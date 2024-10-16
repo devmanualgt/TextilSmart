@@ -3,7 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
 import { AuthGuard } from './auth.guard';
-import { ListProductsComponent } from './modules/products/list-products/list-products.component';
 
 const routes: Routes = [
   {
@@ -104,6 +103,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/purchase-orders/purchase-orders.module').then(
             (m) => m.PurchaseOrdersModule
+          ),
+      },
+      {
+        path: 'productions',
+        loadChildren: () =>
+          import('./modules/productions/productions.module').then(
+            (m) => m.ProductionsModule
           ),
       },
     ],
