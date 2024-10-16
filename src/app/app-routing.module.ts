@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
 import { AuthGuard } from './auth.guard';
+import { ListProductsComponent } from './modules/products/list-products/list-products.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,14 @@ const routes: Routes = [
             (m) => m.DashboardModule
           ),
       },
+
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./modules/products/products.module').then(
+            (m) => m.ProductsModule
+          ),
+      },
     ],
   },
   {
@@ -105,6 +114,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/theme-pages/landingpage/landingpage.module').then(
             (m) => m.LandingPageModule
+          ),
+      },
+      {
+        path: 'products/out',
+        loadChildren: () =>
+          import('./modules/products/products.module').then(
+            (m) => m.ProductsModule
           ),
       },
     ],
