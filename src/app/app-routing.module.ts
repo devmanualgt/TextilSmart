@@ -99,6 +99,13 @@ const routes: Routes = [
             (m) => m.FeedstocksModule
           ),
       },
+      {
+        path: 'purchase',
+        loadChildren: () =>
+          import('./modules/purchase-orders/purchase-orders.module').then(
+            (m) => m.PurchaseOrdersModule
+          ),
+      },
     ],
   },
   {
