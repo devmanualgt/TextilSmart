@@ -73,6 +73,15 @@ const routes: Routes = [
             (m) => m.ThemePagesModule
           ),
       },
+
+      // NUEVAS RUTAS
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./modules/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+      },
     ],
   },
   {
