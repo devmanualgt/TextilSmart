@@ -91,6 +91,14 @@ const routes: Routes = [
             (m) => m.ProductsModule
           ),
       },
+
+      {
+        path: 'feedstocks',
+        loadChildren: () =>
+          import('./modules/feedstocks/feedstocks.module').then(
+            (m) => m.FeedstocksModule
+          ),
+      },
     ],
   },
   {
