@@ -175,3 +175,13 @@
   flex-direction: column;
   height: 100%;
 }
+
+img,
+svg {
+  vertical-align: baseline !important;
+}
+
+.mdc-list-item.mdc-list-item--with-one-line .mdc-list-item__start {
+  align-self: baseline !important;
+  margin-top: 0;
+}
