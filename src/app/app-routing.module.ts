@@ -119,6 +119,11 @@ const routes: Routes = [
             (m) => m.SalesOrdersModule
           ),
       },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./modules/users/users.module').then((m) => m.UsersModule),
+      },
     ],
   },
   {
