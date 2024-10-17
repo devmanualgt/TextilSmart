@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ListPurchaseOrdersComponent } from './list-purchase-orders/list-purchase-orders.component';
 import { AddPurchaseOrdersComponent } from './add-purchase-orders/add-purchase-orders.component';
 import { DetailPurchaseOrdersComponent } from './detail-purchase-orders/detail-purchase-orders.component';
+import { FinishPurchaseOrdersComponent } from './finish-purchase-orders/finish-purchase-orders.component';
 
 export const PurchaseOrdersModuleRoutes: Routes = [
   {
@@ -41,7 +42,7 @@ export const PurchaseOrdersModuleRoutes: Routes = [
 
       {
         path: 'finish/:id',
-        component: DetailPurchaseOrdersComponent,
+        component: FinishPurchaseOrdersComponent,
         data: {
           title: 'Finalizar Orden de Compra',
           urls: [

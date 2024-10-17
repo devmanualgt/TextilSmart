@@ -112,6 +112,13 @@ const routes: Routes = [
             (m) => m.ProductionsModule
           ),
       },
+      {
+        path: 'sales',
+        loadChildren: () =>
+          import('./modules/sales-orders/sales-orders.module').then(
+            (m) => m.SalesOrdersModule
+          ),
+      },
     ],
   },
   {
