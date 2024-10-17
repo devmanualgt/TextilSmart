@@ -1,0 +1,30 @@
+/* Fondo degradado */
+body {
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+}
+
+/* Estilo para las tarjetas de usuarios */
+.user-card {
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botones de acción en las tarjetas */
+.modify-btn, .delete-btn {
+    margin-left: 5px;
+}
+
+/* Estilo para los botones de acción */
+.btn-primary, .btn-warning, .btn-danger {
+    font-size: 0.9rem;
+}
+
+/* Estilo para el Modal */
+.modal-title {
+    color: #007bff;
+}
+
+.modal-body input {
+    border-radius: 5px;
+}

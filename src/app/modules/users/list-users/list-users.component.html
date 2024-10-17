@@ -1,1 +1,29 @@
-<p>list-users works!</p>
+<!-- Contenedor Principal -->
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <!-- Barra de Búsqueda -->
+        <input type="text" id="search-input" class="form-control w-50" placeholder="Buscar cliente...">
+        <!-- Botón para agregar un nuevo cliente -->
+        <button class="btn btn-primary" id="add-client-btn">Agregar Cliente</button>
+    </div>
+
+    <!-- Lista de Usuarios y Clientes -->
+    <div id="users-list" class="mt-4">
+        <!-- Elemento de Ejemplo -->
+        <div class="user-card card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Rudy Flores</h5>
+                <div class="actions">
+                    <button class="btn btn-warning btn-sm modify-btn">Modificar</button>
+                    <button class="btn btn-danger btn-sm delete-btn">Eliminar</button>
+                </div>
+            </div>
+            <div class="card-body user-info collapse">
+                <p>Usuario: usuario123</p>
+                <p>Teléfono: 123456789</p>
+                <p>Direcciones: Calle Ejemplo 123, Ciudad - <a href="#" class="add-address">Agregar más direcciones</a></p>
+                <p>NIT: 123456-7</p>
+            </div>
+        </div>
+    </div>
+</div>
