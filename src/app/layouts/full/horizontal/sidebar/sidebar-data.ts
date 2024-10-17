@@ -2,7 +2,7 @@ import { NavItem } from '../../vertical/sidebar/nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
-    navCap: 'Home',
+    navCap: 'Horizontal',
   },
   {
     displayName: 'Dashboards',
@@ -95,7 +95,8 @@ export const navItems: NavItem[] = [
           {
             displayName: 'Detail',
             iconName: 'point',
-            route: 'apps/blog/detail/Early Black Friday Amazon deals: cheap TVs, headphones, laptops',
+            route:
+              'apps/blog/detail/Early Black Friday Amazon deals: cheap TVs, headphones, laptops',
           },
         ],
       },
