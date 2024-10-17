@@ -574,7 +574,7 @@ export const navItems: NavItem[] = [
   },
 
   {
-    navCap: 'Administrador',
+    navCap: 'Admin',
   },
 
   {
@@ -607,6 +607,31 @@ export const navItems: NavItem[] = [
     iconName: 'user',
     route: 'users/list',
   },
+  {
+    navCap: 'Usuario',
+  },
+  {
+    displayName: 'Tablero',
+    iconName: 'layout-dashboard',
+    route: '/dashboard',
+  },
+  {
+    displayName: 'Productos',
+    iconName: 'building-store',
+    route: 'products/list',
+  },
+
+  {
+    displayName: 'Pedidos',
+    iconName: 'shopping-cart',
+    route: 'sales/orders/list',
+  },
+  {
+    displayName: 'Rastreo',
+    iconName: 'current-location',
+    route: 'sales/orders/list',
+  },
+
   /* {
     displayName: 'Notes',
     iconName: 'note',
