@@ -1,42 +1,54 @@
 <!-- Modal Agregar Cliente -->
-<div class="modal fade" id="addClientModal" tabindex="-1" aria-labelledby="addClientModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addClientModalLabel">Agregar Cliente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="client-form">
-                    <div class="mb-3">
-                        <label for="client-name" class="form-label">Nombre y Apellido</label>
-                        <input type="text" class="form-control" id="client-name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="username" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="phone" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="address" required>
-                        <button type="button" class="btn btn-secondary btn-sm mt-2" id="add-address-btn">Agregar otra
-                            dirección</button>
-                    </div>
-                    <div class="mb-3">
-                        <label for="nit" class="form-label">Número de NIT</label>
-                        <input type="text" class="form-control" id="nit" required>
-                    </div>
-                    <!-- Más campos si es necesario -->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </div>
-        </div>
+<div class="modal-header">
+  <h5 class="modal-title" id="addClientModalLabel">Agregar Cliente</h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="closeModal()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form id="client-form">
+    <div class="mb-3">
+      <label for="client-name" class="form-label">Nombre y Apellido</label>
+      <input type="text" class="form-control" id="client-name" required />
     </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Usuario</label>
+      <input type="text" class="form-control" id="username" required />
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Teléfono</label>
+      <input type="tel" class="form-control" id="phone" required />
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Dirección</label>
+      <input type="text" class="form-control" id="address" required />
+      <button
+        type="button"
+        class="btn btn-secondary btn-sm mt-2"
+        id="add-address-btn"
+      >
+        Agregar otra dirección
+      </button>
+    </div>
+    <div class="mb-3">
+      <label for="nit" class="form-label">Número de NIT</label>
+      <input type="text" class="form-control" id="nit" required />
+    </div>
+    <!-- Más campos si es necesario -->
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    data-bs-dismiss="modal"
+    (click)="closeModal()"
+  >
+    Cancelar
+  </button>
+  <button type="submit" class="btn btn-primary">Guardar</button>
 </div>
