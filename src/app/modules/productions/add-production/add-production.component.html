@@ -1,1 +1,72 @@
-<p>add-production works!</p>
+<div class="container mt-4">
+
+    <!-- Selección de Producto -->
+    <div class="mb-3 text-center">
+        <button id="btnSeleccionarProducto" class="btn btn-outline-primary" onclick="abrirModal('producto')">Seleccionar Producto</button>
+    </div>
+
+    <!-- Selección de Encargado -->
+    <div class="mb-3 text-center">
+        <button id="btnSeleccionarEncargado" class="btn btn-outline-primary" onclick="abrirModal('encargado')">Seleccionar Encargado</button>
+    </div>
+
+    <!-- Fechas de Inicio y Finalización -->
+    <div class="mb-3 row justify-content-center">
+        <div class="col-md-4">
+            <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+            <input type="date" id="fechaInicio" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <label for="fechaFin" class="form-label">Fecha de Finalización</label>
+            <input type="date" id="fechaFin" class="form-control">
+        </div>
+    </div>
+
+    <!-- Cantidad a Fabricar -->
+    <div class="mb-3 text-center">
+        <label for="cantidadFabricar" class="form-label">Cantidad a Fabricar</label>
+        <input type="number" id="cantidadFabricar" class="form-control text-center" style="max-width: 200px; margin: auto;" min="1">
+    </div>
+
+    <!-- Tabla de Materia Prima -->
+    <div class="product-details mt-4">
+        <table class="table table-striped table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad por Prenda</th>
+                    <th>Unidad de Medida</th>
+                    <th>Stock</th>
+                    <th>Cantidad Necesaria</th>
+                    <th>Disponibilidad</th>
+                </tr>
+            </thead>
+            <tbody id="materiaPrimaTableBody">
+                <!-- Las filas serán agregadas dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botón de Enviar -->
+    <div class="text-center mt-3">
+        <button class="btn btn-success" onclick="enviarProduccion()">Enviar</button>
+    </div>
+</div>
+
+<!-- Modal de Selección (Usado para Producto y Encargado) -->
+<div class="modal fade" id="seleccionModal" tabindex="-1" aria-labelledby="seleccionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="seleccionModalLabel">Selecciona una Opción</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control mb-3" id="modalSearchInput" placeholder="Buscar...">
+        <ul class="list-group" id="modalList">
+          <!-- Lista dinámica -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

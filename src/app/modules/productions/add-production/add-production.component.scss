@@ -1,0 +1,31 @@
+body {
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+}
+
+h3 {
+    color: #004d40;
+}
+
+.btn-outline-primary {
+    font-weight: bold;
+}
+
+.table th {
+    text-align: center;
+    color: #004d40;
+    font-weight: bold;
+}
+
+.table td {
+    text-align: center;
+}
+
+.table .existente {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.table .faltante {
+    color: #dc3545;
+    font-weight: bold;
+}
