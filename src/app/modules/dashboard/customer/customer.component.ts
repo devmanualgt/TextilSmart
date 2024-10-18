@@ -12,6 +12,10 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Inicio del componenete")
+    this.asignarsaludo()
+  }
+  
+  asignarsaludo(){
     // Mensaje de bienvenida según la hora
     const hora = new Date().getHours();
 
@@ -22,6 +26,5 @@ export class CustomerComponent implements OnInit {
     } else {
       this.saludo = 'Buena noche, ';
     }
-
   }
 }
