@@ -1,1 +1,275 @@
-<p>new-sale-order-customer works!</p>
+<div class="container">
+    <mat-stepper #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Datos Envío</ng-template>
+            <div class="row">
+              <div class="col-md-4 d-flex flex-column align-items-center">
+                <div>
+                  <p class="p-1 bg-primary text-white campo">Registro</p>
+                  <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group">
+                    
+                      <mat-radio-button class="example-radio-button" value="1">Guardar mis datos</mat-radio-button>
+                      <mat-radio-button class="example-radio-button" value="2">Comprar como invitado</mat-radio-button>
+                      <mat-radio-button class="example-radio-button" value="3">Ya tengo cuenta</mat-radio-button>
+                    
+                  </mat-radio-group>         
+
+                </div>
+                <div>
+
+                  <p class="p-1 bg-primary text-white campo">Tus Detalles</p>
+                  <mat-form-field class=" col-12 col-md-6 col-xxl-3 campo" >
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Primer y segundo nombre campo" formControlName="nombre" required>
+                  </mat-form-field>
+                  <mat-form-field  class=" col-12 col-md-6 col-xxl-3 campo">
+                      <mat-label>Apellido</mat-label>
+                      <input matInput placeholder="Primer y segundo apellido campo" formControlName="apellido" required>
+                  </mat-form-field>
+                  <mat-form-field class="col-12  col-md-6 col-xxl-3 campo">
+                      <mat-label>E-mail</mat-label>
+                      <input matInput placeholder="micorreo@ejemplo.com" formControlName="correo" required>
+                  </mat-form-field>
+                  <mat-form-field class="col-12 col-md-6  col-xxl-3 campo">
+                      <mat-label>Telefono</mat-label>
+                      <input matInput placeholder="12345678" formControlName="telefono" required>
+                  </mat-form-field>
+                  
+                  <mat-form-field class="col-12 col-md-6 col-xxl-3 campo">
+                        <mat-label>Direccion exacta</mat-label>
+                        <input matInput placeholder="mi direccion 5av, zona 0" formControlName="direccion" required>
+                  </mat-form-field>
+                  <mat-form-field class="col-12 col-md-6 col-xxl-3 campo">
+                      <mat-label>Departamento</mat-label>
+                      <input matInput placeholder="Guatemala" formControlName="departamento" required>
+                  </mat-form-field>
+                  <mat-form-field class="col-12 col-md-6 col-xxl-3 campo">
+                      <mat-label>Municipio</mat-label>
+                      <input matInput placeholder="Guatemala" formControlName="municipio" required>
+                  </mat-form-field>
+                </div>
+                </div>
+
+                <div class="col-md-8 d-flex flex-column align-items-between">
+                  
+                  <div class="contenido-cupon">
+                    <p class="p-1 bg-primary text-white ">Cupon / certificado</p>
+                    
+                    <div class="contenido-cupon-input row d-flex align-items-center">
+                      <mat-form-field class=" col-12 col-md-6 col-xxl-3" >
+                        <mat-label>Ingresa tu cupon</mat-label>
+                        <input class="" matInput placeholder="Ingresa tu cupon aqui" formControlName="nombre" required>
+                      </mat-form-field>
+                      <button class="col-12 col-md-6 col-xxl-3" mat-flat-button>Aplicar</button>
+
+                    </div>
+
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="p-1 bg-primary text-white w-100">Metodo de envio</p>
+                      <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group">
+                        
+                          <mat-radio-button class="example-radio-button" value="1">Cargo expreso</mat-radio-button>
+                          <mat-radio-button class="example-radio-button" value="2">Recoger en..</mat-radio-button>
+                        
+                      </mat-radio-group>
+                    </div>
+                    <div class="col-md-6">
+                      <p class="p-1 bg-primary text-white campo">Metodo de pago</p>
+                      <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group">
+                        
+                          <mat-radio-button class="example-radio-button" value="1">Pago contra entrega</mat-radio-button>
+                          <mat-radio-button class="example-radio-button" v  alue="2">Transferencia o deposito bancario</mat-radio-button>
+                          <mat-radio-button class="example-radio-button" value="3">Tarjeta de credito o debito</mat-radio-button>
+                        
+                      </mat-radio-group>
+                    </div>
+                  </div>
+
+                  <div class="campo">
+                    <p class="p-1 bg-primary text-white campo">Productos</p>
+                    <mat-form-field>
+                      <mat-label>Buscar...</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                    </mat-form-field>
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                      
+                      <!-- Position Column -->
+                      <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                      </ng-container>
+                    
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                      </ng-container>
+                    
+                      <!-- Weight Column -->
+                      <ng-container matColumnDef="weight">
+                        <th mat-header-cell *matHeaderCellDef> Weight </th>
+                        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                      </ng-container>
+                    
+                      <!-- Symbol Column -->
+                      <ng-container matColumnDef="symbol">
+                        <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                      </ng-container>
+                    
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    
+                      <!-- Row shown when there is no matching data. -->
+                      <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                      </tr>
+                    </table>
+
+
+                  </div>
+                </div>
+          
+            </div>
+            <div>
+              <button mat-button matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+
+
+
+
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Pago</ng-template>
+
+            <div class="row">
+              <div class="col-md-3 d-flex flex-column align-items-center ">
+              
+                <div class=" campo">
+                  <mat-form-field class="campo" >
+                    <mat-label>No. Tarjeta</mat-label>
+                    <input matInput formControlName="secondCtrl" placeholder="123456789"
+                           required>
+                  </mat-form-field>
+                </div>
+  
+                <div class="campo">
+  
+                  <mat-form-field class="example-full-width campo">
+                    <mat-label>Fecha de vencimiento</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-hint>día/mes/año</mat-hint>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                  <button mat-raised-button (click)="picker.open()">Abrir</button>
+                 
+                  
+                </div> 
+
+  
+                <div class="col-md-3 campo">
+  
+                  <mat-form-field class="campo">
+                    <mat-label>CVV</mat-label>
+                    <input matInput formControlName="secondCtrl" placeholder="123"
+                           required>
+                  </mat-form-field>
+                </div>
+  
+                <div class="col-md-3">
+                    <div>
+                      <button mat-button matStepperPrevious>Regresar</button>
+                      <button mat-button matStepperNext>Finalizar</button>
+                    </div>
+  
+                </div>
+                
+                
+
+              </div>
+              
+
+              <div class="col-md-9 ">
+                
+                <div class="tabla-productos">
+
+                    <mat-form-field>
+                        <mat-label>Buscar...</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                      </mat-form-field>
+                      
+                      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                      
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="position">
+                          <th mat-header-cell *matHeaderCellDef> No. </th>
+                          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                        </ng-container>
+                      
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                          <th mat-header-cell *matHeaderCellDef> Name </th>
+                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+                      
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="weight">
+                          <th mat-header-cell *matHeaderCellDef> Weight </th>
+                          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                        </ng-container>
+                      
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="symbol">
+                          <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                        </ng-container>
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                      </table>
+                      
+                </div>
+            
+              </div>
+                    
+            </div>
+
+          </form>
+            
+
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Completado</ng-template>
+          <div class="container text-center">
+            <p class="fs-1">¡Felicitades!</p>
+            <p class="fs-1">Tu compra ha sido realizada con éxito.</p>
+            <button mat-button matStepperPrevious>Regresar a la página principal</button>
+
+          </div>
+          <div>
+            <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+          </div>
+        </mat-step>
+
+      </mat-stepper>
+
+</div>

@@ -1,1 +1,56 @@
-<p>add-purchase-orders works!</p>
+<div class="container">
+
+  <mat-stepper  #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Selecciona un proveedor</ng-template>
+
+        <select class="form-select" aria-label="Default select example">
+          <option selected>-- Proveedor --</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+
+
+        
+        
+        <div>
+          
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Datos orden">
+      <form [formGroup]="secondFormGroup">
+      
+         
+          <div class="container mt-5">
+            <div class="d-flex justify-content-between align-items-between py-2">
+              <h2>{{proveedor}}</h2>
+              <button class="btn btn-primary" (click)="addProduct()">Agregar Fila</button>
+
+            </div>  
+            <app-table [productos]="productos" ></app-table>
+          </div>  
+
+        <div>
+          <button mat-button matStepperPrevious>Regresar</button>
+          <button mat-button matStepperNext>Finalizar</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Finalizar</ng-template>
+      <p>Orden de compra realizada correctamente</p>
+      <div>
+        <button mat-button matStepperPrevious>Pagina principal</button>
+        <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+      </div>
+    </mat-step>
+
+  </mat-stepper>
+
+</div>

@@ -1,0 +1,45 @@
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Total</th>
+        <th>- -</th>
+        <th>- -</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productos.controls; let i = index" [formGroup]="product">
+        <td>
+          <input formControlName="nombre" class="form-control">
+        </td>
+        <td>
+          <input formControlName="cantidad" type="number" class="form-control">
+        </td>
+        <td>
+          <input formControlName="precio" type="number" class="form-control">
+        </td>
+        <td>
+          <input [value]="product.value.cantidad * product.value.precio" class="form-control" readonly>
+        </td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="modifyProduct(i)">
+            <!-- {{ product.value.editable ? 'Guardar' : 'Modificar' }} -->
+            @if (product.value.editable) {
+              <i class="fa-solid fa-floppy-disk"></i>
+              <!-- <i class="fa-regular fa-floppy-disk"></i> -->
+            }@else{
+              <i class="fa-solid fa-pen"></i>
+            }
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteProduct(i)"><i class="fa-solid fa-trash-can"></i></button>
+
+        </td>
+      </tr> 
+    </tbody>
+    
+  </table>
