@@ -26,15 +26,16 @@ export class ListUsersComponent {
 
   async deleteUser() {
     const alertDeleted = await this.alertService.alertSimple(
-      '',
-      '¿Está seguro de eliminar el usuario?',
-      'question',
-      'Aceptar',
+      'Confirmación de Eliminación',
+      '¿Está seguro de que desea eliminar este usuario? Esta acción es irreversible y el usuario no podrá ser recuperado.',
+      'warning',
+      'Sí, eliminar',
       'Cancelar',
       false
     );
+
     if (alertDeleted) {
-      console.log('usar api para eliminar');
+      console.log('usar API para eliminar');
     }
   }
 }
