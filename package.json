@@ -24,6 +24,7 @@
     "@kolkov/angular-editor": "^2.1.0",
     "@ng-bootstrap/ng-bootstrap": "^17.0.1",
     "@ng-matero/extensions": "^17.0.0",
+    "@ng-select/ng-select": "^13.9.1",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.11.8",
