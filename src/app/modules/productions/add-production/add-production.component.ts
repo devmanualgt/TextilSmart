@@ -22,9 +22,16 @@ export class AddProductionComponent {
   selectedCar: number;
 
   cars = [
-    { id: 1, name: 'Volvo' },
-    { id: 2, name: 'Saab' },
-    { id: 3, name: 'Opel' },
-    { id: 4, name: 'Audi' },
+    { id: 1, name: 'Camisa' },
+    { id: 2, name: 'Blusa' },
+    { id: 3, name: 'Short' },
+    { id: 4, name: 'Top' },
+  ];
+
+  cars2 = [
+    { id: 1, name: 'Encargado1' },
+    { id: 2, name: 'Encargado2' },
+    { id: 3, name: 'Encargado3' },
+    { id: 4, name: 'Encargado4' },
   ];
 }

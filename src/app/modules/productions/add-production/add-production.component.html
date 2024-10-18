@@ -1,8 +1,7 @@
 <div class="container mt-4">
+  
   <!-- Selección de Producto -->
-  <div class="mb-3 text-center">
-    <!-- <button id="btnSeleccionarProducto" class="btn btn-outline-primary" onclick="abrirModal('producto')">Seleccionar Producto</button> -->
-
+  <div class="mb-3 text-center size-select m-auto">
     <ng-select
       [items]="cars"
       bindLabel="name"
@@ -16,15 +15,21 @@
     </ng-select>
   </div>
 
+  
+
   <!-- Selección de Encargado -->
-  <div class="mb-3 text-center">
-    <button
-      id="btnSeleccionarEncargado"
-      class="btn btn-outline-primary"
-      onclick="abrirModal('encargado')"
+  <div class="mb-3 text-center size-select m-auto">
+    <ng-select
+      [items]="cars2"
+      bindLabel="name"
+      [loading]="false"
+      bindValue="id"
+      placeholder="Seleccionar Encargado"
     >
-      Seleccionar Encargado
-    </button>
+      <ng-template ng-option-tmp let-item="item">
+        {{ item.name }} <br />
+      </ng-template>
+    </ng-select>
   </div>
 
   <!-- Fechas de Inicio y Finalización -->
