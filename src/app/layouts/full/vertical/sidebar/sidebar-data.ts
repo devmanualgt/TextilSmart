@@ -629,7 +629,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Rastreo',
     iconName: 'current-location',
-    route: 'sales/orders/list',
+    route: 'sales/orders/tracking',
   },
 
   /* {
