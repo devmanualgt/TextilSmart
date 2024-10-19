@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffefe;
+    color: #fff;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    //max-width: 900px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-outline {
+    flex: 1; /* Permite que el buscador ocupe todo el espacio disponible */
+}
+
+.form-control {
+    width: 100%; /* Asegura que el buscador ocupe todo el ancho disponible */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde del campo de búsqueda */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #fff; /* Color de fondo del buscador */
+    color: #000; /* Color del texto */
+    margin-right: 10px; /* Espacio entre el buscador y el botón */
+}
+
+.new-order {
+    padding: 10px 15px; /* Tamaño del botón Nueva Orden */
+    background-color: #28a745; /* Color del botón */
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.new-order:hover {
+    background-color: #218838;
+}
+
+/* Estilos de la tabla */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-dark {
+    background-color: #fff8f8; /* Fondo oscuro de la tabla */
+    color: #fff; /* Texto blanco para las celdas */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #ffffff; /* Efecto hover en las filas */
+}
+
+/* Estilos para los botones de acciones */
+.action-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-btn.btn-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.action-btn.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.action-btn.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-btn.btn-danger:hover {
+    background-color: #c82333;
+}

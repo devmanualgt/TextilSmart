@@ -1,1 +1,67 @@
-<p>list-productions works!</p>
+<div class="container">
+    <div class="search-container d-flex align-items-center mb-3">
+        <div class="form-outline me-2">
+            <input type="search" id="form1" class="form-control" placeholder="Buscar..." aria-label="Search" />
+        </div>
+        <button class="report btn btn-primary me-2">Reporte</button>
+        <button class="new-production btn btn-success">Nueva Producción</button>
+    </div>
+
+    <div class="production-table">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">No. Producción</th>
+                    <th scope="col">Responsable</th>
+                    <th scope="col">Fecha Inicio</th>
+                    <th scope="col">Fecha Fin estimada</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Etapa</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Juan Pérez</td>
+                    <td>2024-10-10</td>
+                    <td>2024-10-20</td>
+                    <td>100</td>
+                    <td>En proceso</td>
+                    <td>Montaje</td>
+                    <td>
+                        <button class="action-btn btn btn-warning btn-sm">Detalle</button>
+                        <button class="action-btn btn btn-danger btn-sm">Teñido</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>María Gómez</td>
+                    <td>2024-09-15</td>
+                    <td>2024-09-30</td>
+                    <td>200</td>
+                    <td>Completado</td>
+                    <td>Pruebas</td>
+                    <td>
+                        <button class="action-btn btn btn-warning btn-sm">Detalle</button>
+                        <button class="action-btn btn btn-danger btn-sm">Teñido</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Carlos López</td>
+                    <td>2024-10-01</td>
+                    <td>2024-10-15</td>
+                    <td>150</td>
+                    <td>Pendiente</td>
+                    <td>Ensamblaje</td>
+                    <td>
+                        <button class="action-btn btn btn-warning btn-sm">Detalle</button>
+                        <button class="action-btn btn btn-danger btn-sm">Teñido</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

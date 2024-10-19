@@ -1,1 +1,54 @@
-<p>list-feedstock works!</p>
+<div class="container">
+    <div class="search-container d-flex align-items-center mb-3">
+        <div class="form-outline me-2">
+            <input type="search" id="form1" class="form-control" placeholder="Buscar..." aria-label="Search" />
+        </div>
+        <button class="new-order btn btn-success">Nueva Orden</button>
+    </div>
+
+    <div class="order-table">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre Materia</th>
+                    <th scope="col">Unidad de Medida</th>
+                    <th scope="col">Existencias Stock</th>
+                    <th scope="col">Proveedor</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Construcción</th>
+                    <td>Bolsa</td>
+                    <td>200</td>
+                    <td>Cemex</td>
+                    <td>
+                        <button class="action-btn btn btn-warning btn-sm">Editar</button>
+                        <button class="action-btn btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Carpintería</th>
+                    <td>Cubo Metrico</td>
+                    <td>50</td>
+                    <td>Maderas del Sur</td>
+                    <td>
+                        <button class="action-btn btn btn-warning btn-sm">Editar</button>
+                        <button class="action-btn btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Estructura</th>
+                    <td>Kilogramo</td>
+                    <td>1000</td>
+                    <td>Aceros Nacionales</td>
+                    <td>
+                        <button class="action-btn btn btn-warning btn-sm">Editar</button>
+                        <button class="action-btn btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
