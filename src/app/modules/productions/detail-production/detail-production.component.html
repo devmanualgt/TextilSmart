@@ -1,1 +1,125 @@
-<p>detail-production works!</p>
+<div class="container-fluid">
+    <!-- Encabezado -->
+    <div class="header">
+        <h1>Detalle de Producción</h1>
+    </div>
+
+    <!-- Sección del Usuario -->
+    <div class="user-section">
+        <img src="user-placeholder.png" alt="User">
+        <span>User</span>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" id="general-tab" href="#">General</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="monitoreo-tab" href="#">Monitoreo</a>
+        </li>
+    </ul>
+
+    <!-- Contenido General -->
+    <div id="generalContent" class="form-container">
+        <div class="row">
+            <div class="col-6">
+                <button class="btn btn-primary">Editar</button>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-danger">Cancelar Producción</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <select class="form-select" aria-label="Select Estado">
+                    <option selected>Seleccionar Estado</option>
+                    <option value="1">En Proceso</option>
+                    <option value="2">Completado</option>
+                    <option value="3">Pendiente</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <select class="form-select" aria-label="Select Producto">
+                    <option selected>Seleccionar Producto</option>
+                    <option value="1">Producto A</option>
+                    <option value="2">Producto B</option>
+                    <option value="3">Producto C</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <select class="form-select" aria-label="Select Encargado">
+                    <option selected>Seleccionar Encargado</option>
+                    <option value="1">Encargado 1</option>
+                    <option value="2">Encargado 2</option>
+                    <option value="3">Encargado 3</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label for="fecha-inicio" class="form-label">Fecha Inicio</label>
+                <input type="date" id="fecha-inicio" class="form-control" placeholder="Fecha Inicio">
+            </div>
+            <div class="col-6">
+                <label for="fecha-fin" class="form-label">Fecha Fin</label>
+                <input type="date" id="fecha-fin" class="form-control" placeholder="Fecha Fin">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input type="number" class="form-control" placeholder="Cantidad a Producir">
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido Monitoreo con Línea de Tiempo -->
+    <div id="monitoreoContent" class="form-container">
+        <h5 class="text-primary">Monitoreo del Proceso</h5>
+        <div class="timeline">
+            <!-- Evento 1 -->
+            <div class="timeline-event left">
+                <div class="content completed">
+                    <h5>12 JUN - Producción Iniciada</h5>
+                    <p>Detalles de la producción iniciados en la planta 1.</p>
+                </div>
+            </div>
+
+            <!-- Evento 2 -->
+            <div class="timeline-event right">
+                <div class="content completed">
+                    <h5>13 JUN - Proceso de Ensamblaje</h5>
+                    <p>Fase de ensamblaje completada con éxito.</p>
+                </div>
+            </div>
+
+            <!-- Evento 3 -->
+            <div class="timeline-event left">
+                <div class="content in-progress">
+                    <h5>14 JUN - Control de Calidad</h5>
+                    <p>Revisión de control de calidad en curso.</p>
+                </div>
+            </div>
+
+            <!-- Evento 4 -->
+            <div class="timeline-event right">
+                <div class="content not-started">
+                    <h5>15 JUN - Empaque y Envío</h5>
+                    <p>Pendiente de iniciar.</p>
+                </div>
+            </div>
+
+            <!-- Evento 5 -->
+            <div class="timeline-event left">
+                <div class="content not-started">
+                    <h5>16 JUN - Entrega Final</h5>
+                    <p>Esperando la confirmación de entrega.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
