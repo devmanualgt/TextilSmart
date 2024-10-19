@@ -1,13 +1,13 @@
 import { AlertService } from './../../../services/alert.service';
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddUsersComponent } from '../add-users/add-users.component';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-users',
   standalone: true,
-  imports: [],
+  imports: [NgbAccordionModule],
   templateUrl: './list-users.component.html',
   styleUrl: './list-users.component.scss',
 })
