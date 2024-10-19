@@ -31,13 +31,7 @@ export const ProductionsModuleRoutes: Routes = [
       {
         path: 'detail/:id',
         component: DetailProductionComponent,
-        data: {
-          title: 'Detalle Produccion',
-          urls: [
-            { title: 'Producciones', url: '/productions/list' },
-            { title: 'Detalle' },
-          ],
-        },
+        
       },
 
       {
