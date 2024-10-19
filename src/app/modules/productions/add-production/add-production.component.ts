@@ -26,9 +26,6 @@ import Swal from 'sweetalert2';
 export class AddProductionComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
   selectedCar: number;
-  production = this._formBuilder.group([
-    this.createProduction()
-  ]);
 
   productionForm: FormGroup;
 
@@ -42,23 +39,16 @@ export class AddProductionComponent implements OnInit {
     this.generarFormularioProduccion()
   }
 
-  createProduction(): FormGroup {
-    return this._formBuilder.group({
-      producto: [0, Validators.required],
-      encargado: [0, Validators.required],
-      fechaFin: ["", Validators.required],
-      fechaInicio: ["", Validators.required],
-      cantidad: [0, Validators.required]
-    });
-  }
-
   generarFormularioProduccion(){
     this.productionForm = this.fb.group({
-      producto: [0, Validators.required],
-      encargado: [0, Validators.required],
+      proveedor: [null, Validators.required],
+      producto: [null, Validators.required],
+      color: [null, Validators.required],
+      talla: [null, Validators.required],
+      cantidad: [null, Validators.required],
+      encargado: [null, Validators.required],
       fechaFin: ["", Validators.required],
-      fechaInicio: ["", Validators.required],
-      cantidad: [0, Validators.required]
+      fechaInicio: ["", Validators.required]
     })
   }
   
@@ -69,12 +59,15 @@ export class AddProductionComponent implements OnInit {
 
     const nombreProducto= this.buscarElemento(this.cars, this.productionForm.value.producto)["name"]
     const nombreEncargado= this.buscarElemento(this.cars2, this.productionForm.value.encargado)["name"]
+    const nombreProveedor= this.buscarElemento(this.cars3, this.productionForm.value.proveedor)["name"]
+    const colores= this.buscarElemento(this.cars4, this.productionForm.value.color)["name"]
+    const tallas= this.buscarElemento(this.cars5, this.productionForm.value.talla)["name"]
     const AlertService = await this.alertService.alertSimple(
       'Confirmación de Envío',
       //'¿Está seguro de que desea enviar la solicitud con los datos actuales?',
-      `<p> Producto: ${nombreProducto} </p> <p>Encargado: ${nombreEncargado}</p>
-      <p> Fecha Inicio: ${this.productionForm.value.fechaInicio} </p> <p> Fecha Fin: ${this.productionForm.value.fechaFin} </p>
-      <p> Cantidad a Fabricar: ${this.productionForm.value.cantidad} </p>`,
+      `<p> Proveedor: ${nombreProveedor} </p> <p> Producto: ${nombreProducto} </p> <p> Color: ${colores} </p>  
+      <p> Talla: ${tallas} </p> <p>Encargado: ${nombreEncargado}</p> <p> Cantidad a Fabricar: ${this.productionForm.value.cantidad} </p>
+      <p> Fecha Inicio: ${this.productionForm.value.fechaInicio} </p> <p> Fecha Fin: ${this.productionForm.value.fechaFin} </p>`,
       'warning',
       'Sí, enviar',
       'Cancelar',
@@ -104,5 +97,24 @@ export class AddProductionComponent implements OnInit {
     { id: 4, name: 'Encargado4' },
   ];
 
-  
+  cars3 = [
+    { id: 1, name: 'Gusy' },
+    { id: 2, name: 'Tres Mosqueteros' },
+    { id: 3, name: 'Uniformes Industriales' },
+    { id: 4, name: 'RG Uniformes' },
+  ];
+
+  cars4 = [
+    { id: 1, name: 'Rojo' },
+    { id: 2, name: 'Amarrilo' },
+    { id: 3, name: 'Verde' },
+    { id: 4, name: 'Blanco' },
+  ];
+
+  cars5 = [
+    { id: 1, name: 'XS' },
+    { id: 2, name: 'S' },
+    { id: 3, name: 'M' },
+    { id: 4, name: 'L' },
+  ];
 }
