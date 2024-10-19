@@ -1,21 +1,26 @@
 body {
-    padding: 20px;
-    background-color: #f8f9fa;
+  padding: 20px;
+  background-color: #f8f9fa;
 }
 
 .product-card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    background-color: white;
-    padding: 20px;
-    margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .search-bar {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .modal-header {
-    background-color: #0d6efd;
-    color: white;
+  background-color: #0d6efd;
+  color: white;
+}
+
+.marginBtnAggModify {
+  margin-left: 5 px;
+  margin-right: 20px;
 }

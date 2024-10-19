@@ -1,8 +1,5 @@
 <div class="container-fluid">
-    <!-- Encabezado -->
-    <div class="header">
-        <h1>Detalle de Producción</h1>
-    </div>
+    
 
     <!-- Sección del Usuario -->
     <div class="user-section">
@@ -13,13 +10,12 @@
     <!-- Navigation Tabs -->
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" id="general-tab" href="#">General</a>
+            <a class="nav-link active" id="general-tab" href="javascript:void(0);">General</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="monitoreo-tab" href="#">Monitoreo</a>
+            <a class="nav-link" id="monitoreo-tab" href="javascript:void(0);">Monitoreo</a>
         </li>
     </ul>
-
     <!-- Contenido General -->
     <div id="generalContent" class="form-container">
         <div class="row">
@@ -27,7 +23,7 @@
                 <button class="btn btn-primary">Editar</button>
             </div>
             <div class="col-6">
-                <button class="btn btn-danger">Cancelar Producción</button>
+                <button class="btn btn-danger" (click)="cancelProduction()">Cancelar Producción</button>
             </div>
         </div>
         <div class="row">

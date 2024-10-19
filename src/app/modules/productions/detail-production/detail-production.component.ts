@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-detail-production',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detail-production.component.scss']
 })
 export class DetailProductionComponent implements OnInit {  // Cambia el nombre de la clase aquí
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.showGeneralContent();
@@ -41,5 +42,20 @@ export class DetailProductionComponent implements OnInit {  // Cambia el nombre 
 
     generalContent.style.display = 'none';
     monitoreoContent.style.display = 'block';
+  }
+
+  async cancelProduction() {
+    const alertDeleted = await this.alertService.alertSimple(
+      'Confirmación de Cancelacion',
+      '¿Está seguro de que desea cancelar la producción? Esta acción es irreversible y la producción no podrá ser recuperado.',
+      'warning',
+      'Sí, eliminar',
+      'Cancelar',
+      false
+    );
+
+    if (alertDeleted) {
+      console.log('usar API para eliminar');
+    }
   }
 }
