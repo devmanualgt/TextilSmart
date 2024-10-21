@@ -50,7 +50,7 @@
               <!-- Itera sobre las filas -->
               <td *ngFor="let row of tblInfo.rows; let j = index">
                 <!-- Aquí Angular ya puede acceder a las propiedades anidadas usando el operador de punto -->
-                {{ getNestedValue(hold, row.value) || "--" }}
+                {{ getNestedValue(hold, row.value) }}
               </td>
 
               <!-- Botones para acciones -->

@@ -57,6 +57,15 @@ export class ListFeedstockComponent implements OnInit {
       keyboard: false,
     });
     modalRef.componentInstance.data = data;
+    modalRef.result
+      .then((result) => {
+        if (result.refresh) {
+          this.getFeedStock();
+        }
+      })
+      .catch((reason) => {
+        console.log('Modal cerrado con error:', reason);
+      });
   }
 
   search(value: string) {
