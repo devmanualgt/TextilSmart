@@ -51,6 +51,8 @@ export class ListFeedstockComponent implements OnInit {
 
   openModal(data: Object) {
     const modalRef = this.modalService.open(AddFeedstockComponent, {
+      backdrop: 'static',
+      size: 'lg',
       centered: true,
       keyboard: false,
     });

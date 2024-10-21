@@ -11,7 +11,11 @@
   <button class="new-order btn btn-success">Nueva Orden</button>
 </div> -->
 
-<app-search textBtn="Nuevo" (searchValue)="search($event)"></app-search>
+<app-search
+  textBtn="Nuevo"
+  (searchValue)="search($event)"
+  (newValue)="openModal({})"
+></app-search>
 
 <mat-card class="cardWithShadow">
   <mat-card-content class="p-24">
