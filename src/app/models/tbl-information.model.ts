@@ -16,6 +16,7 @@ export interface BtnData {
   icon: string;
   color: string;
   name: CRUD;
+  visible: string;
 }
 
 export interface FnData {
@@ -28,4 +29,5 @@ export enum CRUD {
   READ = 'read',
   UPDATE = 'update',
   DELETE = 'delete',
+  ACCTION = 'action',
 }

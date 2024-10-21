@@ -23,19 +23,29 @@ export const tbl_list_instruction = {
   ],
   btn: [
     {
+      icon: 'fa-solid fa-cart-shopping',
+      color: 'warning',
+      name: CRUD.ACCTION,
+      visible: 'realizarPedido',
+    },
+    {
       icon: 'fa-solid fa-eye',
       color: 'primary',
       name: CRUD.READ,
+      visible: '',
     },
+
     {
       icon: 'fa-solid fa-pen-to-square',
       color: 'success',
       name: CRUD.UPDATE,
+      visible: '',
     },
     {
       icon: 'fa-solid fa-trash',
       color: 'danger',
       name: CRUD.DELETE,
+      visible: '',
     },
   ],
 };

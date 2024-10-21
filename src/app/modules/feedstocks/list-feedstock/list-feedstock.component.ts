@@ -12,6 +12,7 @@ import { AddFeedstockComponent } from '../add-feedstock/add-feedstock.component'
 import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { AlertService } from 'src/app/services/alert.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-feedstock',
@@ -24,6 +25,7 @@ export class ListFeedstockComponent implements OnInit {
   tlbInfo: TblInformation;
   tblData: any;
   constructor(
+    private router: Router,
     private feedstockService: FeedstockService,
     private modalService: NgbModal,
     private alertService: AlertService
@@ -51,8 +53,17 @@ export class ListFeedstockComponent implements OnInit {
   actions(event: FnData) {
     if ([CRUD.DELETE].includes(event.type)) {
       this.deleteItem(event.data.id);
-    } else {
+    } else if ([CRUD.CREATE, CRUD.UPDATE, CRUD.READ].includes(event.type)) {
       this.openModal(event);
+    } else if ([CRUD.ACCTION].includes(event.type)) {
+      const navigationExtras: NavigationExtras = {
+        state: {
+          data: event.data,
+        },
+      };
+      console.log(navigationExtras);
+
+      this.router.navigate([`purchase/orders/new`], navigationExtras);
     }
   }
 

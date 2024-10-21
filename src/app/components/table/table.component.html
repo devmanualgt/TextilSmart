@@ -54,22 +54,42 @@
               </td>
 
               <!-- Botones para acciones -->
-              <td *ngIf="tblInfo.btns">
+              <td *ngIf="tblInfo.btns" class="text-end">
                 <div
                   class="btn-group"
                   role="group"
                   aria-label="Button group with nested dropdown"
                 >
                   <ng-container *ngFor="let btn of tblInfo.btns; let k = index">
+                    @if (btn?.visible === '') {
                     <button
                       [title]="btn.name"
-                      [class]="'btn btn-' + btn.color + ' btn-sm'"
+                      [class]="'btn btn-' + btn.color"
                       (click)="newEvent({ data: hold, type: btn.name })"
                     >
                       <span>
-                        <i [class]="btn.icon + ' text-white icon-1x'"></i>
+                        <i
+                          [class]="
+                            btn.icon + ' text-white icon-3x bi bi-aspect-ratio'
+                          "
+                        ></i>
                       </span>
                     </button>
+                    } @else if(btn?.visible !== '' && hold[btn.visible]) {
+                    <button
+                      [title]="btn.name"
+                      [class]="'btn btn-' + btn.color"
+                      (click)="newEvent({ data: hold, type: btn.name })"
+                    >
+                      <span>
+                        <i
+                          [class]="
+                            btn.icon + ' text-white icon-1x bi bi-aspect-ratio'
+                          "
+                        ></i>
+                      </span>
+                    </button>
+                    }
                   </ng-container>
                 </div>
               </td>
