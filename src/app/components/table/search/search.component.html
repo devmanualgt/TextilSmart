@@ -10,7 +10,9 @@
         </mat-form-field>
       </div>
       <div class="col-lg-4 d-flex align-items-center justify-content-end">
-        <button mat-flat-button color="primary">{{ textBtn }}</button>
+        <button mat-flat-button color="primary" (click)="onNew()">
+          {{ textBtn }}
+        </button>
       </div>
     </div>
   </mat-card-content>
