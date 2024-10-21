@@ -1,41 +1,28 @@
 import { AlertService } from 'src/app/services/alert.service';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FeedstockService {
-  API_URL = `${environment.API_URL}/v1`;
-  constructor(private http: HttpClient, private alertService: AlertService) {}
-
-  async getFeedStock() {
-    let msm;
-    try {
-      const response = await firstValueFrom(
-        this.http.get<any>(`${this.API_URL}/feedstocks`, {
-          observe: 'response',
-        })
-      );
-
-      if (response?.ok) {
-        return { status: true, data: response.body['records'] };
-      } else {
-        return { status: false };
-      }
-    } catch (error) {
-      // this.handlerError.errorAlertNorm(error, msm);
-      return { status: false };
-    }
+export class FeedstockService extends CrudService<any> implements OnDestroy {
+  override API_URL = `${environment.API_URL}/v1/feedstocks`;
+  URL_API = `${environment.API_URL}/v1`;
+  constructor(
+    @Inject(HttpClient) http: HttpClient,
+    public override alertService: AlertService
+  ) {
+    super(http, alertService);
   }
 
   async getProviders() {
     let msm;
     try {
       const response = await firstValueFrom(
-        this.http.get<any>(`${this.API_URL}/providers`, {
+        this.http.get<any>(`${this.URL_API}/providers`, {
           observe: 'response',
         })
       );
@@ -55,7 +42,7 @@ export class FeedstockService {
     let msm;
     try {
       const response = await firstValueFrom(
-        this.http.get<any>(`${this.API_URL}/feedstocks/categories`, {
+        this.http.get<any>(`${this.URL_API}/feedstocks/categories`, {
           observe: 'response',
         })
       );
@@ -71,31 +58,7 @@ export class FeedstockService {
     }
   }
 
-  async postFeedStock(form: Object) {
-    let msm;
-    try {
-      const formData = await this.alertService.toUrlEncoded(form);
-      console.log(formData);
-
-      const response = await firstValueFrom(
-        this.http.post<any>(`${this.API_URL}/feedstocks`, formData, {
-          observe: 'response',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        })
-      );
-
-      if (response?.ok) {
-        return {
-          status: true,
-          data: response.body['records'],
-          message: response.body['message'],
-        };
-      } else {
-        return { status: false };
-      }
-    } catch (error) {
-      this.alertService.errorAlertNorm(error, error);
-      return { status: false };
-    }
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
   }
 }

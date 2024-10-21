@@ -15,10 +15,17 @@ export interface RowData {
 export interface BtnData {
   icon: string;
   color: string;
-  name: string;
+  name: CRUD;
 }
 
 export interface FnData {
-  data: Object;
-  type: string;
+  data: any;
+  type: CRUD;
+}
+
+export enum CRUD {
+  CREATE = 'create',
+  READ = 'read',
+  UPDATE = 'update',
+  DELETE = 'delete',
 }

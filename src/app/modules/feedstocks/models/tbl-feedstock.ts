@@ -1,3 +1,5 @@
+import { CRUD } from 'src/app/models/tbl-information.model';
+
 export const tbl_list_instruction = {
   headers: [
     'Codigo',
@@ -23,17 +25,17 @@ export const tbl_list_instruction = {
     {
       icon: 'fa-solid fa-eye',
       color: 'primary',
-      name: 'Detalle',
+      name: CRUD.READ,
     },
     {
       icon: 'fa-solid fa-pen-to-square',
       color: 'success',
-      name: 'Editar',
+      name: CRUD.UPDATE,
     },
     {
       icon: 'fa-solid fa-trash',
       color: 'danger',
-      name: 'Eliminar',
+      name: CRUD.DELETE,
     },
   ],
 };

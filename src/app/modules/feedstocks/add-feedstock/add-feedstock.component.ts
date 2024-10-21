@@ -7,11 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { FeedstockService } from './../services/feedstock.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FloatLabelType } from '@angular/material/form-field';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MaterialModule } from 'src/app/material.module';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CRUD, FnData } from 'src/app/models/tbl-information.model';
 
 @Component({
   selector: 'app-add-feedstock',
@@ -21,6 +22,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './add-feedstock.component.scss',
 })
 export class AddFeedstockComponent implements OnInit {
+  @Input() info: FnData;
   float: FloatLabelType = 'auto';
   feedStockForm: FormGroup;
   providers = [];
@@ -56,17 +58,25 @@ export class AddFeedstockComponent implements OnInit {
   }
 
   generateForm() {
+    const disabled = this.info?.type.includes('Detalle') ? true : false;
     this.feedStockForm = this.fb.group({
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      unidadMedida: ['', Validators.required],
-      nivelMinimo: ['', Validators.required],
-      precioUnitario: ['', Validators.required],
-      proveedor: ['', Validators.required],
-      categoriaMateria: ['', Validators.required],
+      nombre: [{ value: '', disabled: disabled }, Validators.required],
+      descripcion: [{ value: '', disabled: disabled }, Validators.required],
+      unidadMedida: [{ value: '', disabled: disabled }, Validators.required],
+      nivelMinimo: [{ value: '', disabled: disabled }, Validators.required],
+      precioUnitario: [{ value: '', disabled: disabled }, Validators.required],
+      proveedor: [{ value: '', disabled: disabled }, Validators.required],
+      categoriaMateria: [
+        { value: '', disabled: disabled },
+        Validators.required,
+      ],
     });
     this.getProviders();
     this.getCategories();
+
+    if (this.info) {
+      this.setFormValues();
+    }
   }
 
   async sendFeedSock() {
@@ -79,9 +89,16 @@ export class AddFeedstockComponent implements OnInit {
       'Materia Prima se esta guardado',
       0
     );
-    const send = await this.feedstockService.postFeedStock(
-      this.feedStockForm.value
-    );
+    let send;
+    if (this.info?.type === CRUD.UPDATE) {
+      send = await this.feedstockService.update(
+        this.feedStockForm.value,
+        this.info.data['id']
+      );
+    } else {
+      send = await this.feedstockService.create(this.feedStockForm.value);
+    }
+
     if (send.status) {
       this.alertService
         .alertSimple(
@@ -96,6 +113,18 @@ export class AddFeedstockComponent implements OnInit {
           this.cerrarModal(true);
         });
     }
-    console.log(this.feedStockForm.value);
+  }
+
+  setFormValues() {
+    const data = this.info.data;
+    this.feedStockForm.patchValue({
+      nombre: data.nombre,
+      descripcion: data.descripcion,
+      unidadMedida: data.unidadMedida,
+      nivelMinimo: data.nivelMinimo,
+      precioUnitario: data.precioUnitario,
+      proveedor: data?.proveedor?.id,
+      categoriaMateria: data?.categoriaMateria?.id,
+    });
   }
 }

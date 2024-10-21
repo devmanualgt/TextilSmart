@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FeedstockService } from '../services/feedstock.service';
-import { FnData, TblInformation } from 'src/app/models/tbl-information.model';
+import {
+  CRUD,
+  FnData,
+  TblInformation,
+} from 'src/app/models/tbl-information.model';
 import { tbl_list_instruction } from '../models/tbl-feedstock';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddFeedstockComponent } from '../add-feedstock/add-feedstock.component';
 import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-list-feedstock',
@@ -20,7 +25,8 @@ export class ListFeedstockComponent implements OnInit {
   tblData: any;
   constructor(
     private feedstockService: FeedstockService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -36,27 +42,28 @@ export class ListFeedstockComponent implements OnInit {
       rows: tbl_list_instruction.rows,
       btns: tbl_list_instruction.btn,
     };
-    const getList = await this.feedstockService.getFeedStock();
+    const getList = await this.feedstockService.find();
     if (getList.status) {
       this.tblData = getList.data;
     }
   }
 
   actions(event: FnData) {
-    console.log(event);
-    if (event.type === 'Detalle') {
-      this.openModal(event.data);
+    if ([CRUD.DELETE].includes(event.type)) {
+      this.deleteItem(event.data.id);
+    } else {
+      this.openModal(event);
     }
   }
 
-  openModal(data: Object) {
+  openModal(info?: FnData) {
     const modalRef = this.modalService.open(AddFeedstockComponent, {
       backdrop: 'static',
       size: 'lg',
       centered: true,
       keyboard: false,
     });
-    modalRef.componentInstance.data = data;
+    modalRef.componentInstance.info = info;
     modalRef.result
       .then((result) => {
         if (result.refresh) {
@@ -66,6 +73,37 @@ export class ListFeedstockComponent implements OnInit {
       .catch((reason) => {
         console.log('Modal cerrado con error:', reason);
       });
+  }
+
+  async deleteItem(id: string) {
+    const alertDeleted = await this.alertService.alertSimple(
+      'Confirmación de Eliminación',
+      '¿Está seguro de que desea eliminar el dato? Esta acción es irreversible y el usuario no podrá ser recuperado.',
+      'warning',
+      'Sí, eliminar',
+      'Cancelar',
+      false
+    );
+
+    if (!alertDeleted) {
+      return;
+    }
+    this.alertService.loader('Eliminando', '', 0);
+    const deleted = await this.feedstockService.delete(id);
+    if (deleted.status) {
+      this.alertService
+        .alertSimple(
+          'Notificación',
+          deleted.message,
+          'success',
+          'Aceptar',
+          '',
+          true
+        )
+        .then(async (es) => {
+          this.getFeedStock();
+        });
+    }
   }
 
   search(value: string) {
