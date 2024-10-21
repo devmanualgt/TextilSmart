@@ -13,10 +13,7 @@ export class TableComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.tblInfo);
-    console.log(this.tblData);
-  }
+  ngOnInit(): void {}
 
   getNestedValue(obj: any, path: string) {
     return path.split('.').reduce((acc, part) => acc && acc[part], obj);
