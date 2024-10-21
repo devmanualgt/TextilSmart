@@ -1,5 +1,4 @@
 @if (tblInfo && tblData) {
-
 <div class="card-body">
   <ng-container
     *ngIf="tblInfo.export_xls"
@@ -82,5 +81,8 @@
   </div>
 </div>
 } @else {
-<p>No ha elementos</p>
+<div class="card-body">
+  <!-- <app-loader></app-loader> -->
+</div>
+
 }
