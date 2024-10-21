@@ -3,7 +3,12 @@
 <div class="modal-body">
   <div class="card-body py-0">
     <!-- Formulario para datos -->
-    <form class="px-4" autocomplete="off">
+    <form
+      class="px-4"
+      autocomplete="off"
+      [formGroup]="feedStockForm"
+      (ngSubmit)="sendFeedSock()"
+    >
       <!-- Primera fila  -->
       <!-- Materia Prima y Proveedor -->
       <div class="row m-t-20">
@@ -14,7 +19,7 @@
             color="primary"
             [floatLabel]="float"
           >
-            <input matInput type="text" />
+            <input matInput required type="text" formControlName="nombre" />
             <mat-label
               ><span class="text-muted font-weight-bold font-size"
                 >Materia Prima</span
@@ -28,10 +33,12 @@
             class="w-100"
             [floatLabel]="float"
           >
-            <mat-select value="">
-              <mat-option value="male">Male</mat-option>
-              <mat-option value="female">Female</mat-option>
-              <mat-option value="other">Other</mat-option>
+            <mat-select value="" matInput required formControlName="proveedor">
+              @for (provider of providers; track $index) {
+              <mat-option [value]="provider['id']">{{
+                provider["nombre"]
+              }}</mat-option>
+              }
             </mat-select>
             <mat-label
               ><span class="text-muted font-weight-bold font-size"
@@ -53,7 +60,12 @@
             color="primary"
             [floatLabel]="float"
           >
-            <input matInput type="text" />
+            <input
+              matInput
+              required
+              type="number"
+              formControlName="nivelMinimo"
+            />
             <mat-label
               ><span class="text-muted font-weight-bold font-size"
                 >Nivel Minimo</span
@@ -70,7 +82,12 @@
             color="primary"
             [floatLabel]="float"
           >
-            <input matInput type="text" />
+            <input
+              matInput
+              required
+              type="number"
+              formControlName="precioUnitario"
+            />
             <mat-label
               ><span class="text-muted font-weight-bold font-size"
                 >Precio</span
@@ -81,7 +98,7 @@
       </div>
 
       <!-- Tercera fila  -->
-      <!-- Unidad de medid y Caterias -->
+      <!-- Unidad de medid y Categorias -->
       <div class="row m-t-20">
         <!-- Columna Unidad de medid -->
         <div class="col-lg-6">
@@ -91,7 +108,12 @@
             color="primary"
             [floatLabel]="float"
           >
-            <input matInput type="text" />
+            <input
+              matInput
+              required
+              type="text"
+              formControlName="unidadMedida"
+            />
             <mat-label
               ><span class="text-muted font-weight-bold font-size"
                 >Unidad de medida</span
@@ -100,17 +122,24 @@
           </mat-form-field>
         </div>
 
-        <!-- Column Caterias -->
+        <!-- Column Categorias -->
         <div class="col-lg-6">
           <mat-form-field
             appearance="outline"
             class="w-100"
             [floatLabel]="float"
           >
-            <mat-select value="" multiple>
-              <mat-option value="male">Male</mat-option>
-              <mat-option value="female">Female</mat-option>
-              <mat-option value="other">Other</mat-option>
+            <mat-select
+              value=""
+              required
+              type="text"
+              formControlName="categoriaMateria"
+            >
+              @for (categorie of categories; track $index) {
+              <mat-option [value]="categorie['id']">{{
+                categorie["nombre"]
+              }}</mat-option>
+              }
             </mat-select>
             <mat-label
               ><span class="text-muted font-weight-bold font-size"
@@ -132,7 +161,13 @@
             color="primary"
             [floatLabel]="float"
           >
-            <textarea matInput rows="5"></textarea>
+            <textarea
+              matInput
+              rows="5"
+              required
+              type="text"
+              formControlName="descripcion"
+            ></textarea>
 
             <mat-label
               ><span class="text-muted font-weight-bold font-size"
