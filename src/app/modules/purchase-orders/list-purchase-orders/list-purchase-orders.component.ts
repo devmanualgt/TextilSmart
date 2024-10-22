@@ -3,8 +3,13 @@ import { PurchaseOrderService } from './../services/purchase-order.service';
 import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
-import { FnData, TblInformation } from 'src/app/models/tbl-information.model';
+import {
+  CRUD,
+  FnData,
+  TblInformation,
+} from 'src/app/models/tbl-information.model';
 import { tbl_purchase_orders } from '../models/tbl-purchase-orders';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-purchase-orders',
@@ -16,7 +21,10 @@ import { tbl_purchase_orders } from '../models/tbl-purchase-orders';
 export class ListPurchaseOrdersComponent implements OnInit {
   tlbInfo: TblInformation;
   tblData: any;
-  constructor(private purchaseOrderService: PurchaseOrderService) {}
+  constructor(
+    private router: Router,
+    private purchaseOrderService: PurchaseOrderService
+  ) {}
 
   async ngOnInit() {
     this.getOrders();
@@ -43,5 +51,9 @@ export class ListPurchaseOrdersComponent implements OnInit {
     console.log(value);
   }
 
-  actions(event: FnData) {}
+  actions(event: FnData) {
+    if (event.type === CRUD.READ) {
+      this.router.navigate([`purchase/orders/detail/${event.data.id}`]);
+    }
+  }
 }

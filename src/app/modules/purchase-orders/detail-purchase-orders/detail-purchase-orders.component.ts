@@ -1,4 +1,3 @@
-import { InformationService } from './../../../services/information.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
