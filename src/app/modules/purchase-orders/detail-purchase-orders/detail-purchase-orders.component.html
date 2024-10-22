@@ -1,72 +1,76 @@
-<div class="container mt-4">
-    <!-- Número de Orden -->
-    <h3 class="text-center mb-3">Orden de Compra #12345</h3>
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <div class="container mt-4">
+      <!-- Número de Orden -->
+      <h3 class="text-center mb-3">Orden de Compra #12345</h3>
 
-    <!-- Datos de la Orden de Compra -->
-    <div class="order-info-container">
+      <!-- Datos de la Orden de Compra -->
+      <div class="order-info-container">
         <!-- Usuario y Proveedor -->
         <div class="order-info-card">
-            <!--<img src="icon-usuario.png" alt="Usuario Icono" class="icon">-->
-            <i class="fa-solid fa-user-large"></i>
-            <div class="info-title">Usuario</div>
-            <div class="info-data">Juan Pérez</div>
+          <!--<img src="icon-usuario.png" alt="Usuario Icono" class="icon">-->
+          <i class="fa-solid fa-user-large"></i>
+          <div class="info-title">Usuario</div>
+          <div class="info-data">Juan Pérez</div>
         </div>
         <div class="order-info-card">
-            <!--<img src="icon-proveedor.png" alt="Proveedor Icono" class="icon">-->
-            <i class="fa-solid fa-truck-field"></i>
-            <div class="info-title">Proveedor</div>
-            <div class="info-data">ABC Proveedores</div>
+          <!--<img src="icon-proveedor.png" alt="Proveedor Icono" class="icon">-->
+          <i class="fa-solid fa-truck-field"></i>
+          <div class="info-title">Proveedor</div>
+          <div class="info-data">ABC Proveedores</div>
         </div>
 
         <!-- Estado, Fecha de Creación, y Días Transcurridos -->
         <div class="order-info-card">
-            <!--<img src="icon-estado.png" alt="Estado Icono" class="icon">-->
-            <i class="fa-solid fa-code-compare"></i>
-            <div class="info-title">Estado</div>
-            <div class="info-data">En proceso</div>
+          <!--<img src="icon-estado.png" alt="Estado Icono" class="icon">-->
+          <i class="fa-solid fa-code-compare"></i>
+          <div class="info-title">Estado</div>
+          <div class="info-data">En proceso</div>
         </div>
         <div class="order-info-card">
-            <!--<img src="icon-fecha.png" alt="Fecha Icono" class="icon">-->
-            <i class="fa-solid fa-calendar-days"></i>
-            <div class="info-title">Fecha Creación</div>
-            <div class="info-data">01/10/2024</div>
+          <!--<img src="icon-fecha.png" alt="Fecha Icono" class="icon">-->
+          <i class="fa-solid fa-calendar-days"></i>
+          <div class="info-title">Fecha Creación</div>
+          <div class="info-data">01/10/2024</div>
         </div>
         <div class="order-info-card">
-            <!--<img src="icon-dias.png" alt="Días Icono" class="icon">-->
-            <i class="fa-solid fa-clock"></i>
-            <div class="info-title">Días Transcurridos</div>
-            <div class="info-data" id="dias-transcurridos"></div>
+          <!--<img src="icon-dias.png" alt="Días Icono" class="icon">-->
+          <i class="fa-solid fa-clock"></i>
+          <div class="info-title">Días Transcurridos</div>
+          <div class="info-data" id="dias-transcurridos"></div>
         </div>
-    </div>
+      </div>
 
-    <!-- Detalle de Productos de Materia Prima -->
-    <div class="product-details mt-4">
+      <!-- Detalle de Productos de Materia Prima -->
+      <div class="product-details mt-4">
         <table class="table table-striped table-bordered">
-            <thead class="table-light">
-                <tr>
-                    <th>Producto</th>
-                    <th>Unidad de Medida</th>
-                    <th>Precio Unitario (Q)</th>
-                    <th>Cantidad Necesaria</th>
-                    <th>Precio Total (Q)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Tela</td>
-                    <td>yarda</td>
-                    <td>5.00</td>
-                    <td>100</td>
-                    <td>500.00</td>
-                </tr>
-                <tr>
-                    <td>Botones</td>
-                    <td>unidades</td>
-                    <td>0.10</td>
-                    <td>200</td>
-                    <td>20.00</td>
-                </tr>
-            </tbody>
+          <thead class="table-light">
+            <tr>
+              <th>Producto</th>
+              <th>Unidad de Medida</th>
+              <th>Precio Unitario (Q)</th>
+              <th>Cantidad Necesaria</th>
+              <th>Precio Total (Q)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tela</td>
+              <td>yarda</td>
+              <td>5.00</td>
+              <td>100</td>
+              <td>500.00</td>
+            </tr>
+            <tr>
+              <td>Botones</td>
+              <td>unidades</td>
+              <td>0.10</td>
+              <td>200</td>
+              <td>20.00</td>
+            </tr>
+          </tbody>
         </table>
+      </div>
     </div>
-</div>
+  </mat-card-content>
+</mat-card>
