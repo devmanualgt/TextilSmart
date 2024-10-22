@@ -156,6 +156,13 @@ const routes: Routes = [
             (m) => m.ProductsModule
           ),
       },
+      //Esta ruta la agrego Denis
+      {
+        path: 'home',
+        title: 'Home',
+        loadComponent: () => import ('./modules/home/home.component'),
+      },
+      
     ],
   },
   {

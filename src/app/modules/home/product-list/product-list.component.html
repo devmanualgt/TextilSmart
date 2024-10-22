@@ -1,0 +1,16 @@
+<div class="card border row">
+    <p>Lista de compras</p>
+
+    @for (product of productos; track $index) {
+
+        <div class="col d-flex border">
+
+            <p>{{product.nombre}} {{product.precio}}</p>
+            <button type="button" class="btn" (click)="onClick(product)">Comprar</button>
+        </div>
+    }
+    <!-- <div class="">
+        <p class="">{{product.nombre}}, Q{{product.precio}}</p>
+
+    </div> -->
+</div>

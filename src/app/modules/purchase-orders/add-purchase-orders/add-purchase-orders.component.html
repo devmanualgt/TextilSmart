@@ -8,6 +8,7 @@
           class="form-select"
           aria-label="Default select example"
           [value]="information?.proveedor?.id"
+          formControlName="proveedorCtrl" required
         >
           <option selected>-- Proveedor --</option>
           <option value="1">One</option>
@@ -15,8 +16,13 @@
           <option value="3">Three</option>
         </select>
 
+
+        
+
+
         <div>
           <button mat-button matStepperNext>Siguiente</button>
+          <!-- <button mat-button (click)="stepper.next()" [disabled]="firstFormGroup.invalid">Siguiente</button> -->
         </div>
       </form>
     </mat-step>

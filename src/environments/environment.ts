@@ -1,8 +1,11 @@
 const url = {
   protocol: 'http',
-  domain: 'localhost:3000',
+  // domain: 'localhost:3000',
+  domain: 'api-textil-umg.vercel.app',
   path: 'api',
 };
+
+
 
 export const environment = {
   production: false,
