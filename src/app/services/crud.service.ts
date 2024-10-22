@@ -129,4 +129,21 @@ export abstract class CrudService<T> {
       })
       .join('&');
   }
+
+  filterDataTable(data: any[], searchText: string): any[] {
+    const lowerCaseSearchText = searchText.toLowerCase();
+  
+    return data.filter(item => {
+      return Object.values(item).some(value => {
+        // Verificar si el valor no es null ni undefined y si es un string, número o booleano
+        if (value !== null && value !== undefined) {
+          return value.toString().toLowerCase().includes(lowerCaseSearchText);
+        }
+        return false;
+      });
+    });
+  }
+  
+  
+
 }

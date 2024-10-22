@@ -13,6 +13,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { AlertService } from 'src/app/services/alert.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-list-feedstock',
@@ -24,11 +25,13 @@ import { NavigationExtras, Router } from '@angular/router';
 export class ListFeedstockComponent implements OnInit {
   tlbInfo: TblInformation;
   tblData: any;
+  originalTblData: any;
   constructor(
     private router: Router,
     private feedstockService: FeedstockService,
     private modalService: NgbModal,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private crudService: CrudService<any>
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +50,7 @@ export class ListFeedstockComponent implements OnInit {
     const getList = await this.feedstockService.find();
     if (getList.status) {
       this.tblData = getList.data;
+      this.originalTblData = [...this.tblData];
     }
   }
 
@@ -117,7 +121,18 @@ export class ListFeedstockComponent implements OnInit {
     }
   }
 
-  search(value: string) {
-    console.log(value);
+  // search(value: string) {
+  //   console.log(value);
+  // }
+
+
+  search(searchText: string): void {
+    if (searchText === '') {
+      // Si el texto de búsqueda está vacío, restaurar los datos originales
+      this.tblData = [...this.originalTblData];
+    } else {
+      // Filtrar la tabla si hay texto en el campo de búsqueda
+      this.tblData = this.crudService.filterDataTable(this.originalTblData, searchText);
+    }
   }
 }

@@ -5,7 +5,9 @@ import {
   FormsModule,
   ReactiveFormsModule,
   FormGroup,
+  FormControl
 } from '@angular/forms';
+import { FormArray } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -13,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from './table/table.component';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-purchase-orders',
@@ -26,21 +29,26 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     TableComponent,
+    
   ],
   templateUrl: './add-purchase-orders.component.html',
   styleUrl: './add-purchase-orders.component.scss',
 })
 export class AddPurchaseOrdersComponent implements OnInit {
+
   proveedor = 'Ferreterias el Fierron';
   private _formBuilder = inject(FormBuilder);
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
+    proveedorCtrl: ['', Validators.required] 
+    
   });
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
   productos = this._formBuilder.array([this.createProduct()]);
   information: any;
+
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
 
@@ -77,4 +85,6 @@ export class AddPurchaseOrdersComponent implements OnInit {
     const product = this.productos.at(index);
     product.patchValue({ editable: !product.value.editable });
   }
+
+  
 }
