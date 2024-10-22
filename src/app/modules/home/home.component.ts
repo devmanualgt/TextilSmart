@@ -1,11 +1,12 @@
 import {Component, Input} from '@angular/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
-import { CardProductComponent } from './card-product/card-product.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { Product } from './interfaces/product-detail.interface';
 import { CartService } from './services/cart.service';
-import { ProductListComponent } from './product-list/product-list.component';
+import { ProductComponent } from './product/product.component';
+import { HeaderComponent } from "../../layouts/full/vertical/header/header.component";
+import { HeaderCartComponent } from './header-cart/header-cart.component';
 
 // interface product {
 
@@ -19,11 +20,11 @@ import { ProductListComponent } from './product-list/product-list.component';
   selector: 'app-home',
   standalone: true,
   imports: [
-    MatButtonModule, 
+    MatButtonModule,
     MatMenuModule,
-    CardProductComponent,
     CarouselComponent,
-    ProductListComponent
+    ProductComponent,
+    HeaderCartComponent
     
 ],
   templateUrl: './home.component.html',
@@ -49,9 +50,5 @@ export default class HomeComponent {
       ];
     } 
     
-    onClick(product: Product){
-      this.cartService.addNewProduct(product);
-      
-  
-    }
+   
 }
