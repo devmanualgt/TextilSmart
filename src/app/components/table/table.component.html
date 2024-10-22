@@ -48,13 +48,25 @@
           <ng-container *ngFor="let hold of tblData; let i = index">
             <tr>
               <!-- Itera sobre las filas -->
-              <td *ngFor="let row of tblInfo.rows; let j = index">
+              <td
+                *ngFor="let row of tblInfo.rows; let j = index"
+                class="align-middle"
+              >
                 <!-- Aquí Angular ya puede acceder a las propiedades anidadas usando el operador de punto -->
+                @if(row.icon){
+                <a title="service">
+                  <span [class]="'btn btn-icon  btn-sm mx-3'">
+                    <i [class]="hold[row.value]"></i>
+                  </span>
+                </a>
+                } @else {
+
                 {{ getNestedValue(hold, row.value) }}
+                }
               </td>
 
               <!-- Botones para acciones -->
-              <td *ngIf="tblInfo.btns" class="text-end">
+              <td *ngIf="tblInfo.btns" class="text-center align-middle">
                 <div
                   class="btn-group"
                   role="group"
