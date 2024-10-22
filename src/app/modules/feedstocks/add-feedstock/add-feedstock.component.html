@@ -1,1 +1,201 @@
-<p>add-feedstock works!</p>
+<app-modal-header title="Nueva Materia Prima"></app-modal-header>
+
+<div class="modal-body">
+  <div class="card-body py-0">
+    <!-- Formulario para datos -->
+    <form
+      class="px-4"
+      autocomplete="off"
+      [formGroup]="feedStockForm"
+      (ngSubmit)="sendFeedSock()"
+    >
+      <!-- Primera fila  -->
+      <!-- Materia Prima y Proveedor -->
+      <div class="row m-t-20">
+        <div class="col-lg-6">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <input matInput required type="text" formControlName="nombre" />
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Materia Prima</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            [floatLabel]="float"
+          >
+            <mat-select value="" matInput required formControlName="proveedor">
+              @for (provider of providers; track $index) {
+              <mat-option [value]="provider['id']">{{
+                provider["nombre"]
+              }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Proveedor</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Segunda fila  -->
+      <!-- Nivel Maximo y Precio -->
+      <div class="row m-t-20">
+        <!-- Columna Nivel Maximo -->
+        <div class="col-lg-6">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <input
+              matInput
+              required
+              type="number"
+              formControlName="nivelMinimo"
+            />
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Nivel Minimo</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+
+        <!--Columna Precio -->
+        <div class="col-lg-6">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <input
+              matInput
+              required
+              type="number"
+              formControlName="precioUnitario"
+            />
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Precio</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Tercera fila  -->
+      <!-- Unidad de medid y Categorias -->
+      <div class="row m-t-20">
+        <!-- Columna Unidad de medid -->
+        <div class="col-lg-6">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <input
+              matInput
+              required
+              type="text"
+              formControlName="unidadMedida"
+            />
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Unidad de medida</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+
+        <!-- Column Categorias -->
+        <div class="col-lg-6">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            [floatLabel]="float"
+          >
+            <mat-select
+              value=""
+              required
+              type="text"
+              formControlName="categoriaMateria"
+            >
+              @for (categorie of categories; track $index) {
+              <mat-option [value]="categorie['id']">{{
+                categorie["nombre"]
+              }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Categorias</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Cuarta fila  -->
+      <!-- Descripcion -->
+      <div class="row m-t-20">
+        <!-- Columna Descripcion -->
+        <div class="col-lg-12">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <textarea
+              matInput
+              rows="5"
+              required
+              type="text"
+              formControlName="descripcion"
+            ></textarea>
+
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Descripcion</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Segunda fila  -->
+      <!-- Boton envio -->
+      <div class="row m-t-20">
+        <!-- Columna Boton envio -->
+        <div class="col-lg-12">
+          <div class="m-t-12">
+            <button
+              mat-raised-button
+              style="height: 48px; width: 100%"
+              type="submit"
+              class="btn font-weight-bolder btn-primary font-size-sm mr-1 text-white"
+              color="primary"
+            >
+              Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

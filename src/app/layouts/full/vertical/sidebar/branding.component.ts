@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 
@@ -11,7 +10,8 @@ import { CoreService } from 'src/app/services/core.service';
       <a href="/">
         <img
           src="./assets/images/logos/dark-logo.svg"
-          class="align-middle m-2"
+          class="align-middle m-auto d-flex"
+          style="width: 75%;"
           alt="logo"
         />
       </a>

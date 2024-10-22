@@ -1,12 +1,18 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatButtonModule} from '@angular/material/button';
+import { Component, inject, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+  FormGroup,
+} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from './table/table.component';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-purchase-orders',
@@ -19,30 +25,34 @@ import { TableComponent } from './table/table.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    TableComponent
-    
+    TableComponent,
   ],
   templateUrl: './add-purchase-orders.component.html',
-  styleUrl: './add-purchase-orders.component.scss'
+  styleUrl: './add-purchase-orders.component.scss',
 })
-export class AddPurchaseOrdersComponent {
-
-  
-  proveedor = "Ferreterias el Fierron"
-
-
+export class AddPurchaseOrdersComponent implements OnInit {
+  proveedor = 'Ferreterias el Fierron';
   private _formBuilder = inject(FormBuilder);
-
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
+  productos = this._formBuilder.array([this.createProduct()]);
+  information: any;
+  constructor(private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
 
-  productos = this._formBuilder.array([
-    this.createProduct()
-  ]);
+    if (navigation && navigation.extras.state) {
+      const data = navigation.extras.state['data'];
+      console.log(data);
+
+      this.information = data;
+    }
+  }
+
+  ngOnInit(): void {}
 
   // Función para crear un producto con FormControls
   createProduct(): FormGroup {
@@ -50,11 +60,11 @@ export class AddPurchaseOrdersComponent {
       nombre: ['', Validators.required],
       cantidad: [0, Validators.required],
       precio: [0, Validators.required],
-      editable: [true]
+      editable: [true],
     });
   }
 
-    // Agregar un nuevo producto
+  // Agregar un nuevo producto
   addProduct() {
     this.productos.push(this.createProduct());
   }
@@ -67,7 +77,4 @@ export class AddPurchaseOrdersComponent {
     const product = this.productos.at(index);
     product.patchValue({ editable: !product.value.editable });
   }
-
-  
-
 }

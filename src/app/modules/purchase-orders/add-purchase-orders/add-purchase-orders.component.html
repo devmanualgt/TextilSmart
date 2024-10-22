@@ -1,22 +1,21 @@
 <div class="container">
-
-  <mat-stepper  #stepper>
+  <mat-stepper #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Selecciona un proveedor</ng-template>
 
-        <select class="form-select" aria-label="Default select example">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          [value]="information?.proveedor?.id"
+        >
           <option selected>-- Proveedor --</option>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
 
-
-        
-        
         <div>
-          
           <button mat-button matStepperNext>Siguiente</button>
         </div>
       </form>
@@ -24,16 +23,15 @@
 
     <mat-step [stepControl]="secondFormGroup" label="Datos orden">
       <form [formGroup]="secondFormGroup">
-      
-         
-          <div class="container mt-5">
-            <div class="d-flex justify-content-between align-items-between py-2">
-              <h2>{{proveedor}}</h2>
-              <button class="btn btn-primary" (click)="addProduct()">Agregar Fila</button>
-
-            </div>  
-            <app-table [productos]="productos" ></app-table>
-          </div>  
+        <div class="container mt-5">
+          <div class="d-flex justify-content-between align-items-between py-2">
+            <h2>{{ proveedor }}</h2>
+            <button class="btn btn-primary" (click)="addProduct()">
+              Agregar Fila
+            </button>
+          </div>
+          <app-table [productos]="productos"></app-table>
+        </div>
 
         <div>
           <button mat-button matStepperPrevious>Regresar</button>
@@ -50,7 +48,5 @@
         <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
       </div>
     </mat-step>
-
   </mat-stepper>
-
 </div>

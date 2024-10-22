@@ -1,4 +1,5 @@
 @use "@angular/material" as mat;
+
 @include mat.core();
 
 @import "variables";
@@ -67,3 +68,5 @@
 
 // RTL Theme
 @import "rtl/rtl";
+
+@import "custom";
