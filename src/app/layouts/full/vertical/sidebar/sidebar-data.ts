@@ -1,6 +1,6 @@
 import { NavItem } from './nav-item/nav-item';
 
-/* export const navItems: NavItem[] = [
+export const navItemss: NavItem[] = [
   {
     navCap: 'Home',
   },
@@ -561,7 +561,7 @@ import { NavItem } from './nav-item/nav-item';
     route: 'https://www.google.com/',
     external: true,
   },
-]; */
+];
 
 export const navItems: NavItem[] = [
   {
