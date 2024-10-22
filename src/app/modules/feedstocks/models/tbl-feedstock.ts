@@ -1,6 +1,6 @@
 import { CRUD } from 'src/app/models/tbl-information.model';
 
-export const tbl_list_instruction = {
+export const tbl_feedstock = {
   headers: [
     'Codigo',
     'Material',

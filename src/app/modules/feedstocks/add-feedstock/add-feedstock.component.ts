@@ -58,7 +58,7 @@ export class AddFeedstockComponent implements OnInit {
   }
 
   generateForm() {
-    const disabled = this.info?.type.includes('Detalle') ? true : false;
+    const disabled = [CRUD.READ].includes(this.info?.type) ? true : false;
     this.feedStockForm = this.fb.group({
       nombre: [{ value: '', disabled: disabled }, Validators.required],
       descripcion: [{ value: '', disabled: disabled }, Validators.required],

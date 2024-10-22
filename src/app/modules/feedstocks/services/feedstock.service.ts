@@ -8,9 +8,9 @@ import { CrudService } from 'src/app/services/crud.service';
 @Injectable({
   providedIn: 'root',
 })
-export class FeedstockService extends CrudService<any> implements OnDestroy {
-  override API_URL = `${environment.API_URL}/v1/feedstocks`;
+export class FeedstockService extends CrudService<any> {
   URL_API = `${environment.API_URL}/v1`;
+  override API_URL = `${environment.API_URL}/v1/feedstocks`;
   constructor(
     @Inject(HttpClient) http: HttpClient,
     public override alertService: AlertService
@@ -56,9 +56,5 @@ export class FeedstockService extends CrudService<any> implements OnDestroy {
       // this.handlerError.errorAlertNorm(error, msm);
       return { status: false };
     }
-  }
-
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
   }
 }

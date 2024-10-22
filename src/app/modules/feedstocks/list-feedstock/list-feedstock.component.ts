@@ -6,7 +6,7 @@ import {
   FnData,
   TblInformation,
 } from 'src/app/models/tbl-information.model';
-import { tbl_list_instruction } from '../models/tbl-feedstock';
+import { tbl_feedstock } from '../models/tbl-feedstock';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddFeedstockComponent } from '../add-feedstock/add-feedstock.component';
 import { MaterialModule } from 'src/app/material.module';
@@ -40,9 +40,9 @@ export class ListFeedstockComponent implements OnInit {
       tbl_name: 'Materia Prima',
       export_xls: false,
       scroll_tbl: false,
-      headers: tbl_list_instruction.headers,
-      rows: tbl_list_instruction.rows,
-      btns: tbl_list_instruction.btn,
+      headers: tbl_feedstock.headers,
+      rows: tbl_feedstock.rows,
+      btns: tbl_feedstock.btn,
     };
     const getList = await this.feedstockService.find();
     if (getList.status) {
