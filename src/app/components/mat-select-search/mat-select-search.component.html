@@ -1,0 +1,27 @@
+<mat-form-field appearance="outline" class="w-100" floatLabel="auto">
+  <mat-select
+    [value]="info.value"
+    matInput
+    [required]="info.required"
+    [formControl]="selectControl"
+  >
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="searchControl"
+        placeholderLabel="Buscar"
+        noEntriesFoundLabel="Valor no encontrado"
+      ></ngx-mat-select-search>
+    </mat-option>
+    <mat-option
+      *ngFor="let option of filteredOptions | async"
+      [value]="option[info.id]"
+    >
+      {{ option[displayKey] }}
+    </mat-option>
+  </mat-select>
+  <mat-label
+    ><span class="text-muted font-weight-bold font-size">{{
+      info.label
+    }}</span></mat-label
+  >
+</mat-form-field>
