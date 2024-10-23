@@ -7,6 +7,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from './loading/loader.component';
 import { ModalHeaderComponent } from './modal-header/modal-header.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,13 @@ import { ModalHeaderComponent } from './modal-header/modal-header.component';
     LoaderComponent,
     ModalHeaderComponent,
   ],
-  imports: [CommonModule, MaterialModule, TablerIconsModule, FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule,
+    TablerIconsModule,
+    FormsModule,
+  ],
   exports: [
     TableComponent,
     SearchComponent,

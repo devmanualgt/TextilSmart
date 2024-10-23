@@ -561,7 +561,7 @@ import { NavItem } from './nav-item/nav-item';
 //     route: 'https://www.google.com/',
 //     external: true,
 //   },
-// ]; 
+// ];
 
 export const navItems: any[] = [
   {
@@ -632,7 +632,7 @@ export const navItems: any[] = [
     route: 'sales/orders/tracking',
   },
 
-   {
+  {
     displayName: 'Notes',
     iconName: 'note',
     route: 'apps/notes',
