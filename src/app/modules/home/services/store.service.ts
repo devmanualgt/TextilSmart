@@ -23,6 +23,11 @@ export class StoreService {
     // console.log(response);
     return response
   }
+
+  getAllData(){
+    
+  
+  }
   //con promesa
   // getPromise(): Promise<any[]> {
   //   return lastValueFrom(this.httpClient.get<any[]>(`${this.baseUrl}products`))
