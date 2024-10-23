@@ -39,7 +39,7 @@
             <th *ngFor="let item of tblInfo.headers">
               {{ item }}
             </th>
-            @if (tblInfo.btns) {
+            @if (tblInfo.btns.length > 0) {
             <th>Acciones</th>
             }
           </tr>
