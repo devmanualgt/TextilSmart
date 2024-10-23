@@ -121,6 +121,30 @@ export abstract class CrudService<T> {
     }
   }
 
+  async findById(id: any) {
+    try {
+      const response = await firstValueFrom(
+        this.http.get<any>(`${this.API_URL}/${id}`, {
+          observe: 'response',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        })
+      );
+
+      if (response?.ok) {
+        return {
+          status: true,
+          data: response.body['records'],
+          message: response.body['message'],
+        };
+      } else {
+        return { status: false };
+      }
+    } catch (error) {
+      this.alertService.errorAlertNorm(error, error);
+      return { status: false };
+    }
+  }
+
   toUrlEncoded(obj: any): string {
     return Object.keys(obj)
       .map((key) => {

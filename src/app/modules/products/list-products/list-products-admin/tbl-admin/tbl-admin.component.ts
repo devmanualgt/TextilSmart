@@ -1,16 +1,16 @@
-
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AlertService } from 'src/app/services/alert.service';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @Component({
   selector: 'app-tbl-products-admin',
   templateUrl: 'tbl-admin.component.html',
   styleUrls: ['tbl-admin.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ComponentsModule],
 })
 export class TblAdminComponent {
   @ViewChild('productModal', { static: false }) productModal!: ElementRef; // Modal de producto
@@ -19,7 +19,10 @@ export class TblAdminComponent {
   selectedProduct = { id: '', name: '', price: 0, stock: 0 }; // Producto seleccionado para editar
   newProduct = { name: '', price: 0, stock: 0 }; // Inicialización del nuevo producto
 
-  constructor(private modalService: NgbModal, private alertService: AlertService) {}
+  constructor(
+    private modalService: NgbModal,
+    private alertService: AlertService
+  ) {}
 
   // Abrir modal para agregar nuevo producto
   openProductModal(content: any) {
@@ -28,7 +31,10 @@ export class TblAdminComponent {
   }
 
   // Abrir modal para editar producto existente
-  editProduct(product: { id: string; name: string; price: number; stock: number }, content: any) {
+  editProduct(
+    product: { id: string; name: string; price: number; stock: number },
+    content: any
+  ) {
     this.selectedProduct = { ...product }; // Cargar datos del producto a editar
     this.modalService.open(content, { centered: true });
   }
@@ -63,5 +69,4 @@ export class TblAdminComponent {
       console.log('usar API para eliminar');
     }
   }
-  
 }
