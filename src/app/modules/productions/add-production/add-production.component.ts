@@ -45,7 +45,7 @@ export class AddProductionComponent implements OnInit {
       producto: [null, Validators.required],
       color: [null, Validators.required],
       talla: [null, Validators.required],
-      cantidad: [null, Validators.required],
+      cantidad: [0, Validators.required],
       encargado: [null, Validators.required],
       fechaFin: ["", Validators.required],
       fechaInicio: ["", Validators.required]
