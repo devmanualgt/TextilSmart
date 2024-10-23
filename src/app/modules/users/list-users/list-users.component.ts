@@ -17,6 +17,7 @@ import { CRUD } from 'src/app/models/tbl-information.model';
   styleUrl: './list-users.component.scss',
 })
 export class ListUsersComponent implements OnInit{
+  usersOriginal: any = []
   users: any = []
   constructor(
     private userService: UserService,
@@ -32,6 +33,7 @@ export class ListUsersComponent implements OnInit{
     const listUsers = await this.userService.find()
     if(listUsers.status){
       this.users= listUsers.data
+      this.usersOriginal = [...this.users];
       console.log(listUsers.data)
     }
   }
@@ -95,7 +97,15 @@ export class ListUsersComponent implements OnInit{
         });
     }
   }
-  search(value: string) {
-    console.log(value);
+  
+  
+  search(searchText: string): void {
+    if (searchText === '') {
+      // Si el texto de búsqueda está vacío, restaurar los datos originales
+      this.users = [...this.usersOriginal];
+    } else {
+      // Filtrar la tabla si hay texto en el campo de búsqueda
+      this.users = this.userService.filterDataTable(this.usersOriginal, searchText);
+    }
   }
 }
