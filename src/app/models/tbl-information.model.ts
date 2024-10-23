@@ -8,8 +8,8 @@ export interface TblInformation {
 }
 
 export interface RowData {
-  //header: string;
   value: any;
+  icon?: boolean;
 }
 
 export interface BtnData {

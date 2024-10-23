@@ -31,3 +31,27 @@ body {
   --bs-table-color-type: #000 !important;
   --bs-table-bg-type: #f3f6f9 !important;
 }
+
+.fa-shirt {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: url("./assets/images/types/shirt.svg") no-repeat center center;
+  background-size: contain;
+}
+
+.fa-trousers {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: url("./assets/images/types/pants.svg") no-repeat center center;
+  background-size: contain;
+}
+
+.fa-coat {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: url("./assets/images/types/coat.svg") no-repeat center center;
+  background-size: contain;
+}

@@ -43,7 +43,12 @@
               <td>
                 <button
                   class="btn btn-warning btn-sm marginBtnAggModify"
-                  (click)="editProduct({ id: '#001', name: 'Producto A', price: 30, stock: 100 }, productModal)"
+                  (click)="
+                    editProduct(
+                      { id: '#001', name: 'Producto A', price: 30, stock: 100 },
+                      productModal
+                    )
+                  "
                 >
                   Editar
                 </button>
@@ -63,7 +68,12 @@
               <td>
                 <button
                   class="btn btn-warning btn-sm marginBtnAggModify"
-                  (click)="editProduct({ id: '#002', name: 'Producto B', price: 45, stock: 50 }, productModal)"
+                  (click)="
+                    editProduct(
+                      { id: '#002', name: 'Producto B', price: 45, stock: 50 },
+                      productModal
+                    )
+                  "
                 >
                   Editar
                 </button>
@@ -96,7 +106,9 @@
   <div class="modal-body">
     <form>
       <div class="mb-3">
-        <label for="newProductName" class="form-label">Nombre del Producto</label>
+        <label for="newProductName" class="form-label"
+          >Nombre del Producto</label
+        >
         <input
           type="text"
           class="form-control"

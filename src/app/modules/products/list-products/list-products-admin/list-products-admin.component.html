@@ -1,0 +1,22 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-0">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      @for (link of tabs; track link) {
+      <a
+        mat-tab-link
+        [routerLink]="link.path"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [active]="rla.isActive"
+        class="flex-grow-1"
+      >
+        {{ link.label }}
+      </a>
+      }
+    </nav>
+  </mat-card-content>
+</mat-card>
+
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>

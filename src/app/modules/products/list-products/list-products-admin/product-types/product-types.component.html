@@ -1,0 +1,15 @@
+<!-- <app-search
+  textBtn="Nuevo"
+  (searchValue)="search($event)"
+  (newValue)="openModal()"
+></app-search> -->
+
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <app-table
+      [tblInfo]="tlbInfo"
+      [tblData]="tblData"
+      (btnAction)="actions($event)"
+    ></app-table>
+  </mat-card-content>
+</mat-card>
