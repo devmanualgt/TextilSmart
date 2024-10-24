@@ -1,54 +1,66 @@
-<!-- Modal Agregar Cliente -->
-<div class="modal-header">
-  <h5 class="modal-title" id="addClientModalLabel">Agregar Cliente</h5>
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="modal"
-    aria-label="Close"
-    (click)="closeModal()"
-  ></button>
-</div>
+<app-modal-header title="Agregar Nuevo Usuario"></app-modal-header>
+
 <div class="modal-body">
-  <form id="client-form">
-    <div class="mb-3">
-      <label for="client-name" class="form-label">Nombre y Apellido</label>
-      <input type="text" class="form-control" id="client-name" required />
-    </div>
-    <div class="mb-3">
-      <label for="username" class="form-label">Usuario</label>
-      <input type="text" class="form-control" id="username" required />
-    </div>
-    <div class="mb-3">
-      <label for="phone" class="form-label">Teléfono</label>
-      <input type="tel" class="form-control" id="phone" required />
-    </div>
-    <div class="mb-3">
-      <label for="address" class="form-label">Dirección</label>
-      <input type="text" class="form-control" id="address" required />
-      <button
-        type="button"
-        class="btn btn-secondary btn-sm mt-2"
-        id="add-address-btn"
-      >
-        Agregar otra dirección
-      </button>
-    </div>
-    <div class="mb-3">
-      <label for="nit" class="form-label">Número de NIT</label>
-      <input type="text" class="form-control" id="nit" required />
-    </div>
-    <!-- Más campos si es necesario -->
-  </form>
-</div>
-<div class="modal-footer">
-  <button
-    type="button"
-    class="btn btn-secondary"
-    data-bs-dismiss="modal"
-    (click)="closeModal()"
-  >
-    Cancelar
-  </button>
-  <button type="submit" class="btn btn-primary">Guardar</button>
+  <div class="card-body py-0">
+    <!-- Formulario para datos -->
+    <form class="px-4" autocomplete="off" [formGroup]="addusersform" (ngSubmit)="sendUsersForm()">
+      <!-- Primera fila  -->
+      <!-- Nombre -->
+      <div class="row m-t-20">
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100" color="primary" [floatLabel]="float">
+            <input matInput required type="text" formControlName="nombre" />
+            <mat-label><span class="text-muted font-weight-bold font-size">Nombre</span></mat-label>
+          </mat-form-field>
+        </div>
+        <!-- Apellido -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100" color="primary" [floatLabel]="float">
+            <input matInput required type="text" formControlName="apellido" />
+            <mat-label><span class="text-muted font-weight-bold font-size">Apellido</span></mat-label>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Segunda fila  -->
+      <!-- Usuario, Correo y Teléfono -->
+      <div class="row m-t-20">
+        <!-- Usuario -->
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline" class="w-100" color="primary" [floatLabel]="float">
+            <input matInput required type="text" formControlName="usuario" />
+            <mat-label><span class="text-muted font-weight-bold font-size">Usuario</span></mat-label>
+          </mat-form-field>
+        </div>
+        <!-- Correo -->
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline" class="w-100" color="primary" [floatLabel]="float">
+            <input matInput required type="text" formControlName="correoElectronico" />
+            <mat-label><span class="text-muted font-weight-bold font-size">Correo Electronico</span></mat-label>
+          </mat-form-field>
+        </div>
+        <!-- Teléfono -->
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline" class="w-100" color="primary" [floatLabel]="float">
+            <input matInput required type="text" formControlName="telefono" />
+            <mat-label><span class="text-muted font-weight-bold font-size">Teléfono</span></mat-label>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Tercera fila  -->
+      <!-- Boton envio -->
+      <div class="row m-t-20">
+        <!-- Columna Boton envio -->
+        <div class="col-lg-12">
+          <div class="m-t-12">
+            <button mat-raised-button style="height: 48px; width: 100%" type="submit"
+              class="btn font-weight-bolder btn-primary font-size-sm mr-1 text-white" color="primary">
+              Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

@@ -1,120 +1,123 @@
 @if (tblInfo && tblData) {
-<div class="card-body">
-  <ng-container
-    *ngIf="tblInfo.export_xls"
-    style="padding-bottom: 10px; padding-top: 10px"
-  >
-    <!-- <div>
-        <div class="row">
-          <div class="col-sm-12">
-            <button
-              (click)="exportToExcel()"
-              class="btn font-weight-bolder font-size-sm mr-1"
-              style="background-color: green; color: white"
-            >
-              <i class="fas fa-file-excel" style="color: white"></i>Exportar a
-              Excel</button
-            >&nbsp;
-          </div>
-        </div>
-      </div> -->
-  </ng-container>
-
-  <div
-    class="table-responsive angular-bootstrap-table"
-    [class.global-table]="tblInfo.scroll_tbl"
-  >
-    <div class="col-md-12 table-responsive p-0" #epltable>
-      <table
-        class="table table-striped table-head-custom table-vertical-center overflow-hidden"
-        [ngStyle]="{
-          display: tblInfo.scroll_tbl ? 'table-header-group' : 'table'
-        }"
-      >
-        <thead
-          class="sticky-top thead-info"
-          style="background-color: white; color: black"
-        >
-          <tr>
-            <th *ngFor="let item of tblInfo.headers">
-              {{ item }}
-            </th>
-            @if (tblInfo.btns) {
-            <th>Acciones</th>
-            }
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let hold of tblData; let i = index">
-            <tr>
-              <!-- Itera sobre las filas -->
-              <td
-                *ngFor="let row of tblInfo.rows; let j = index"
-                class="align-middle"
+  <div class="card-body">
+    <ng-container
+      *ngIf="tblInfo.export_xls"
+      style="padding-bottom: 10px; padding-top: 10px"
+    >
+      <!-- <div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button
+                (click)="exportToExcel()"
+                class="btn font-weight-bolder font-size-sm mr-1"
+                style="background-color: green; color: white"
               >
-                <!-- Aquí Angular ya puede acceder a las propiedades anidadas usando el operador de punto -->
-                @if(row.icon){
-                <a title="service">
-                  <span [class]="'btn btn-icon  btn-sm mx-3'">
-                    <i [class]="hold[row.value]"></i>
-                  </span>
-                </a>
-                } @else {
-
-                {{ getNestedValue(hold, row.value) }}
-                }
-              </td>
-
-              <!-- Botones para acciones -->
-              <td *ngIf="tblInfo.btns" class="text-center align-middle">
-                <div
-                  class="btn-group"
-                  role="group"
-                  aria-label="Button group with nested dropdown"
-                >
-                  <ng-container *ngFor="let btn of tblInfo.btns; let k = index">
-                    @if (btn?.visible === '') {
-                    <button
-                      [title]="btn.name"
-                      [class]="'btn btn-' + btn.color"
-                      (click)="newEvent({ data: hold, type: btn.name })"
-                    >
-                      <span>
-                        <i
-                          [class]="
-                            btn.icon + ' text-white icon-3x bi bi-aspect-ratio'
-                          "
-                        ></i>
-                      </span>
-                    </button>
-                    } @else if(btn?.visible !== '' && hold[btn.visible]) {
-                    <button
-                      [title]="btn.name"
-                      [class]="'btn btn-' + btn.color"
-                      (click)="newEvent({ data: hold, type: btn.name })"
-                    >
-                      <span>
-                        <i
-                          [class]="
-                            btn.icon + ' text-white icon-1x bi bi-aspect-ratio'
-                          "
-                        ></i>
-                      </span>
-                    </button>
-                    }
-                  </ng-container>
-                </div>
-              </td>
+                <i class="fas fa-file-excel" style="color: white"></i>Exportar a
+                Excel</button
+              >&nbsp;
+            </div>
+          </div>
+        </div> -->
+    </ng-container>
+  
+    <div
+      class="table-responsive angular-bootstrap-table"
+      [class.global-table]="tblInfo.scroll_tbl"
+    >
+      <div class="col-md-12 table-responsive p-0" #epltable>
+        <table
+          class="table table-striped table-head-custom table-vertical-center overflow-hidden"
+          [ngStyle]="{
+            display: tblInfo.scroll_tbl ? 'table-header-group' : 'table'
+          }"
+        >
+          <thead
+            class="sticky-top thead-info"
+            style="background-color: white; color: black"
+          >
+            <tr>
+              <th *ngFor="let item of tblInfo.headers">
+                {{ item }}
+              </th>
+              @if (tblInfo.btns.length > 0) {
+              <th>Acciones</th>
+              }
             </tr>
-          </ng-container>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let hold of tblData; let i = index">
+              <tr>
+                <!-- Itera sobre las filas -->
+                <td
+                  *ngFor="let row of tblInfo.rows; let j = index"
+                  class="align-middle"
+                >
+                  <!-- Aquí Angular ya puede acceder a las propiedades anidadas usando el operador de punto -->
+                  @if(row.icon){
+                  <a title="service">
+                    <span [class]="'btn btn-icon  btn-sm mx-3'">
+                      <i [class]="hold[row.value]"></i>
+                    </span>
+                  </a>
+                  } @else if(row.pipe) { @switch(row.pipe) { @case('date') {
+                  {{ getNestedValue(hold, row.value) | date : "dd-MM-yyyy" }}
+                  } @default {
+                  {{ getNestedValue(hold, row.value) }}
+                  } } } @else {
+                  {{ getNestedValue(hold, row.value) }}
+                  }
+                </td>
+  
+                <!-- Botones para acciones -->
+                <td *ngIf="tblInfo.btns" class="text-center align-middle">
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Button group with nested dropdown"
+                  >
+                    <ng-container *ngFor="let btn of tblInfo.btns; let k = index">
+                      @if (btn?.visible === '') {
+                      <button
+                        [title]="btn.name"
+                        [class]="'btn btn-' + btn.color"
+                        (click)="newEvent({ data: hold, type: btn.name })"
+                      >
+                        <span>
+                          <i
+                            [class]="
+                              btn.icon + ' text-white icon-3x bi bi-aspect-ratio'
+                            "
+                          ></i>
+                        </span>
+                      </button>
+                      } @else if(btn?.visible !== '' && hold[btn.visible]) {
+                      <button
+                        [title]="btn.name"
+                        [class]="'btn btn-' + btn.color"
+                        (click)="newEvent({ data: hold, type: btn.name })"
+                      >
+                        <span>
+                          <i
+                            [class]="
+                              btn.icon + ' text-white icon-1x bi bi-aspect-ratio'
+                            "
+                          ></i>
+                        </span>
+                      </button>
+                      }
+                    </ng-container>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
-} @else {
-<div class="card-body">
-  <!-- <app-loader></app-loader> -->
-</div>
-
-}
+  } @else {
+  <div class="card-body">
+    <!-- <app-loader></app-loader> -->
+  </div>
+  
+  }
