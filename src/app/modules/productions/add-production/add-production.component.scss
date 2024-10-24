@@ -1,36 +1,40 @@
 body {
-    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
 }
 
 h3 {
-    color: #004d40;
+  color: #004d40;
 }
 
 .size-select {
-    text-align: center;
-    width: 40%;
+  text-align: center;
+  width: 40%;
 }
 
 .btn-outline-primary {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .table th {
-    text-align: center;
-    color: #004d40;
-    font-weight: bold;
+  text-align: center;
+  color: #004d40;
+  font-weight: bold;
 }
 
 .table td {
-    text-align: center;
+  text-align: center;
 }
 
 .table .existente {
-    color: #28a745;
-    font-weight: bold;
+  color: #28a745;
+  font-weight: bold;
 }
 
 .table .faltante {
-    color: #dc3545;
-    font-weight: bold;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.no-interaction {
+  pointer-events: none;
 }

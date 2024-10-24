@@ -2,17 +2,24 @@
   <mat-card-content class="p-24">
     <form [formGroup]="productionForm" (ngSubmit)="sendproduction()">
       <div class="row m-t-20">
-        <div class="col-lg-4">
+        <!--  <div class="col-lg-4">
           @if (providers.length > 0) {
           <app-mat-select-search
             [options]="providers"
             displayKey="nombre"
-            [info]="{ id: 'id', value: '', required: true, label: 'Proveedor' }"
+            [info]="{
+              id: 'id',
+              value: '',
+              required: true,
+              label: 'Proveedor',
+              check: true
+            }"
+            (check_value)="showProdiver($event)"
             formControlName="proveedor"
           ></app-mat-select-search>
           }
-        </div>
-        <div class="col-lg-4">
+        </div> -->
+        <div class="col-lg-6">
           @if (products.length > 0) {
           <app-mat-select-search
             [options]="products"
@@ -23,7 +30,7 @@
           }
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <mat-form-field
             appearance="outline"
             class="w-100"
@@ -61,7 +68,7 @@
           <app-mat-select-search
             [options]="colors"
             displayKey="nombre"
-            [info]="{ id: 'key', value: '', required: true, label: 'Colores' }"
+            [info]="{ id: 'id', value: '', required: true, label: 'Colores' }"
             formControlName="color"
           ></app-mat-select-search>
           }
@@ -71,7 +78,7 @@
           <app-mat-select-search
             [options]="sizes"
             displayKey="nombre"
-            [info]="{ id: 'key', value: '', required: true, label: 'Talla' }"
+            [info]="{ id: 'id', value: '', required: true, label: 'Talla' }"
             formControlName="talla"
           ></app-mat-select-search>
           }
@@ -106,12 +113,22 @@
               (click)="pickerend.open()"
               formControlName="fechaFinEstimada"
             />
-            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle
               matIconSuffix
               [for]="pickerend"
             ></mat-datepicker-toggle>
             <mat-datepicker #pickerend></mat-datepicker>
+            <mat-error
+              *ngIf="
+                productionForm
+                  .get('fechaFinEstimada')
+                  ?.hasError('fechaInvalida')
+              "
+            >
+              La fecha de finalización debe ser al menos 5 días mayor a la fecha
+              actual.
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
