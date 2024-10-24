@@ -64,9 +64,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 
-
-
-
 export class NewSaleOrderCustomerComponent {
 
 
