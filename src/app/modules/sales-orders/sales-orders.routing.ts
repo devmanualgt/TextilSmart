@@ -63,6 +63,18 @@ export const SalesOrdersModuleRoutes: Routes = [
           ],
         },
       },
+      // {
+      //   //esta ruta la creo Denis, motivo: no la encontraba en otro ruting
+      //   path: 'detail-sale-order',
+      //   component: DetailSaleOrderComponent,
+      //   data: {
+      //     title: 'Detalle orden de compra',
+      //     urls: [
+      //       { title: 'Pedidos', url: '/sales/orders/list' },
+      //       { title: 'Detalle' },
+      //     ],
+      //   },
+      // },
     ],
   },
 ];

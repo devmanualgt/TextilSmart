@@ -1,13 +1,25 @@
 <app-carousel></app-carousel>
+<app-header-cart></app-header-cart>
 
-<div class="container-sm mt-5">
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" class="form-control" placeholder="¿Qué estás buscando?" aria-label="buscar" aria-describedby="basic-addon1">
-    </div>
-</div>
 
-<!-- <app-product-list/> -->
+<!-- <section>
+    <form>
+      <input type="text" placeholder="Filter by city"  #filter/>
+      <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+    </form>
+  </section> -->
+
+  <!-- <div>
+    <input
+      type="text"
+      placeholder="Buscar..."
+      [(ngModel)]="busqueda"
+    />
+    <app-hijo [valorBusqueda]="busqueda"></app-hijo>
+  </div> -->
+`
+
+  
 
 <section class="container-fluid d-flex align-items-center
  justify-content-center mt-4">
@@ -38,40 +50,17 @@
 <h2 class="fs-3 text-center">Tu estilo, nuestra inspiración</h2>
 <h2 class="text-center">TextilSmart</h2>
 
-<div class="container mt-3">
-    <h2 class="fs-5">Destacados...</h2>
+    <div class="container mt-3">
+        <h2 class="fs-5">Destacados...</h2>
 
-    <!-- cards -->
-    <!-- <app-card-product [productos]="productos"></app-card-product> -->
-     <app-card-product/>
+        <div class="row">
 
-    <div class="row d-flex justify-content-center align-items-center">
-        @for (product of products; track $index) {
-          <div class="col d-flex justify-content-center">
-      
-            <div class="card" style="width: 18rem;">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{product.nombre}}</h5>
-                <p class="card-text">Q {{product?.precio}}</p>
-                <div class="d-flex justify-content-between gap-2">
-                  <a  class="btn btn-primary w-50">Ver</a>
-                  <!-- <a  class="btn btn-primary w-50" (click)="onClick(product)">Agregar</a> -->
-                  <button type="button" class="btn" (click)="onClick(product)">Agregar</button>
-                </div>
-                <!-- <a href="#" class="btn btn-primary" (click)="onClick(product)">Comprar</a> -->
-              </div>
-            </div>
-          </div>
-        }
-      
-      </div>
-      
+            <!-- <app-product [text]="busqueda" ></app-product> -->
+            <app-product ></app-product>
+            
+        </div>
+    </div>
 
-
-
-
-
-</div>
+    
 
 </section>

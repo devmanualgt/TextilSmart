@@ -1,78 +1,59 @@
-import { ProductService } from './../products/services/product.service';
-import { Component, Input } from '@angular/core';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
-import { CardProductComponent } from './card-product/card-product.component';
+import {Component, Input, ViewChild} from '@angular/core';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 import { CarouselComponent } from './carousel/carousel.component';
 import { Product } from './interfaces/product-detail.interface';
-import { CartService } from './services/cart.service';
-import { ProductListComponent } from './product-list/product-list.component';
+import { ProductComponent } from './product/product.component';
+import { HeaderComponent } from "../../layouts/full/vertical/header/header.component";
+import { HeaderCartComponent } from './header-cart/header-cart.component';
+import { ProductService } from '../products/services/product.service';
+import { SearchComponent } from 'src/app/components/table/search/search.component';
+import { CommonModule } from '@angular/common';
+import { StoreService } from './services/store.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
-// interface product {
 
-//     id: number,
-//     nombre: string,
-//     precio: number
-
-// }
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+    CommonModule,
     MatButtonModule,
     MatMenuModule,
-    CardProductComponent,
     CarouselComponent,
-    ProductListComponent,
-  ],
+    ProductComponent,
+    HeaderCartComponent,
+    // BrowserModule, 
+    FormsModule
+    
+],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrl: './home.component.scss'
 })
 export default class HomeComponent {
-  products: Product[] = [];
 
-  // productos: Product[]  = [
-  //     { id: 1, nombre: 'Producto1', precio: 100 , descripcion: "saf", img: "asdf"},
-  //     { id: 2, nombre: 'Producto2', precio: 100 ,descripcion: "saf", img: "asdf"},
-  //     { id: 3, nombre: 'Producto3', precio: 100 ,descripcion: "saf", img: "asdf"},
-  //   ];
+    products: Product[]= [];
+    busqueda: string = '';
 
-  constructor(
-    private cartService: CartService,
-    private productService: ProductService
-  ) {}
+    constructor(private productService: ProductService, private storeService: StoreService){}
 
-  async ngOnInit() {
-    const a = await this.productService.find();
-    console.log(a);
 
-    this.products = [
-      {
-        id: 1,
-        nombre: 'Producto11',
-        precio: 100,
-        descripcion: 'saf',
-        img: 'asdf',
-      },
-      {
-        id: 2,
-        nombre: 'Producto2',
-        precio: 100,
-        descripcion: 'saf',
-        img: 'asdf',
-      },
-      {
-        id: 3,
-        nombre: 'Producto3',
-        precio: 100,
-        descripcion: 'saf',
-        img: 'asdf',
-      },
-    ];
-  }
+    
+    async ngOnInit(){
 
-  onClick(product: Product) {
-    this.cartService.addNewProduct(product);
-  }
+      // const a = await this.productService.find();
+      // console.log(a);
+      
+    } 
+
+    filterResults(text : string){
+
+      this.storeService.filterProducts(text);
+      console.log('hola')
+
+    }
+
+   
 }

@@ -15,6 +15,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from './table/table.component';
 import { Router } from '@angular/router';
+import { FeedstockService } from '../../feedstocks/services/feedstock.service';
+import { MaterialModule } from 'src/app/material.module';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {AsyncPipe} from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 
 @Component({
@@ -29,6 +36,9 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     TableComponent,
+    MaterialModule,
+    MatAutocompleteModule,
+    AsyncPipe,
     
   ],
   templateUrl: './add-purchase-orders.component.html',
@@ -36,10 +46,10 @@ import { Router } from '@angular/router';
 })
 export class AddPurchaseOrdersComponent implements OnInit {
 
-  proveedor = 'Ferreterias el Fierron';
+  // proveedor = 'Ferreterias el Fierron';
   private _formBuilder = inject(FormBuilder);
   firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+    // firstCtrl: ['', Validators.required],
     proveedorCtrl: ['', Validators.required] 
     
   });
@@ -49,7 +59,11 @@ export class AddPurchaseOrdersComponent implements OnInit {
   productos = this._formBuilder.array([this.createProduct()]);
   information: any;
 
-  constructor(private router: Router) {
+  // variables para los proveedores
+  MyProviders: any[] = []; 
+  error: boolean = false; 
+
+  constructor(private router: Router, private feedstockService: FeedstockService) {
     const navigation = this.router.getCurrentNavigation();
 
     if (navigation && navigation.extras.state) {
@@ -60,7 +74,12 @@ export class AddPurchaseOrdersComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getProviders();
+
+    
+  }
+
 
   // Función para crear un producto con FormControls
   createProduct(): FormGroup {
@@ -86,5 +105,18 @@ export class AddPurchaseOrdersComponent implements OnInit {
     product.patchValue({ editable: !product.value.editable });
   }
 
+  async getProviders() {
+    const result = await this.feedstockService.getProviders();
+    if (result.status) {
+      this.MyProviders = result.data; // Almacenar datos
+    } else {
+      this.error = true; // Manejar error
+    }
+  }
+
   
+
+
 }
+
+
