@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-
   
   myCart$ = this.storeService.myCart$;
 
@@ -48,5 +47,19 @@ export class CartComponent {
   }
 
 
+  // isCartOpen = false;
+
+  // toggleCart() {
+  //   this.isCartOpen = !this.isCartOpen;
+  //   this.updateBodyScroll();
+  // }
+
+  // updateBodyScroll() {
+  //   if (this.isCartOpen) {
+  //     document.body.classList.add('no-scroll');
+  //   } else {
+  //     document.body.classList.remove('no-scroll');
+  //   }
+  // }
 
 }

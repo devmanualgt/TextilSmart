@@ -24,16 +24,34 @@ export class StoreService {
     return response
   }
 
-  getAllData(){
-    
-  
-  }
-  //con promesa
-  // getPromise(): Promise<any[]> {
-  //   return lastValueFrom(this.httpClient.get<any[]>(`${this.baseUrl}products`))
-  // }
 
   //añado producto al carrito
+  // addProduct(product: any) {
+
+  //   // debugger;
+  //   if (this.myList.length === 0) {
+  //     product.cantidad = 1;
+  //     this.myList.push(product);
+  //     //emito la lista para los que estén escuchando
+  //     this.myCart.next(this.myList);
+
+  //   } else {
+  //     const productMod = this.myList.find((element) => {
+  //       return element.id === product.id
+  //     })
+  //     if (productMod) {
+  //       productMod.cantidad = productMod.cantidad + 1;
+  //       this.myCart.next(this.myList);
+  //     } else {
+  //       product.cantidad = 1;
+  //       this.myList.push(product);
+  //       //ojo hay que emitir la lista!!
+  //       this.myCart.next(this.myList);
+  //     }
+
+  //   }
+  // }
+
   addProduct(product: any) {
 
     // debugger;
@@ -77,8 +95,20 @@ export class StoreService {
 
   }
   totalCart() {
-    const total = this.myList.reduce(function (acc, product) { return acc + (product.cantidad * product.price); }, 0)
+    const total = this.myList.reduce(function (acc, product) { return acc + (product.cantidad * product.precio); }, 0)
     return total
   }
+
+
+  // Nuevo método para filtrar productos
+  filterProducts(searchTerm: string): any[] {
+    if (!searchTerm) {
+      return this.myList; // Devuelve todos los productos si no hay término de búsqueda
+    }
+    return this.myList.filter(product =>
+      product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
   
 }

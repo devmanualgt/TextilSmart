@@ -1,15 +1,34 @@
-<article class="product" *ngFor="let product of products">
-    <div class="product-header">
-      <h3 class="product-header-title">{{ product.title }}</h3>
-      <p>$ {{ product.price }}</p>
-    </div>
-    <div class="product-body">
-      <!-- <img [src]="product.images[0]" alt="" /> -->
-      <p>{{ product.description }}</p>
-    </div>
-    <div class="product-footer">
-      <button class="product-footer-button" (click)="addToCart(product)">
-        <i class="fa-solid fa-basket-shopping"></i>
-      </button>
-    </div>
-  </article>
+<section>
+  <form>
+    <!-- la variable de referencia #filter almacena lo que se ingrese en el input, ese valor se lo pasamos al metodo filterResult cuando se active el evento click del boton -->
+    <input type="text" placeholder="Filter by city"  #filter/>
+    <button class="primary" type="button" (click)="filterProducts(filter.value)">Search</button>
+  </form>
+</section>
+
+<div class="row gap-3  justify-content-center">
+    @for(dato of filteredData; track $index) {
+      <div class="col-lg-2 col-sm-4 col-6 border p-0 justify-content-between align-items-between">
+        <div class="shadow-none text-center shadow-none">
+          <img src="../../../../assets/images/products/s1.jpg" alt="imgSrc" class="w-100" mat-card-image />
+          <!-- <img [src]="" alt="users" width="40" class="rounded-circle" /> -->
+          
+          <div class="descripcion-card p-1 pb-2">
+            <h4 class="mat-subtitle-2 f-w-400  m-t-8">
+              {{ dato.nombre }}
+            </h4>
+            <h6 class="m-t-4 mat-subtitle-1 f-w-600  m-t-8">
+              Q{{ dato.precio }}
+            </h6>
+            <!-- <p>{{dato.descripcion}}</p> -->
+          </div>
+          <div>
+            <button type="button" class="btn btn-outline-primary w-100 rounded-0" (click)="addToCart(dato)">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+  </div>
+

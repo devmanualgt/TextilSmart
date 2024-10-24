@@ -1,12 +1,25 @@
 <app-carousel></app-carousel>
 <app-header-cart></app-header-cart>
-<div class="container-sm mt-5">
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" class="form-control" placeholder="¿Qué estás buscando?" aria-label="buscar" aria-describedby="basic-addon1">
-    </div>
-</div>
 
+
+<!-- <section>
+    <form>
+      <input type="text" placeholder="Filter by city"  #filter/>
+      <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+    </form>
+  </section> -->
+
+  <!-- <div>
+    <input
+      type="text"
+      placeholder="Buscar..."
+      [(ngModel)]="busqueda"
+    />
+    <app-hijo [valorBusqueda]="busqueda"></app-hijo>
+  </div> -->
+`
+
+  
 
 <section class="container-fluid d-flex align-items-center
  justify-content-center mt-4">
@@ -40,16 +53,14 @@
     <div class="container mt-3">
         <h2 class="fs-5">Destacados...</h2>
 
-        <div class="contenedor">
-            <div class="container-products">
-                <app-product></app-product>
-            </div>
+        <div class="row">
+
+            <!-- <app-product [text]="busqueda" ></app-product> -->
+            <app-product ></app-product>
+            
         </div>
-        
-
-
-
-
     </div>
+
+    
 
 </section>
