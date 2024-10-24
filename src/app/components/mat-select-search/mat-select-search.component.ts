@@ -1,8 +1,19 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  AbstractControl,
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  ValidatorFn,
 } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 @Component({
@@ -21,6 +32,8 @@ export class MatSelectSearchComponent implements OnInit, ControlValueAccessor {
   @Input() options: any[] = [];
   @Input() displayKey: string = 'name';
   @Input() info: any;
+  @Output() check_value = new EventEmitter();
+  check: boolean = false; // Valor inicial del checkbox
 
   public searchControl: FormControl = new FormControl();
   public selectControl: FormControl = new FormControl();
@@ -88,5 +101,14 @@ export class MatSelectSearchComponent implements OnInit, ControlValueAccessor {
         (option) => option[this.displayKey].toLowerCase().indexOf(search) > -1
       )
     );
+  }
+
+  onCheckboxChange(event: any) {
+    //const checkbox = event.target as HTMLInputElement;
+    /* this.check = checkbox.checked; // Actualiza el valor del checkbox
+    this.check_value.emit(this.check); // Emite el nuevo valor */
+    console.log(this.check);
+    console.log(event);
+    this.check_value.emit(this.check);
   }
 }

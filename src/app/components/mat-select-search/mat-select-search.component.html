@@ -24,4 +24,14 @@
       info.label
     }}</span></mat-label
   >
+  @if (info.check) {
+  <mat-hint>
+    <mat-checkbox
+      (change)="onCheckboxChange($event)"
+      [(ngModel)]="check"
+      color="primary"
+      >Habilitar proveedor</mat-checkbox
+    >
+  </mat-hint>
+  }
 </mat-form-field>
