@@ -10,9 +10,8 @@
     @for(dato of filteredData; track $index) {
       <div class="col-lg-2 col-sm-4 col-6 border p-0 justify-content-between align-items-between">
         <div class="shadow-none text-center shadow-none">
-          <img src="../../../../assets/images/products/s1.jpg" alt="imgSrc" class="w-100" mat-card-image />
-          <!-- <img [src]="" alt="users" width="40" class="rounded-circle" /> -->
-          
+          <!-- <img src="../../../../assets/images/products/s1.jpg" alt="imgSrc" class="w-100" mat-card-image /> -->
+          <img [src]="dato.url" alt="users" width="40" class="rounded-circle" style="width: 100%;" />
           <div class="descripcion-card p-1 pb-2">
             <h4 class="mat-subtitle-2 f-w-400  m-t-8">
               {{ dato.nombre }}
