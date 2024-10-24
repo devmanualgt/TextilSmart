@@ -10,6 +10,7 @@ export interface TblInformation {
 export interface RowData {
   value: any;
   icon?: boolean;
+  pipe?: string;
 }
 
 export interface BtnData {
