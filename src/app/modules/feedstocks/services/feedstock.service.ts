@@ -17,12 +17,32 @@ export class FeedstockService extends CrudService<any> {
   ) {
     super(http, alertService);
   }
-//estoy consumiendo esta api
+  //estoy consumiendo esta api
   async getProviders() {
     let msm;
     try {
       const response = await firstValueFrom(
         this.http.get<any>(`${this.URL_API}/providers`, {
+          observe: 'response',
+        })
+      );
+
+      if (response?.ok) {
+        return { status: true, data: response.body['records'] };
+      } else {
+        return { status: false };
+      }
+    } catch (error) {
+      // this.handlerError.errorAlertNorm(error, msm);
+      return { status: false };
+    }
+  }
+
+  async findByIdProdiver(id: string) {
+    let msm;
+    try {
+      const response = await firstValueFrom(
+        this.http.get<any>(`${this.URL_API}/providers/${id}`, {
           observe: 'response',
         })
       );

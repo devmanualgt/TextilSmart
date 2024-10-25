@@ -33,6 +33,8 @@ export class MatSelectSearchComponent implements OnInit, ControlValueAccessor {
   @Input() displayKey: string = 'name';
   @Input() info: any;
   @Output() check_value = new EventEmitter();
+  @Output() selectionChange = new EventEmitter<any>(); // Añadir este Output
+
   check: boolean = false; // Valor inicial del checkbox
 
   public searchControl: FormControl = new FormControl();
@@ -59,6 +61,12 @@ export class MatSelectSearchComponent implements OnInit, ControlValueAccessor {
       .subscribe((selectedValue) => {
         this.onChange(selectedValue); // Llamar a onChange con el valor seleccionado
         this.onTouched(); // Marcar como tocado
+      });
+
+    this.selectControl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe((selectedValue) => {
+        this.selectionChange.emit(selectedValue); // Emitir el valor seleccionado
       });
   }
 

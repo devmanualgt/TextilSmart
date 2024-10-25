@@ -1,42 +1,97 @@
-<div class="container">
-  <mat-stepper #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Selecciona un proveedor</ng-template>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          [value]="information?.proveedor?.id"
-          formControlName="proveedorCtrl" required
-        >
-          <option selected>-- Proveedor --</option>
-          @for (provider of MyProviders; track $index) {
-            <option value="{{provider.id}}">{{provider.nombre}}</option>
-          }
-        </select>
-        <div>
-          <button mat-button matStepperNext>Siguiente</button>
-        </div>
-      </form>
-    </mat-step>
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <div class="container">
+      <mat-stepper #stepper linear>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <div class="container mt-5">
+              <!-- <ng-template matStepLabel>Selecciona un proveedor</ng-template>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                [value]="information?.proveedor?.id"
+                formControlName="proveedorCtrl" required
+              >
+                <option selected>-- Proveedor --</option>
+                @for (provider of MyProviders; track $index) {
+                  <option value="{{provider.id}}">{{provider.nombre}}</option>
+                }
+              </select>
+              <div>
+                <button mat-button matStepperNext>Siguiente</button>
+              </div> -->
+              @if (MyProviders.length > 0) {
+              <app-mat-select-search
+                [options]="MyProviders"
+                displayKey="nombre"
+                [info]="{
+                  id: 'id',
+                  value: '',
+                  required: true,
+                  label: 'Proveedor'
+                }"
+                formControlName="proveedorCtrl"
+              ></app-mat-select-search>
+              }
 
-    <mat-step [stepControl]="secondFormGroup" label="Datos orden">
-      <form [formGroup]="secondFormGroup">
-        <div class="container mt-5">
-          <div class="d-flex justify-content-between align-items-between py-2">
-            <h2>Ferreterias</h2>
-            <button class="btn btn-primary" (click)="addProduct()">
-              Agregar Fila
-            </button>
-          </div>
-          <app-table [productos]="productos"></app-table>
-        </div>
-        <div>
-          <button mat-button matStepperPrevious>Regresar</button>
-          <button mat-button matStepperNext>Finalizar</button>
-        </div>
-      </form>
-    </mat-step>
+              <div class="text-right">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  (click)="getDetailProvider()"
+                >
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
 
-  </mat-stepper>
-</div>
+        <mat-step [stepControl]="secondFormGroup" label="Datos orden">
+          <form [formGroup]="secondFormGroup">
+            <div class="container mt-5">
+              <div
+                class="d-flex justify-content-between align-items-between py-2"
+              >
+                <h2>Ferreterias</h2>
+                <button class="btn btn-primary" (click)="addProduct()">
+                  Agregar Fila
+                </button>
+              </div>
+              <app-table-detail
+                [productos]="productos"
+                [listFeedstock]="listFeedstock"
+              ></app-table-detail>
+            </div>
+            <!-- <div>
+              <button mat-button matStepperPrevious>Regresar</button>
+              <button mat-button matStepperNext>Finalizar</button>
+            </div> -->
+
+            <!-- <div class="text-right">
+              <button mat-flat-button color="warn" matStepperPrevious>
+                Regresar
+              </button>
+              <button mat-flat-button color="primary" matStepperNext>
+                Finalizar
+              </button>
+            </div> -->
+            <div class="d-flex align-items-center justify-content-between">
+              <button mat-flat-button color="warn" matStepperPrevious>
+                Regresar
+              </button>
+              <button
+                mat-flat-button
+                color="primary"
+                (click)="sendOrder()"
+                matStepperNext
+              >
+                Finalizar
+              </button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </mat-card-content>
+</mat-card>
