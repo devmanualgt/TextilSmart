@@ -5,13 +5,179 @@
   <div class="card-body py-0">
     <!-- Formulario principal -->
     <form class="px-4" [formGroup]="productForm" (ngSubmit)="sendProduct()">
-      
+      <div class="row m-t-20">
+        <div class="col-lg-4">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <input matInput required type="text" formControlName="nombre" />
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Nombre Producto</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-4">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <input matInput required type="number" formControlName="precio" />
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Precio</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-4">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            [floatLabel]="float"
+          >
+            <mat-select
+              value=""
+              matInput
+              required
+              formControlName="tipo_producto"
+            >
+              @for (tipo of tipos; track $index) {
+              <mat-option [value]="tipo['tipo_producto']">{{
+                tipo["tipo_producto"]
+              }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Tipo</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row m-t-20">
+        <div class="col-lg-12">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <input matInput required type="url" formControlName="url" />
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >URL</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row m-t-20">
+        <div class="col-lg-12">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            [floatLabel]="float"
+          >
+            <mat-select
+              value=""
+              matInput
+              required
+              multiple
+              formControlName="categorias"
+            >
+              @for (categoria of categorias; track $index) {
+              <mat-option [value]="categoria['id']">{{
+                categoria["nombre"]
+              }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Categorias</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row m-t-20">
+        <div class="col-lg-12">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            color="primary"
+            [floatLabel]="float"
+          >
+            <textarea
+              matInput
+              rows="5"
+              required
+              type="text"
+              formControlName="descripcion"
+            ></textarea>
+
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Descripcion</span
+              ></mat-label
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row m-t-20">
+        @for (atributo of atributos; track $index) {
+
+        <div class="col">
+          <mat-form-field
+            appearance="outline"
+            class="w-100"
+            [floatLabel]="float"
+          >
+            <mat-select
+              value=""
+              matInput
+              required
+              (selectionChange)="onAttributeSelected($event, $index)"
+            >
+              @for (valor of atributo.valores; track $index) {
+              <mat-option [value]="valor">{{ valor }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size">{{
+                atributo.descripcion
+              }}</span></mat-label
+            >
+          </mat-form-field>
+        </div>
+        }
+      </div>
+
+      @if (false) {
       <!-- Nombre del producto -->
       <div class="row m-t-20">
         <div class="col-lg-6">
           <div class="form-group">
             <label for="productName">Nombre del Producto</label>
-            <input id="productName" class="form-control" required formControlName="name" />
+            <input
+              id="productName"
+              class="form-control"
+              required
+              formControlName="name"
+            />
           </div>
         </div>
 
@@ -19,7 +185,13 @@
         <div class="col-lg-6">
           <div class="form-group">
             <label for="productPrice">Precio</label>
-            <input id="productPrice" class="form-control" required type="number" formControlName="price" />
+            <input
+              id="productPrice"
+              class="form-control"
+              required
+              type="number"
+              formControlName="price"
+            />
           </div>
         </div>
       </div>
@@ -29,7 +201,12 @@
         <div class="col-lg-12">
           <div class="form-group">
             <label for="imageUrl">URL de la Imagen</label>
-            <input id="imageUrl" class="form-control" type="url" formControlName="imageUrl" />
+            <input
+              id="imageUrl"
+              class="form-control"
+              type="url"
+              formControlName="imageUrl"
+            />
           </div>
         </div>
       </div>
@@ -39,9 +216,16 @@
         <div class="col-lg-12">
           <div class="form-group">
             <label for="productCategory">Categoría</label>
-            <select id="productCategory" class="form-control" required formControlName="category">
+            <select
+              id="productCategory"
+              class="form-control"
+              required
+              formControlName="category"
+            >
               <option selected value="">-- Selecciona una Categoría --</option>
-              <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nombre }}</option>
+              <option *ngFor="let cat of categories" [value]="cat.id">
+                {{ cat.nombre }}
+              </option>
             </select>
           </div>
         </div>
@@ -52,22 +236,27 @@
         <div class="col-lg-12">
           <div class="form-group">
             <label for="productDescription">Descripción</label>
-            <textarea id="productDescription" class="form-control" rows="3" required formControlName="description"></textarea>
+            <textarea
+              id="productDescription"
+              class="form-control"
+              rows="3"
+              required
+              formControlName="description"
+            ></textarea>
           </div>
         </div>
       </div>
+
+      }
 
       <!-- Credenciales dinámicas -->
       <div class="row m-t-20">
         <div class="col-lg-12">
           <!-- FormArray de materiales -->
           <form [formGroup]="form">
-            
-            <div >
-      
+            <div>
               <h2>Materiales que usará</h2>
-              
-      
+
               <!-- Encabezados para los inputs de nombre y cantidad -->
               <div class="row m-t-10">
                 <div class="col-lg-6">
@@ -77,42 +266,82 @@
                   <h4>Cantidad</h4>
                 </div>
               </div>
-      
+
               <!-- Iterar sobre el FormArray -->
-              <div  *ngFor="let rows of productos.controls; let i = index" class="row m-t-10">
+              <div
+                *ngFor="let rows of productos.controls; let i = index"
+                class="row m-t-10"
+              >
                 <ng-container [formGroup]="rows">
                   <div class="col-lg-6">
-                    <input class="form-control"  placeholder="Nombre" formControlName="nombre" type="text">
+                    <!--  <input
+                      class="form-control"
+                      placeholder="Nombre"
+                      formControlName="nombre"
+                      type="text"
+                    /> -->
+                    <mat-form-field
+                      appearance="outline"
+                      class="w-100"
+                      [floatLabel]="float"
+                    >
+                      <mat-select
+                        value=""
+                        matInput
+                        required
+                        formControlName="materiaPrima"
+                      >
+                        @for (material of materiaPrima; track $index) {
+                        <mat-option [value]="material['id']">{{
+                          material["nombre"]
+                        }}</mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
                   </div>
                   <div class="col-lg-6">
-                    <input class="form-control"  placeholder="Cantidad" formControlName="cantidad" type="number">
+                    <input
+                      class="form-control"
+                      placeholder="Cantidad"
+                      formControlName="cantidad"
+                      type="number"
+                    />
                   </div>
                 </ng-container>
               </div>
             </div>
             <!-- Aquí añadimos el margen superior al botón -->
             <div class="mt-4">
-              <button class="btn btn-secondary" (click)="addProduct()" type="button">Añadir Material</button>
+              <button
+                class="btn btn-secondary"
+                (click)="addProduct()"
+                type="button"
+              >
+                Añadir Material
+              </button>
             </div>
           </form>
         </div>
       </div>
-      
-          
 
       <!-- Botón de enviar -->
       <div class="row m-t-20">
         <div class="col-lg-12">
-          <button class="btn btn-primary" style="width: 100%;" type="submit">
+          <button class="btn btn-primary" style="width: 100%" type="submit">
             Guardar Producto
           </button>
         </div>
       </div>
     </form>
-    
   </div>
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Cancelar</button>
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="activeModal.dismiss()"
+  >
+    Cancelar
+  </button>
 </div>
