@@ -9,13 +9,17 @@ export const PurchaseOrdersModuleRoutes: Routes = [
     path: 'orders',
     children: [
       {
+        path: '',
+        redirectTo: 'list',
+        pathMatch: 'full', // Asegura que se redirija solo si es la ruta exacta '/orders'
+      },
+      {
         path: 'list',
         component: ListPurchaseOrdersComponent,
         data: {
           title: 'Ordenes de Compra',
         },
       },
-
       {
         path: 'new',
         component: AddPurchaseOrdersComponent,
@@ -27,7 +31,6 @@ export const PurchaseOrdersModuleRoutes: Routes = [
           ],
         },
       },
-
       {
         path: 'detail/:id',
         component: DetailPurchaseOrdersComponent,
@@ -39,7 +42,6 @@ export const PurchaseOrdersModuleRoutes: Routes = [
           ],
         },
       },
-
       {
         path: 'finish/:id',
         component: FinishPurchaseOrdersComponent,

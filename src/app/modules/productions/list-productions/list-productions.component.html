@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
     <div class="search-container d-flex align-items-center mb-3">
         <div class="form-outline me-2">
             <input type="search" id="form1" class="form-control" placeholder="Buscar..." aria-label="Search" />
@@ -64,4 +64,20 @@
             </tbody>
         </table>
     </div>
-</div>
+</div>-->
+
+<app-search
+  textBtn="Nueva Producción"
+  (searchValue)="search($event)"
+  (newValue)="openNew()"
+></app-search>
+
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <app-table
+      [tblInfo]="tlbInfo"
+      [tblData]="tblData"
+      (btnAction)="actions($event)"
+    ></app-table>
+  </mat-card-content>
+</mat-card>

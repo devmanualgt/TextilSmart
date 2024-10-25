@@ -1,10 +1,15 @@
+import { DetailProductTypeComponent } from './detail-product-type/detail-product-type.component';
 import { ProductService } from './../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
-import { TablerIconsModule } from 'angular-tabler-icons';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MaterialModule } from 'src/app/material.module';
-import { FnData, TblInformation } from 'src/app/models/tbl-information.model';
+import {
+  CRUD,
+  FnData,
+  TblInformation,
+} from 'src/app/models/tbl-information.model';
 import { tbl_type_productos } from '../../../models/tbl-products';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product-types',
@@ -17,7 +22,10 @@ export class ProductTypesComponent implements OnInit {
   tlbInfo: TblInformation;
   tblData = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.getTypes();
@@ -38,5 +46,28 @@ export class ProductTypesComponent implements OnInit {
     }
   }
 
-  actions(acction: FnData) {}
+  actions(acction: FnData) {
+    if (acction.type === CRUD.READ) {
+      this.openModal(acction);
+    }
+  }
+
+  openModal(info?: FnData) {
+    const modalRef = this.modalService.open(DetailProductTypeComponent, {
+      backdrop: 'static',
+      size: 'lg',
+      centered: true,
+      keyboard: false,
+    });
+    modalRef.componentInstance.info = info;
+    modalRef.result
+      .then((result) => {
+        if (result.refresh) {
+          this.getTypes();
+        }
+      })
+      .catch((reason) => {
+        console.log('Modal cerrado con error:', reason);
+      });
+  }
 }

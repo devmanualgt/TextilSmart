@@ -585,7 +585,7 @@ export const navItems: any[] = [
   {
     displayName: 'Ordenes de Compra',
     iconName: 'file-invoice',
-    route: 'purchase/orders/list',
+    route: 'purchase/orders',
   },
   {
     displayName: 'Productos',
