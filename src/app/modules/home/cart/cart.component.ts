@@ -8,45 +8,39 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+  styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  
   myCart$ = this.storeService.myCart$;
 
   viewCart: boolean = false;
 
-  constructor(private storeService: StoreService, private router: Router) { }
+  constructor(private storeService: StoreService, private router: Router) {}
 
   updateUnits(operation: string, id: string) {
-
-    const product = this.storeService.findProductById(id)
+    const product = this.storeService.findProductById(id);
     if (product) {
       if (operation === 'minus' && product.cantidad > 0) {
         product.cantidad = product.cantidad - 1;
       }
       if (operation === 'add') {
         product.cantidad = product.cantidad + 1;
-
       }
       if (product.cantidad === 0) {
-        this.deleteProduct(id)
+        this.deleteProduct(id);
       }
     }
-
   }
   totalProduct(price: number, units: number) {
-    return price * units
+    return price * units;
   }
   deleteProduct(id: string) {
     this.storeService.deleteProduct(id);
-
   }
   totalCart() {
     const result = this.storeService.totalCart();
     return result;
   }
-
 
   // isCartOpen = false;
 
@@ -63,10 +57,8 @@ export class CartComponent {
   //   }
   // }
 
-  
-  pagar(){
+  pagar() {
     // this.router.navigate(['purchase/orders/new']);
-    this.router.navigate(['sales/orders/detail/34']);
+    this.router.navigate(['sales/orders/new']);
   }
-
 }
