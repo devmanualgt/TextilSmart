@@ -154,11 +154,31 @@ export abstract class CrudService<T> {
       .join('&');
   }
 
+  toUrlEncodedArr(obj: any, parentKey: string = ''): string {
+    const queryString = Object.keys(obj)
+      .map((key) => {
+        const value = obj[key];
+        const encodedKey = parentKey ? `${parentKey}[${key}]` : key;
+
+        if (typeof value === 'object' && value !== null) {
+          // Llamada recursiva para manejar objetos o arrays anidados
+          return this.toUrlEncodedArr(value, encodedKey);
+        } else {
+          return `${encodeURIComponent(encodedKey)}=${encodeURIComponent(
+            value
+          )}`;
+        }
+      })
+      .join('&');
+
+    return queryString;
+  }
+
   filterDataTable(data: any[], searchText: string): any[] {
     const lowerCaseSearchText = searchText.toLowerCase();
-  
-    return data.filter(item => {
-      return Object.values(item).some(value => {
+
+    return data.filter((item) => {
+      return Object.values(item).some((value) => {
         // Verificar si el valor no es null ni undefined y si es un string, número o booleano
         if (value !== null && value !== undefined) {
           return value.toString().toLowerCase().includes(lowerCaseSearchText);
@@ -167,7 +187,4 @@ export abstract class CrudService<T> {
       });
     });
   }
-  
-  
-
 }
