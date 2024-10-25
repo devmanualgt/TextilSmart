@@ -19,12 +19,13 @@
       {{ option[displayKey] }}
     </mat-option>
   </mat-select>
+  @if (info.label) {
   <mat-label
     ><span class="text-muted font-weight-bold font-size">{{
       info.label
     }}</span></mat-label
   >
-  @if (info.check) {
+  } @if (info.check) {
   <mat-hint>
     <mat-checkbox
       (change)="onCheckboxChange($event)"
