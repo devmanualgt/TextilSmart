@@ -35,4 +35,9 @@ export class ProductService extends CrudService<any> {
       return { status: false };
     }
   }
+
+  // Nuevo método para obtener categorías
+  async getCategories() {
+    
+  }
 }

@@ -1,4 +1,5 @@
-import { CRUD } from 'src/app/models/tbl-information.model';
+
+mport { CRUD } from 'src/app/models/tbl-information.model';
 
 export const tbl_type_productos = {
   headers: ['', 'Tipo', 'Atributos'],
