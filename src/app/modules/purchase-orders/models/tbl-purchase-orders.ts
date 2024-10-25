@@ -26,3 +26,24 @@ export const tbl_purchase_orders = {
     },
   ],
 };
+
+
+export const tbl_purchase_orders_detail = {
+  headers: [
+    'Producto',
+    'Unidad de Medida',
+    'Precion Unitario (Q)',
+    'Cantidad',
+    'Subtotal',
+  ],
+  rows: [
+    { value: 'materiaPrima.nombre' },
+    { value: 'materiaPrima.unidadMedida' },
+    { value: 'materiaPrima.precioUnitario' },
+    { value: 'cantidad' },
+    { value: 'subTotal' },
+  ],
+
+  btn: [
+  ],
+};
