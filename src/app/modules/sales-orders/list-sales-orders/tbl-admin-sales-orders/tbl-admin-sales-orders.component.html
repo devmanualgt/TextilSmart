@@ -1,1 +1,15 @@
-<p>tbl-admin-sales-orders works!</p>
+<app-search
+  textBtn="Nuevo Pedido"
+  (searchValue)="search($event)"
+  (newValue)="openNew()"
+></app-search>
+
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <app-table
+      [tblInfo]="tlbInfo"
+      [tblData]="tblData"
+      (btnAction)="actions($event)"
+    ></app-table>
+  </mat-card-content>
+</mat-card>
