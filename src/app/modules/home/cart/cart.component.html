@@ -70,7 +70,9 @@
   
   <div class="p-3 border text-center">
     <h2 class="m-0 p-3">Total: $ {{ totalCart() }}</h2>
-    <button type="button" class="btn btn-outline-primary rounded-0">Ver carreta y pagar</button>
+    <button type="button" class="btn btn-outline-primary rounded-0"
+    (click)="pagar()"
+    >Ver carreta y pagar</button>
 
   </div>
   <div class="bg-primary" style="height: 30px;"></div>
