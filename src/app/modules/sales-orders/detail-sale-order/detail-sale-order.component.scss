@@ -1,25 +1,4 @@
-
-.fa-solid{
-
-    padding: 10px;
-    font-size: 10px;
-    cursor: pointer;
-    
-    &.fa-trash{
-        // color: red;
-        font-size: 15px;
-    }
-    
-    &:hover{
-        background-color: #2a61d6;
-        
-        border-radius: 100%;
-        color: #fff;
-        font-weight: bolder;
-        
-    }
-}
-
-.campo{
-    width: 100%;
+.detalle-card {
+  min-height: 200px;
+  max-height: 200px;
 }

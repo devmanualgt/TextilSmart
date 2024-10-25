@@ -1,16 +1,39 @@
 .mat-stepper-horizontal {
-    margin-top: 8px;
-  }
-  
-  .mat-mdc-form-field {
-    margin-top: 16px;
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.campo {
+  width: 100%;
+  padding: 0;
+}
+.w-100 {
+  width: 100%;
+  padding: 0;
+}
+
+.fa-solid {
+  padding: 10px;
+  font-size: 10px;
+  cursor: pointer;
+
+  &.fa-trash {
+    // color: red;
+    font-size: 15px;
   }
 
-  .campo{
-    width: 100%;
-    padding: 0;
+  &:hover {
+    background-color: #2a61d6;
+
+    border-radius: 100%;
+    color: #fff;
+    font-weight: bolder;
   }
-  .w-100{
-    width: 100%;
-    padding: 0;
-  }
+}
+
+.campo {
+  width: 100%;
+}
