@@ -1,1 +1,90 @@
-<p>detail-sale-order works!</p>
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-24">
+    <div class="container mt-4">
+      <!-- Número de Orden -->
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h4 class="f-s-30 f-w-600 text-center mat-subtitle-1 lh-lg m-b-16">
+            Pedido No.
+            <span
+              class="text-primary p-x-12 p-y-8 rounded bg-light-primary f-w-600 m-l-8 f-s-50"
+              >4</span
+            >
+          </h4>
+        </div>
+      </div>
+
+      <div class="row">
+        @for(topcard of data; track topcard) {
+        <div class="col-lg-2 col-sm-4 col-6">
+          <mat-card
+            class="shadow-none text-center bg-light-{{
+              topcard.color
+            }}  shadow-none"
+          >
+            <mat-card-content class="pt-10 detalle-card">
+              <!-- <img
+                [src]="topcard.img"
+                alt="users"
+                width="40"
+                class="rounded-circle"
+              /> -->
+
+              <i-tabler
+                [name]="topcard.icon"
+                class="icon-60"
+                style="width: 50px"
+              ></i-tabler>
+              <!-- <i-tabler name="arrow-down-left" class="icon-20"></i-tabler> -->
+
+              <h4 class="mat-subtitle-2 f-w-600 text-{{ topcard.color }} m-t-8">
+                {{ topcard.title }}
+              </h4>
+              <p
+                class="m-t-4 mat-subtitle-1 f-w-600 text-{{
+                  topcard.color
+                }} m-t-8"
+              >
+                @if ( topcard.name == 'createdAt') {
+                {{ topcard.value | date : "dd-MM-yyyy" }}
+                } @else {
+
+                {{ topcard.value }}
+                }
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        }
+      </div>
+
+      <!-- Detalle de Productos de Materia Prima -->
+      <div class="product-details mt-4">
+        <app-table [tblInfo]="tlbInfo" [tblData]="tblData"></app-table>
+
+        <div class="text-right m-t-30">
+          <h5 class="m-b-5 f-w-600 f-s-16">
+            Valor Neto: {{ detalle.paymentDetails[0].compra }}
+          </h5>
+          <h5 class="f-w-600 f-s-16">
+            Total IVA: {{ detalle.paymentDetails[0].iva }}
+          </h5>
+          <h5 class="m-b-5 f-w-600 f-s-16">
+            Distribucion: {{ detalle.paymentDetails[0].distribucion }}
+          </h5>
+          <h5 class="f-w-600 f-s-16">
+            Envio: {{ detalle.paymentDetails[0].envio }}
+          </h5>
+          <mat-divider></mat-divider>
+          <h5 class="f-w-600 f-s-16">
+            - Descuento: {{ detalle.paymentDetails[0].descuento }} %
+          </h5>
+          <mat-divider></mat-divider>
+          <h3 class="m-b-0 p-t-20 f-s-18">
+            Total: {{ detalle.paymentDetails[0].total }}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
