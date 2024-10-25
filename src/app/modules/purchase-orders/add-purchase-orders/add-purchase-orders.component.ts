@@ -141,7 +141,7 @@ export class AddPurchaseOrdersComponent implements OnInit {
   }
 
   async sendOrder() {
-    console.log(this.productos.value);
+    this.alertService.loader('Cargando', 'Generando orden de compra', 0);
     const data = {
       detalle: this.productos.value,
       proveedor: this.firstFormGroup.value.proveedorCtrl,
