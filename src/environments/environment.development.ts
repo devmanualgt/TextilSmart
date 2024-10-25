@@ -1,6 +1,6 @@
 const url = {
-  protocol: 'https',
-  domain: 'api-textil-umg.vercel.app',
+  protocol: 'http',
+  domain: 'localhost:3000',
   path: 'api',
 };
 

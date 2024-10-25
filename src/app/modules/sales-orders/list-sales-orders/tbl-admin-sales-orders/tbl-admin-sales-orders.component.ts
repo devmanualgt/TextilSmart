@@ -4,7 +4,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MaterialModule } from 'src/app/material.module';
-import { CRUD, FnData, TblInformation } from 'src/app/models/tbl-information.model';
+import {
+  CRUD,
+  FnData,
+  TblInformation,
+} from 'src/app/models/tbl-information.model';
 import { AlertService } from 'src/app/services/alert.service';
 import { tbl_orders } from '../../models/tbl-orders';
 import { OrdersService } from '../../services/orders.service';
@@ -14,7 +18,7 @@ import { OrdersService } from '../../services/orders.service';
   standalone: true,
   imports: [ComponentsModule, MaterialModule, TablerIconsModule],
   templateUrl: './tbl-admin-sales-orders.component.html',
-  styleUrl: './tbl-admin-sales-orders.component.scss'
+  styleUrl: './tbl-admin-sales-orders.component.scss',
 })
 export class TblAdminSalesOrdersComponent implements OnInit {
   tlbInfo: TblInformation;
@@ -25,7 +29,7 @@ export class TblAdminSalesOrdersComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private alertService: AlertService
-  ){}
+  ) {}
   ngOnInit(): void {
     this.getListProduction();
   }
@@ -48,7 +52,7 @@ export class TblAdminSalesOrdersComponent implements OnInit {
 
   actions(event: FnData) {
     if ([CRUD.READ].includes(event.type)) {
-      this.router.navigate([`productions/detail/${event.data.id}`]);
+      this.router.navigate([`sales/orders/detail/${event.data.id}`]);
     } else if ([CRUD.ACCTION].includes(event.type)) {
       this.nextPass(event);
     }
@@ -56,19 +60,37 @@ export class TblAdminSalesOrdersComponent implements OnInit {
 
   async nextPass(info?: FnData) {
     const alertDeleted = await this.alertService.alertSimple(
-      'Confirmación de Paso Siguiente',
-      '¿Desea pasar la producción a la siguiente etapa?',
+      'Confirmación',
+      `¿Desea que el pedido pase a el estado ${info?.data.siguienteEstado}`,
       'warning',
-      'Sí, Cambiar Paso',
+      'Sí',
       'Cancelar',
       false
     );
     if (!alertDeleted) {
       return;
     }
+    const data = {
+      ordenId: info?.data.id,
+      nuevoEstado: info?.data.siguienteEstado,
+    };
+    this.alertService.loader('Guardando', 'Grabando siguiente etapa', 0);
+    const next = await this.ordersService.newState(data);
+    if (next.status) {
+      this.alertService
+        .alertSimple(
+          'Notificación',
+          'Estado guardado',
+          'success',
+          'Aceptar',
+          '',
+          true
+        )
+        .then(async (es) => {
+          this.getListProduction();
+        });
+    }
   }
-
-  
 
   async deleteItem(id: string) {
     const alertDeleted = await this.alertService.alertSimple(
@@ -83,6 +105,7 @@ export class TblAdminSalesOrdersComponent implements OnInit {
     if (!alertDeleted) {
       return;
     }
+
     this.alertService.loader('Eliminando', '', 0);
     const deleted = await this.ordersService.delete(id);
     if (deleted.status) {
@@ -101,7 +124,7 @@ export class TblAdminSalesOrdersComponent implements OnInit {
     }
   }
 
-  openNew(){
+  openNew() {
     this.router.navigate([`productions/new`]);
   }
 
@@ -118,5 +141,3 @@ export class TblAdminSalesOrdersComponent implements OnInit {
     }
   }
 }
-
-

@@ -3,6 +3,7 @@ import { ListSalesOrdersComponent } from './list-sales-orders/list-sales-orders.
 import { AddSaleOrderComponent } from './add-sale-order/add-sale-order.component';
 import { DetailSaleOrderComponent } from './detail-sale-order/detail-sale-order.component';
 import { TrakingSaleOrderComponent } from './detail-sale-order/traking-sale-order/traking-sale-order.component';
+import { NewSaleOrderCustomerComponent } from './add-sale-order/new-sale-order-customer/new-sale-order-customer.component';
 
 export const SalesOrdersModuleRoutes: Routes = [
   {
@@ -26,6 +27,12 @@ export const SalesOrdersModuleRoutes: Routes = [
             { title: 'Nuevo' },
           ],
         },
+        /* children: [
+          {
+            path: 'customer',
+            component: NewSaleOrderCustomerComponent,
+          },
+        ], */
       },
 
       {
