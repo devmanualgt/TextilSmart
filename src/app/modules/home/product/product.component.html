@@ -1,33 +1,40 @@
-<section>
-  <form>
-    <!-- la variable de referencia #filter almacena lo que se ingrese en el input, ese valor se lo pasamos al metodo filterResult cuando se active el evento click del boton -->
-    <input type="text" placeholder="Filter by city"  #filter/>
-    <button class="primary" type="button" (click)="filterProducts(filter.value)">Search</button>
-  </form>
-</section>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+  <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="basic-addon1" #filter (input)="filterProducts(filter.value)">
+</div>
 
+  
 <div class="row gap-3  justify-content-center">
-    @for(dato of filteredData; track $index) {
-      <div class="col-lg-2 col-sm-4 col-6 border p-0 justify-content-between align-items-between">
-        <div class="shadow-none text-center shadow-none">
-          <!-- <img src="../../../../assets/images/products/s1.jpg" alt="imgSrc" class="w-100" mat-card-image /> -->
-          <img [src]="dato.url" alt="users" width="40" class="rounded-circle" style="width: 100%;" />
-          <div class="descripcion-card p-1 pb-2">
-            <h4 class="mat-subtitle-2 f-w-400  m-t-8">
-              {{ dato.nombre }}
-            </h4>
-            <h6 class="m-t-4 mat-subtitle-1 f-w-600  m-t-8">
-              Q{{ dato.precio }}
-            </h6>
-            <!-- <p>{{dato.descripcion}}</p> -->
+  @for(productcard of filteredData; track $index) {
+  <div class="col-sm-6 col-lg-3">
+    <mat-card class="cardWithShadow productcard overflow-hidden">
+      <a routerLink="/widgets/cards">
+        <img [src]="productcard.url" alt="imgSrc" class="w-100" mat-card-image />
+      </a>
+      <mat-card-content class="p-b-24 p-t-12 position-relative">
+        <button mat-mini-fab color="primary" class="icon-30 cart-btn"
+         matTooltip="Agregar al carrito"
+         (click)="addToCart(productcard)">
+          <i-tabler name="basket" class="icon-16"></i-tabler>
+        </button>
+        <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{
+          productcard.nombre
+          }}</mat-card-title>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <h6 class="mat-body-2 f-w-600">Q{{ productcard.precio }}</h6>
+            <span class="f-s-14 m-l-4 text-decoration-line-through">Q{{ toNumber(productcard.precio) + 299.99 }}</span>
           </div>
-          <div>
-            <button type="button" class="btn btn-outline-primary w-100 rounded-0" (click)="addToCart(dato)">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </button>
+          <div class="m-l-auto d-flex gap-4">
+            <span><i-tabler name="star" class="fill-warning icon-18"></i-tabler></span>
+            <span><i-tabler name="star" class="fill-warning icon-18"></i-tabler></span>
+            <span><i-tabler name="star" class="fill-warning icon-18"></i-tabler></span>
+            <span><i-tabler name="star" class="fill-warning icon-18"></i-tabler></span>
+            <span><i-tabler name="star" class="fill-warning icon-18"></i-tabler></span>
           </div>
         </div>
-      </div>
-      }
+      </mat-card-content>
+    </mat-card>
   </div>
-
+  }
+</div>

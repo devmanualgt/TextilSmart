@@ -48,12 +48,8 @@ export default class HomeComponent {
       
     } 
 
-    filterResults(text : string){
-
-      this.storeService.filterProducts(text);
-      console.log('hola')
-
-    }
+   
+  
 
    
 }

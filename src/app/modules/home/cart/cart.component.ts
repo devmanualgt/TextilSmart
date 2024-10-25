@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../services/store.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ export class CartComponent {
 
   viewCart: boolean = false;
 
-  constructor(private storeService: StoreService) { }
+  constructor(private storeService: StoreService, private router: Router) { }
 
   updateUnits(operation: string, id: string) {
 
@@ -61,5 +62,11 @@ export class CartComponent {
   //     document.body.classList.remove('no-scroll');
   //   }
   // }
+
+  
+  pagar(){
+    // this.router.navigate(['purchase/orders/new']);
+    this.router.navigate(['sales/orders/detail/34']);
+  }
 
 }

@@ -1,0 +1,7 @@
+<section >
+    <form>
+      <!-- la variable de referencia #filter almacena lo que se ingrese en el input, ese valor se lo pasamos al metodo filterResult cuando se active el evento click del boton -->
+      <input type="text" placeholder="Filter by city"  #filter/>
+      <button class="primary" type="button" (click)="onSearch(filter.value)">Search</button>
+    </form>
+  </section>
