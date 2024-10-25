@@ -45,7 +45,9 @@ export class ListPurchaseOrdersComponent implements OnInit {
     }
   }
 
-  openModal(info?: FnData) {}
+  openModal(info?: FnData) {
+    this.router.navigate([`purchase/orders/new`]);
+  }
 
   search(value: string) {
     console.log(value);

@@ -1,0 +1,62 @@
+<app-modal-header
+  title="Detalle Tipo {{ info.data['tipo_producto'] }}"
+></app-modal-header>
+
+<div class="modal-body">
+  <div class="card-body py-0">
+    <div class="row">
+      <div class="col-lg-12">
+        <mat-card class="cardWithShadow">
+          <mat-card-content class="p-y-24 text-center">
+            <img
+              src=" ./assets/images/types/{{ info.data.icon }}.svg"
+              alt="user"
+              width="200"
+              class="rounded-circle"
+            />
+            <mat-card-title class="m-t-16">{{
+              info.data.tipo_producto | uppercase
+            }}</mat-card-title>
+            <mat-divider></mat-divider>
+
+            <div class="container mt-5">
+              <div class="row">
+                @for (atri of info.data.atributos; track $index) {
+                <div class="col-lg-6 mb-5">
+                  <p>
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary"
+                      (click)="toggleCollapse($index)"
+                      [attr.aria-expanded]="!isCollapsed[$index]"
+                      aria-controls="collapseExample"
+                    >
+                      {{ atri.descripcion }}
+                    </button>
+                  </p>
+                  <div
+                    #collapse="ngbCollapse"
+                    [(ngbCollapse)]="isCollapsed[$index]"
+                  >
+                    <div class="card">
+                      <div class="card-body">
+                        <mat-list role="list">
+                          @for (item of atri.valores; track $index) {
+                          <mat-list-item role="listitem">{{
+                            item
+                          }}</mat-list-item>
+                          }
+                        </mat-list>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                }
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

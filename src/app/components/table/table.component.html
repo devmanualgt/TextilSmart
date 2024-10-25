@@ -5,19 +5,19 @@
     style="padding-bottom: 10px; padding-top: 10px"
   >
     <!-- <div>
-        <div class="row">
-          <div class="col-sm-12">
-            <button
-              (click)="exportToExcel()"
-              class="btn font-weight-bolder font-size-sm mr-1"
-              style="background-color: green; color: white"
-            >
-              <i class="fas fa-file-excel" style="color: white"></i>Exportar a
-              Excel</button
-            >&nbsp;
+          <div class="row">
+            <div class="col-sm-12">
+              <button
+                (click)="exportToExcel()"
+                class="btn font-weight-bolder font-size-sm mr-1"
+                style="background-color: green; color: white"
+              >
+                <i class="fas fa-file-excel" style="color: white"></i>Exportar a
+                Excel</button
+              >&nbsp;
+            </div>
           </div>
-        </div>
-      </div> -->
+        </div> -->
   </ng-container>
 
   <div
@@ -39,7 +39,7 @@
             <th *ngFor="let item of tblInfo.headers">
               {{ item }}
             </th>
-            @if (tblInfo.btns) {
+            @if (tblInfo.btns.length > 0) {
             <th>Acciones</th>
             }
           </tr>
@@ -59,8 +59,11 @@
                     <i [class]="hold[row.value]"></i>
                   </span>
                 </a>
-                } @else {
-
+                } @else if(row.pipe) { @switch(row.pipe) { @case('date') {
+                {{ getNestedValue(hold, row.value) | date : "dd-MM-yyyy" }}
+                } @default {
+                {{ getNestedValue(hold, row.value) }}
+                } } } @else {
                 {{ getNestedValue(hold, row.value) }}
                 }
               </td>
@@ -114,7 +117,29 @@
 </div>
 } @else {
 <div class="card-body">
-  <!-- <app-loader></app-loader> -->
+  <mat-card-content class="b-t-1 d-flex justify-content-center">
+    <div class="container">
+      <div class="row justify-content-center mt-3">
+        <!-- Centra el contenido horizontalmente -->
+        <div class="col-sm text-center">
+          <!-- Centra el contenido dentro de la columna -->
+          <img
+            src="./assets/images/logos/dark-logo.svg"
+            class="max-h-110px"
+            style="width: 30%"
+            alt="Logo"
+          />
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <!-- Centra el contenido horizontalmente -->
+        <div class="col-sm text-center">
+          <!-- Centra el contenido dentro de la columna -->
+          <mat-spinner class="m-auto" [diameter]="50"></mat-spinner>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
 </div>
 
 }

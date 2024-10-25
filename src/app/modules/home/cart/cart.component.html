@@ -1,0 +1,77 @@
+<!-- <div class="productCart-wrapper">
+    <article class="productCart" *ngFor="let product of myCart$ | async">
+      <div class="productCart-body">
+        <p>{{ product.nombre }}</p>
+        <div class="productCart-body-info">
+          <p>$ {{ product.precio }}</p>
+          <p>{{ product.cantidad }} uds</p>
+        </div>
+      </div>
+      <div class="productCart-total">
+        <p>$ {{ totalProduct(product.precio, product.cantidad) }}</p>
+      </div>
+      <div class="productCart-buttons">
+        <div class="productCart-buttons-operators">
+          <i
+            class="fa-solid fa-minus"
+            (click)="updateUnits('minus', product.id)"
+          ></i>
+          <span>{{ product.cantidad }}</span>
+          <i
+            class="fa-solid fa-plus"
+            (click)="updateUnits('add', product.id)"
+          ></i>
+        </div>
+        <i class="fa-solid fa-trash" (click)="deleteProduct(product.id)"></i>
+      </div>
+    </article>
+    <div class="cartTotal">
+      <p class="cartTotal-total">Total: $ {{ totalCart() }}</p>
+    </div>
+    <button class="cart-btn">Ir a mi cesta</button>
+</div> 
+   -->
+
+<div class="p-0 border">
+  <div class="bg-primary" style="height: 30px;"></div>
+
+  <div class="container" style="max-height: 250px; overflow-y: auto;">
+    <h2>Mi carreta</h2>
+    @for (producto of myCart$ | async; track $index) {
+    <div class="row">
+      <div class="col">imagen</div>
+      <div class="col border-bottom">
+        <p>{{producto.nombre}}</p>
+        <!-- <p> ${{producto.precio}}</p> -->
+        <p> ${{totalProduct(producto.precio,producto.cantidad)}}</p>
+      </div>
+
+      <div class="col border-bottom text-center d-flex align-items-center ">
+        <div class="">
+          <div class="d-flex justify-content-around align-items-center gap-3">
+            <i
+              class="fa-solid fa-plus"
+              (click)="updateUnits('add', producto.id)"
+            ></i>
+            <span>{{ producto.cantidad }}</span>
+            
+            <i
+              class="fa-solid fa-minus"
+              (click)="updateUnits('minus', producto.id)"
+            ></i>
+          </div>
+          <i class="fa-solid fa-trash" (click)="deleteProduct(producto.id)"></i>
+        </div>
+      </div>
+    </div>
+    }
+    
+  </div>
+  
+  <div class="p-3 border text-center">
+    <h2 class="m-0 p-3">Total: $ {{ totalCart() }}</h2>
+    <button type="button" class="btn btn-outline-primary rounded-0">Ver carreta y pagar</button>
+
+  </div>
+  <div class="bg-primary" style="height: 30px;"></div>
+</div>
