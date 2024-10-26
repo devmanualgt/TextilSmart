@@ -16,7 +16,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
-
 interface notifications {
   id: number;
   img: string;
@@ -49,12 +48,17 @@ interface quicklinks {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CommonModule, NgScrollbarModule, TablerIconsModule, MaterialModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    NgScrollbarModule,
+    TablerIconsModule,
+    MaterialModule,
+  ],
   templateUrl: './header.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
-
   @Input() showToggle = true;
   @Input() toggleChecked = false;
   @Output() toggleMobileNav = new EventEmitter<void>();
@@ -278,12 +282,7 @@ export class HeaderComponent {
 @Component({
   selector: 'search-dialog',
   standalone: true,
-  imports: [
-    RouterModule,
-    MaterialModule,
-    TablerIconsModule,
-    FormsModule
-  ],
+  imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule],
   templateUrl: 'search-dialog.component.html',
 })
 export class AppSearchDialogComponent {

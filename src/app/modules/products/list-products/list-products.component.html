@@ -1,9 +1,10 @@
-@if (user.role === 'admin') {
+<!-- <app-tbl-products-admin></app-tbl-products-admin> -->
+
+@if(currentUser.rol.rol === 'Administrador'){
 
 <app-list-products-admin></app-list-products-admin>
-} @else if (user.role !== 'admin') {
+
+} @else {
 
 <app-cards-products-customer></app-cards-products-customer>
 }
-
-<!-- <app-tbl-products-admin></app-tbl-products-admin> -->

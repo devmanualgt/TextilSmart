@@ -39,5 +39,5 @@ export class AppHorizontalSidebarComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

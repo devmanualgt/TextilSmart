@@ -24,10 +24,10 @@ export class ListProductsAdminComponent {
       label: 'Productos',
       path: '/products/list/admin',
     },
-    {
+    /*  {
       label: 'Categorias',
       path: '/products/list/categories',
-    },
+    }, */
     {
       label: 'Tipos',
       path: '/products/list/types',
