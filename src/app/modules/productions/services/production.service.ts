@@ -79,4 +79,29 @@ export class ProductionService extends CrudService<any> {
       return { status: false };
     }
   }
+
+  async postNext(form: any) {
+    try {
+      const formData = await this.alertService.toUrlEncoded(form);
+      const response = await firstValueFrom(
+        this.http.post<any>(`${this.API_URL}/asignar`, formData, {
+          observe: 'response',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        })
+      );
+
+      if (response?.ok) {
+        return {
+          status: true,
+          data: response.body['records'],
+          message: response.body['message'],
+        };
+      } else {
+        return { status: false };
+      }
+    } catch (error) {
+      this.alertService.errorAlertNorm(error, error);
+      return { status: false };
+    }
+  }
 }

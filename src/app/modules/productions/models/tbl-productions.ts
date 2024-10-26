@@ -52,7 +52,7 @@ export const tbl_production = {
       icon: 'fa-solid fa-hand-point-right',
       color: 'warning',
       name: CRUD.ACCTION,
-      visible: '',
+      visible: 'next',
     },
     {
       icon: 'fa-solid fa-eye',
