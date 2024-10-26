@@ -1,6 +1,6 @@
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-  <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="basic-addon1" #filter (input)="filterProducts(filter.value)">
+<div class="input-group mb-3 barra-busqueda">
+  <span class="input-group-text bg-primary"  id="basic-addon1"><i class="fa-solid fa-magnifying-glass text-white"></i></span>
+  <input type="text" class="form-control p-1" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="basic-addon1" #filter (input)="filterProducts(filter.value)">
 </div>
 
   
@@ -12,18 +12,21 @@
         <img [src]="productcard.url" alt="imgSrc" class="w-100" mat-card-image />
       </a>
       <mat-card-content class="p-b-24 p-t-12 position-relative">
-        <button mat-mini-fab color="primary" class="icon-30 cart-btn"
-         matTooltip="Agregar al carrito"
-         (click)="addToCart(productcard)">
-          <i-tabler name="basket" class="icon-16"></i-tabler>
-        </button>
-        <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{
+        <div class="d-flex justify-content-end">
+          
+          <button mat-mini-fab color="primary" class="icon-30 cart-btn"
+           matTooltip="Agregar al carrito"
+           (click)="addToCart(productcard)">
+            <i-tabler name="basket" class="icon-16"></i-tabler>
+          </button>
+        </div>
+        <mat-card-title class="mat-headline-2 f-s-16 m-b-4 text-center">{{
           productcard.nombre
           }}</mat-card-title>
+          <span class="f-s-12 m-l-4 text-decoration-line-through">Q{{ toNumber(productcard.precio) + 299.99 }}</span>
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
             <h6 class="mat-body-2 f-w-600">Q{{ productcard.precio }}</h6>
-            <span class="f-s-14 m-l-4 text-decoration-line-through">Q{{ toNumber(productcard.precio) + 299.99 }}</span>
           </div>
           <div class="m-l-auto d-flex gap-4">
             <span><i-tabler name="star" class="fill-warning icon-18"></i-tabler></span>

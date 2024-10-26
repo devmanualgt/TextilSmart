@@ -87,3 +87,12 @@
 .no-scroll {
     overflow: hidden;
 }
+
+.carro{
+    position: fixed;
+    top: 75px;
+    right: 5px;
+
+    background-color: #ffff;
+    min-width: 300px;
+}
