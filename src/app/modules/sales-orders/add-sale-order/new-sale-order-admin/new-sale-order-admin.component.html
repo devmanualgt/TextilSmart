@@ -1,6 +1,6 @@
 <mat-card class="cardWithShadow">
   <mat-card-content class="p-24">
-    <form #invoiceForm="ngForm">
+    <form [formGroup]="saleForm" (ngSubmit)="sendSale()">
       <div class="row justify-content-between m-b-24">
         <div class="col-sm-4 d-flex align-items-center"></div>
         <div class="col-sm-4 text-right">
@@ -12,14 +12,7 @@
           >
             Cancelar
           </a>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="saveDetail()"
-            [disabled]="addForm.invalid"
-          >
-            Generar Pedido
-          </button>
+          <button mat-raised-button color="primary">Generar Pedido</button>
         </div>
       </div>
 
@@ -42,19 +35,14 @@
             [options]="customers"
             displayKey="nombre"
             [info]="{ id: 'id', value: '', required: true, label: 'Cliente' }"
-            formControlName="color"
+            formControlName="cliente"
           ></app-mat-select-search>
           }
         </div>
         <div class="col-sm-6 d-flex align-items-center justify-content-end">
           <div class="text-right">
             <span class="f-w-600 f-s-15 mat-body-1 d-block m-b-8"> Fecha </span>
-            <h6
-              name="date"
-              class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2"
-              [(ngModel)]="invoice.orderDate"
-              ngDefaultControl
-            >
+            <h6 class="m-t-5 m-b-0 f-w-500 f-s-14 mat-body-2" ngDefaultControl>
               {{ invoice.orderDate | date : "dd-MM-yyyy" }}
             </h6>
           </div>
@@ -64,26 +52,44 @@
       <mat-divider></mat-divider>
 
       <div class="row m-y-24 p-t-24">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Nombre</mat-label>
-            <input matInput name="from" [(ngModel)]="invoice.billFrom" />
+            <input matInput formControlName="nombre" />
           </mat-form-field>
         </div>
+
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="apellido" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Telefono</mat-label>
+            <input matInput formControlName="telefono" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Correo Electronico</mat-label>
+            <input matInput formControlName="correoElectronico" />
+          </mat-form-field>
+        </div>
+
         <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>NIT</mat-label>
-            <input matInput name="to" [(ngModel)]="invoice.billTo" />
+            <input matInput formControlName="nit" />
           </mat-form-field>
         </div>
         <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Direccion de Facturacion</mat-label>
-            <input
-              matInput
-              name="fromAddress"
-              [(ngModel)]="invoice.billFromAddress"
-            />
+            <input matInput formControlName="direccionFacturacion" />
           </mat-form-field>
         </div>
       </div>
@@ -91,68 +97,92 @@
         <div class="col-lg-4">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Direccion de Entrega</mat-label>
-            <input
-              matInput
-              name="toAddress"
-              [(ngModel)]="invoice.billToAddress"
-            />
+            <input matInput formControlName="direccion" />
           </mat-form-field>
         </div>
 
         <div class="col-lg-4">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Departamento</mat-label>
-            <input
+            <mat-select
+              value=""
               matInput
-              name="toAddress"
-              [(ngModel)]="invoice.billToAddress"
-            />
+              required
+              formControlName="departamento"
+            >
+              @for (dep of departamentos; track $index) {
+              <mat-option [value]="dep['id']">{{ dep["nombre"] }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Departamento</span
+              ></mat-label
+            >
           </mat-form-field>
         </div>
 
         <div class="col-lg-4">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Municipio</mat-label>
-            <input
-              matInput
-              name="toAddress"
-              [(ngModel)]="invoice.billToAddress"
-            />
+            <mat-select value="" matInput required formControlName="municipio">
+              @for (mun of municipios; track $index) {
+              <mat-option [value]="mun['id']">{{ mun["nombre"] }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Municipio</span
+              ></mat-label
+            >
           </mat-form-field>
         </div>
       </div>
 
       <div class="row m-y-24 p-t-24">
         <div class="col-lg-4">
+          <mat-checkbox
+            color="primary"
+            labelPosition="before"
+            formControlName="entregaInmediata"
+            >Entrega inmediata</mat-checkbox
+          >
+        </div>
+
+        <div class="col-lg-4">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Distribucion Rapaida</mat-label>
-            <input
+            <mat-select
+              value=""
               matInput
-              name="toAddress"
-              [(ngModel)]="invoice.billToAddress"
-            />
+              required
+              formControlName="tipoEntrega"
+            >
+              @for (delivery of deliveries; track $index) {
+              <mat-option [value]="delivery['id']">{{
+                delivery["nombre"]
+              }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Tipo de Entrega</span
+              ></mat-label
+            >
           </mat-form-field>
         </div>
 
         <div class="col-lg-4">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Tipo de Entrega</mat-label>
-            <input
-              matInput
-              name="toAddress"
-              [(ngModel)]="invoice.billToAddress"
-            />
-          </mat-form-field>
-        </div>
-
-        <div class="col-lg-4">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Pago contra entrega</mat-label>
-            <input
-              matInput
-              name="toAddress"
-              [(ngModel)]="invoice.billToAddress"
-            />
+            <mat-select value="" matInput required formControlName="tipoPago">
+              @for (payment of payments; track $index) {
+              <mat-option [value]="payment['id']">{{
+                payment["nombre"]
+              }}</mat-option>
+              }
+            </mat-select>
+            <mat-label
+              ><span class="text-muted font-weight-bold font-size"
+                >Tipo de Entrega</span
+              ></mat-label
+            >
           </mat-form-field>
         </div>
       </div>
@@ -164,10 +194,10 @@
           <thead>
             <tr>
               <th class="p-16">#</th>
-              <th class="p-16">Item Name</th>
-              <th class="p-16">Unit Price</th>
-              <th class="p-16">Units</th>
-              <th class="p-16">Unit Total Price</th>
+              <th class="p-16">Producto</th>
+              <th class="p-16">Precio Unitario</th>
+              <th class="p-16">Cantidad</th>
+              <th class="p-16">Sub Total</th>
               <th class="p-16"></th>
             </tr>
           </thead>
@@ -180,19 +210,36 @@
               </td>
 
               <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
+                <!-- <mat-form-field appearance="outline" class="w-100 hide-hint">
                   <input
                     type="text"
                     matInput
                     class="form-control"
-                    [formControl]="row.get('itemName')"
+                    [formControl]="row.get('producto')"
                     (input)="itemsChanged()"
                   />
-                </mat-form-field>
+
+                </mat-form-field> -->
+                @if (products.length > 0) {
+                <app-mat-select-search
+                  [options]="products"
+                  displayKey="nombre"
+                  [info]="{
+                      id: 'id',
+                      value: '',
+                      required: true,
+                    }"
+                  [formControl]="row.get('producto')"
+                  (selectionChange)="onProductSelected($event, index)"
+                ></app-mat-select-search>
+                }
               </td>
 
               <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100 hide-hint no-interaction"
+                >
                   <input
                     type="number"
                     matInput
@@ -211,14 +258,17 @@
                     matInput
                     class="form-control"
                     min="1"
-                    [formControl]="row.get('units')"
+                    [formControl]="row.get('cantidad')"
                     (input)="itemsChanged()"
                   />
                 </mat-form-field>
               </td>
 
               <td class="p-16">
-                <mat-form-field appearance="outline" class="w-100 hide-hint">
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100 hide-hint no-interaction"
+                >
                   <input
                     [disabled]="true"
                     matInput
@@ -226,7 +276,7 @@
                     class="form-control"
                     [formControl]="row.get('itemTotal')"
                     [value]="
-                      row.get('unitPrice').value * row.get('units').value
+                      row.get('unitPrice').value * row.get('cantidad').value
                     "
                   />
                 </mat-form-field>
@@ -240,7 +290,7 @@
                   (click)="onRemoveRow(index)"
                   class="d-flex justify-content-center"
                 >
-                  <i-tabler name="trash" class="icon-18 d-flex"></i-tabler>
+                  <i-tabler class="icon-18 d-flex"></i-tabler>
                 </button>
                 }
               </td>
@@ -252,20 +302,31 @@
 
       <div class="text-right m-t-30">
         @if(addForm.get('rows')) {
-        <button
-          color="primary"
-          mat-flat-button
-          (click)="onAddRow()"
-          [disabled]="addForm.invalid"
-        >
-          Add row
+        <button color="primary" mat-flat-button (click)="onAddRow()">
+          Agregar Producto
         </button>
         }
 
-        <h5 class="m-b-5 f-w-600 f-s-16">Sub total: {{ subTotal }}</h5>
+        <!-- <h5 class="m-b-5 f-w-600 f-s-16">Sub total: {{ subTotal }}</h5>
         <h5 class="f-w-600 f-s-16">Total Vat: {{ vat }}%</h5>
         <mat-divider></mat-divider>
-        <h3 class="m-b-0 p-t-20 f-s-18">Grand Total: {{ grandTotal }}</h3>
+        <h3 class="m-b-0 p-t-20 f-s-18">Grand Total: {{ grandTotal }}</h3> -->
+
+        @if (detalle) {
+
+        <div class="text-right m-t-30">
+          <h5 class="m-b-5 f-w-600 f-s-16">Valor Neto: {{ detalle.compra }}</h5>
+          <h5 class="f-w-600 f-s-16">Total IVA: {{ detalle.iva }}</h5>
+          <h5 class="m-b-5 f-w-600 f-s-16">
+            Distribucion: {{ detalle.distrubucion }}
+          </h5>
+          <h5 class="f-w-600 f-s-16">Envio: {{ detalle.envio }}</h5>
+          <mat-divider></mat-divider>
+          <h5 class="f-w-600 f-s-16">- Descuento: {{ detalle.descuento }}</h5>
+          <mat-divider></mat-divider>
+          <h3 class="m-b-0 p-t-20 f-s-18">Total: {{ detalle.total }}</h3>
+        </div>
+        }
       </div>
     </div>
   </mat-card-content>

@@ -21,6 +21,8 @@ import { InvoiceList, order } from 'src/app/pages/apps/invoice/invoice';
 import { ServiceinvoiceService } from 'src/app/pages/apps/invoice/serviceinvoice.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { OrdersService } from '../../services/orders.service';
+import { ThisReceiver } from '@angular/compiler';
+import { add } from 'date-fns';
 
 @Component({
   selector: 'app-new-sale-order-admin',
@@ -50,6 +52,10 @@ export class NewSaleOrderAdminComponent implements OnInit {
   products: any = [];
   roles: any = [];
   deliveries: any = [];
+  payments: any = [];
+  departamentos: any = [];
+  municipios: any = [];
+  detalle: any;
   constructor(
     private fb: UntypedFormBuilder,
     private invoiceService: ServiceinvoiceService,
@@ -91,17 +97,31 @@ export class NewSaleOrderAdminComponent implements OnInit {
       this.alertService.loader('Cargando...', 'Obteniendo datos...', 0);
 
       // Realizar todas las solicitudes en paralelo
-      const [customers, productsRes, roles, deliveries] = await Promise.all([
+      const [
+        customers,
+        productsRes,
+        roles,
+        deliveries,
+        departamentos,
+        payments,
+      ] = await Promise.all([
         this.customerService.find(),
         this.productService.find(),
         this.userService.getRoles(),
         this.ordersService.getDeliveries(),
+        this.ordersService.getDepartamentos(),
+        this.ordersService.getPayments(),
       ]);
 
       // Validar que las respuestas sean exitosas
-      const allSuccessful = [customers, productsRes, roles, deliveries].every(
-        (res) => res.status
-      );
+      const allSuccessful = [
+        customers,
+        productsRes,
+        roles,
+        deliveries,
+        departamentos,
+        payments,
+      ].every((res) => res.status);
 
       if (allSuccessful) {
         // Asignar los datos si todo fue exitoso
@@ -109,6 +129,8 @@ export class NewSaleOrderAdminComponent implements OnInit {
         this.customers = customers.data;
         this.roles = roles.data;
         this.deliveries = deliveries.data;
+        this.payments = payments.data;
+        this.departamentos = departamentos.data;
         this.alertService.close();
       } else {
         // Si alguna respuesta no fue exitosa, lanzar un error
@@ -125,7 +147,7 @@ export class NewSaleOrderAdminComponent implements OnInit {
   }
 
   generarFormularioVenta() {
-    const gues = this.roles.find((r: any) => r.nombre);
+    //const gues = this.roles.find((r: any) => r.nombre);
     this.saleForm = this.fb.group({
       // id si es cliente
       cliente: [null],
@@ -133,7 +155,8 @@ export class NewSaleOrderAdminComponent implements OnInit {
       nombre: [null],
       apellido: [null],
       telefono: [null],
-      rol: [gues.id],
+      rol: [null],
+      correoElectronico: [null],
       // Entrega
       direccion: [null],
       departamento: [null],
@@ -147,22 +170,67 @@ export class NewSaleOrderAdminComponent implements OnInit {
       tipoEntrega: [],
       tipoPago: [],
       entregaInmediata: [],
+
+      //productos
+      detallePedido: this.rows,
     });
 
-    this.saleForm.get('proveedor')?.valueChanges.subscribe(() => {
-      this.getValuesFeestock();
+    this.saleForm.get('departamento')?.valueChanges.subscribe(() => {
+      this.valuesMunicipios();
     });
 
-    this.saleForm.get('producto')?.valueChanges.subscribe(() => {
-      this.getValuesFeestock();
+    // obv para el detalle
+    this.saleForm.get('tipoEntrega')?.valueChanges.subscribe(() => {
+      this.getDetallePago();
     });
-
-    this.saleForm.get('cantidad')?.valueChanges.subscribe(() => {
-      this.getValuesFeestock();
+    this.saleForm.get('tipoPago')?.valueChanges.subscribe(() => {
+      this.getDetallePago();
+    });
+    this.saleForm.get('entregaInmediata')?.valueChanges.subscribe(() => {
+      this.getDetallePago();
+    });
+    this.saleForm.get('detallePedido')?.valueChanges.subscribe(() => {
+      this.getDetallePago();
     });
   }
 
-  getValuesFeestock() {}
+  valuesMunicipios() {
+    const idDep = this.saleForm.get('departamento')?.value;
+    const curentDep = this.departamentos.find((d: any) => d.id === idDep);
+    this.municipios = curentDep.municipios;
+  }
+
+  async getDetallePago() {
+    const tipoEntrega = this.saleForm.get('tipoEntrega')?.value;
+    const tipoPago = this.saleForm.get('tipoPago')?.value;
+    const entregaInmediata = this.saleForm.get('entregaInmediata')?.value;
+    const detallePedido = this.saleForm.get('detallePedido')?.value;
+
+    console.log(tipoEntrega);
+    console.log(tipoPago);
+    console.log(entregaInmediata);
+    console.log(detallePedido);
+    if (
+      tipoEntrega &&
+      tipoPago &&
+      detallePedido[0].producto !== '' &&
+      detallePedido[0].cantidad !== ''
+    ) {
+      console.log('sedn');
+      const fornDetail = {
+        tipoEntrega,
+        tipoPago,
+        entregaInmediata,
+        detallePedido,
+      };
+      const detail = await this.ordersService.postDetal(fornDetail);
+      console.log(detail);
+      this.detalle = detail.data;
+    }
+    /* if (tipoEntrega && tipoPago && detallePedido.length > 0) {
+
+    } */
+  }
 
   onAddRow(): void {
     this.rows.push(this.createItemFormGroup());
@@ -171,7 +239,7 @@ export class NewSaleOrderAdminComponent implements OnInit {
   onRemoveRow(rowIndex: number): void {
     const totalCostOfItem =
       this.addForm.get('rows')?.value[rowIndex].unitPrice *
-      this.addForm.get('rows')?.value[rowIndex].units;
+      this.addForm.get('rows')?.value[rowIndex].cantidad;
 
     this.subTotal = this.subTotal - totalCostOfItem;
     this.vat = this.subTotal / 10;
@@ -181,8 +249,8 @@ export class NewSaleOrderAdminComponent implements OnInit {
 
   createItemFormGroup(): UntypedFormGroup {
     return this.fb.group({
-      itemName: ['', Validators.required],
-      units: ['', Validators.required],
+      producto: ['', Validators.required],
+      cantidad: ['', Validators.required],
       unitPrice: ['', Validators.required],
       itemTotal: ['0'],
     });
@@ -198,11 +266,11 @@ export class NewSaleOrderAdminComponent implements OnInit {
     ) {
       if (
         this.addForm.get('rows')?.value[t].unitPrice !== '' &&
-        this.addForm.get('rows')?.value[t].units
+        this.addForm.get('rows')?.value[t].cantidad
       ) {
         total =
           this.addForm.get('rows')?.value[t].unitPrice *
-            this.addForm.get('rows')?.value[t].units +
+            this.addForm.get('rows')?.value[t].cantidad +
           total;
       }
     }
@@ -222,15 +290,78 @@ export class NewSaleOrderAdminComponent implements OnInit {
       t < (<UntypedFormArray>this.addForm.get('rows')).length;
       t++
     ) {
-      const o: order = new order();
-      o.itemName = this.addForm.get('rows')?.value[t].itemName;
+      const o: any = new order();
+      o.producto = this.addForm.get('rows')?.value[t].producto;
       o.unitPrice = this.addForm.get('rows')?.value[t].unitPrice;
-      o.units = this.addForm.get('rows')?.value[t].units;
-      o.unitTotalPrice = o.units * o.unitPrice;
+      o.cantidad = this.addForm.get('rows')?.value[t].cantidad;
+      o.unitTotalPrice = o.cantidad * o.unitPrice;
       this.invoice.orders.push(o);
     }
     /* this.dialog.open(AddedDialogComponent);
     this.invoiceService.addInvoice(this.invoice);
     this.router.navigate(['/apps/invoice']); */
+  }
+
+  async sendSale() {
+    console.log(this.saleForm.value);
+
+    const userData = {
+      nombre: this.saleForm.get('nombre')?.value,
+      apellido: this.saleForm.get('apellido')?.value,
+      telefono: this.saleForm.get('telefono')?.value,
+      rol: this.saleForm.get('rol')?.value,
+      correoElectronico: this.saleForm.get('correoElectronico')?.value,
+      nit: this.saleForm.get('nit')?.value,
+      razonSocial: this.saleForm.get('nombre')?.value,
+      direccionFacturacion: this.saleForm.get('direccionFacturacion')?.value,
+    };
+
+    const address = {
+      direccion: this.saleForm.get('direccion')?.value,
+      departamento: this.saleForm.get('departamento')?.value,
+      municipio: this.saleForm.get('municipio')?.value,
+    };
+
+    const newAccount = { userData };
+
+    const dataForm = {
+      ...this.saleForm.value,
+      newAccount,
+      address,
+    };
+
+    console.log(dataForm);
+
+    this.alertService.loader('Guardando', 'Generando pedido...', 0);
+    const newOder = await this.ordersService.create(dataForm);
+    if (newOder.status) {
+      this.alertService
+        .alertSimple(
+          'Notificación',
+          newOder.message,
+          'success',
+          'Aceptar',
+          '',
+          true
+        )
+        .then(async (es) => {
+          this.router.navigate(['sales/orders/list']);
+        });
+    }
+    console.log(newOder);
+  }
+
+  onProductSelected(index: number, row: number) {
+    console.log(index);
+
+    const productFormGroup = this.rows.at(row) as FormGroup;
+    const selectedProduct = this.products.find(
+      (prod: any) => prod['id'] === index
+    );
+
+    // Si se encuentra el producto, actualiza el precio en el formulario
+    if (selectedProduct) {
+      productFormGroup.get('unitPrice')?.setValue(selectedProduct['precio']);
+    }
   }
 }

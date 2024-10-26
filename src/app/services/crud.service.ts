@@ -153,9 +153,9 @@ export abstract class CrudService<T> {
       })
       .join('&');
   }
-
   toUrlEncodedArr(obj: any, parentKey: string = ''): string {
     const queryString = Object.keys(obj)
+      .filter((key) => obj[key] !== null && obj[key] !== undefined) // Filtra valores null o undefined
       .map((key) => {
         const value = obj[key];
         const encodedKey = parentKey ? `${parentKey}[${key}]` : key;
