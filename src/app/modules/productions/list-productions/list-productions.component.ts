@@ -64,7 +64,8 @@ export class ListProductionsComponent implements OnInit {
   async nextPass(info: FnData) {
     const alertDeleted = await this.alertService.alertSimple(
       'Confirmación de Paso Siguiente',
-      '¿Desea pasar la producción a la siguiente etapa?',
+      `¿Desea pasar la producción al siguiente proceso? <br> Estado: ${info.data.next.estado.nombre} <br>
+      Etapa: ${info.data.next.etapa.nombre}` ,
       'warning',
       'Sí, Cambiar Paso',
       'Cancelar',
@@ -77,8 +78,23 @@ export class ListProductionsComponent implements OnInit {
       procesoId: info.data.next.id,
       produccionId: info.data.id,
     };
+    this.alertService.loader('Guardando', 'Grabando siguiente etapa', 0);
     const next = await this.productionService.postNext(data);
     console.log(next);
+    if (next.status) {
+      this.alertService
+        .alertSimple( 
+          'Notificación',
+          'Estado guardado',
+          'success',
+          'Aceptar',
+          '',
+          true
+        )
+        .then(async (es) => {
+          this.getListProduction();
+        });
+    }
   }
 
   async deleteItem(id: string) {
