@@ -47,3 +47,26 @@
 .product:hover{
     scale:(1.05)
 }
+
+.barra-busqueda{
+    width: 20%;
+    min-width: 200px;
+    position: fixed;
+    z-index: 1;
+    position: fixed;
+    // top: 17px;
+    // right: 60px;
+    top: 75px;
+    left: 5px;
+    
+}
+
+.fa-magnifying-glass{
+    // color: #2664d8;
+    cursor: pointer;
+    &:hover{
+        
+        background-color: #1867dd;
+        color: #fff;
+    }
+}
