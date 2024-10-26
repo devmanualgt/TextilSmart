@@ -19,7 +19,8 @@ export class ProductService extends CrudService<any> {
   }
 
   // Método para obtener detalles de un producto por su ID
-  override async findById(id: string) {  // Añade el modificador override aquí
+  override async findById(id: string) {
+    // Añade el modificador override aquí
     try {
       const response = await firstValueFrom(
         this.http.get<any>(`${this.API_URL}/${id}`, { observe: 'response' })
@@ -28,7 +29,10 @@ export class ProductService extends CrudService<any> {
       if (response?.ok) {
         return response.body; // Retorna el cuerpo de la respuesta con los detalles del producto
       } else {
-        this.alertService.errorAlertNorm('Error al obtener el producto', 'Error');
+        this.alertService.errorAlertNorm(
+          'Error al obtener el producto',
+          'Error'
+        );
         return null;
       }
     } catch (error) {
@@ -57,5 +61,46 @@ export class ProductService extends CrudService<any> {
   // Nuevo método para obtener categorías
   async getCategories() {
     // Implementación futura
+    try {
+      const response = await firstValueFrom(
+        this.http.get<any>(`${this.API_URL}/categories/list`, {
+          observe: 'response',
+        })
+      );
+
+      if (response?.ok) {
+        return { status: true, data: response.body['records'] };
+      } else {
+        return { status: false };
+      }
+    } catch (error) {
+      this.alertService.errorAlertNorm(error, error);
+      return { status: false };
+    }
+  }
+
+  override async create(form: any) {
+    try {
+      const formData = await this.toUrlEncodedArr(form);
+      const response = await firstValueFrom(
+        this.http.post<any>(`${this.API_URL}`, formData, {
+          observe: 'response',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        })
+      );
+
+      if (response?.ok) {
+        return {
+          status: true,
+          data: response.body['records'],
+          message: response.body['message'],
+        };
+      } else {
+        return { status: false };
+      }
+    } catch (error) {
+      this.alertService.errorAlertNorm(error, error);
+      return { status: false };
+    }
   }
 }
