@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductService extends CrudService<any> {
   override API_URL = `${environment.API_URL}/v1/products`;
+
   constructor(
     @Inject(HttpClient) http: HttpClient,
     public override alertService: AlertService
@@ -17,12 +18,29 @@ export class ProductService extends CrudService<any> {
     super(http, alertService);
   }
 
+  // Método para obtener detalles de un producto por su ID
+  override async findById(id: string) {  // Añade el modificador override aquí
+    try {
+      const response = await firstValueFrom(
+        this.http.get<any>(`${this.API_URL}/${id}`, { observe: 'response' })
+      );
+
+      if (response?.ok) {
+        return response.body; // Retorna el cuerpo de la respuesta con los detalles del producto
+      } else {
+        this.alertService.errorAlertNorm('Error al obtener el producto', 'Error');
+        return null;
+      }
+    } catch (error) {
+      this.alertService.errorAlertNorm(error, error);
+      return null;
+    }
+  }
+
   async getTypes() {
     try {
       const response = await firstValueFrom(
-        this.http.get<any>(`${this.API_URL}/types`, {
-          observe: 'response',
-        })
+        this.http.get<any>(`${this.API_URL}/types`, { observe: 'response' })
       );
 
       if (response?.ok) {
@@ -38,6 +56,6 @@ export class ProductService extends CrudService<any> {
 
   // Nuevo método para obtener categorías
   async getCategories() {
-    
+    // Implementación futura
   }
 }
