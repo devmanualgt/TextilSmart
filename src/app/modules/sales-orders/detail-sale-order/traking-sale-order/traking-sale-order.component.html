@@ -1,1 +1,37 @@
-<p>traking-sale-order works!</p>
+<div class="container">
+
+    <div class="container d-flex justify-content-end mt-5">
+  
+      <form class="row g-3">
+        <div class="col-auto">
+          <label for="inputFind" class="visually-hidden">Password</label>
+          <!-- la variable de referencia #filter almacena lo que se ingrese en el input, ese valor se lo pasamos al metodo filterResult cuando se active el evento click del boton -->
+          <input type="text" class="form-control" id="inputFind" placeholder="Buscar pedido" #filter/>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3">buscar</button>
+        </div>
+      </form>
+    </div>
+    
+    <div>
+      <p-timeline [value]="events" align="alternate" styleClass="customized-timeline">
+          <ng-template pTemplate="marker" let-event>
+              <span 
+                  class="flex p-4 w-20rem h-2rem align-items-center justify-content-center text-white rounded-circle z-1 shadow-1" 
+                  [style]="{ 'background-color': event.color }">
+                      <i [class]="event.icon"></i>
+              </span>
+          </ng-template>
+          <ng-template pTemplate="content" let-event>
+              <p-card [header]="event.status" [subheader]="event.date">
+                  
+                  <!-- <p></p> -->
+                  <!-- <p-button label="Read more" [text]="true" /> -->
+              </p-card>
+          </ng-template>
+      </p-timeline>
+    </div>
+  
+  </div>
+  
