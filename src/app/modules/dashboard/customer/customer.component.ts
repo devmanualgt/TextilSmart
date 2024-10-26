@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
@@ -11,43 +11,42 @@ import { MaterialModule } from 'src/app/material.module';
   styleUrl: './customer.component.scss',
 })
 export class CustomerComponent implements OnInit {
-  saludo = ""
+  @Input() user: any;
+  saludo = '';
   stats: any;
   activities: any;
   stats2: any;
 
-   // card 8
-   giftcards: any[] = [
+  // card 8
+  giftcards: any[] = [
     {
       id: 1,
       imgSrc: './assets/dashboard/ver-pedidos.png',
       username: 'Tus cosas tal como las quieres...',
-      textoboton: "Ver Pedidos",
-      ruta: "sales/orders/list",
+      textoboton: 'Ver Pedidos',
+      ruta: 'sales/orders/list',
     },
     {
       id: 2,
       imgSrc: './assets/dashboard/producto3.png',
       username: '¡Lo mejor de lo mejor!',
-      textoboton: "Ver Productos",
-      ruta: "products/list",
+      textoboton: 'Ver Productos',
+      ruta: 'products/list',
     },
     {
       id: 3,
       imgSrc: './assets/dashboard/rastrear-pedidos.png',
       username: '¿Dónde está tu pedido?',
-      textoboton: "Rastrear Pedido",
-      ruta: "sales/orders/tracking",
+      textoboton: 'Rastrear Pedido',
+      ruta: 'sales/orders/tracking',
     },
   ];
 
-  constructor (private router: Router){
-
-  }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    console.log("Inicio del componenete")
-    this.asignarsaludo()
+    console.log('Inicio del componenete');
+    this.asignarsaludo();
   }
 
   asignarsaludo() {
@@ -63,7 +62,7 @@ export class CustomerComponent implements OnInit {
     }
   }
 
-  redirigir(ruta: string){
+  redirigir(ruta: string) {
     this.router.navigate([ruta]);
   }
 }

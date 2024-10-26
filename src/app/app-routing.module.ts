@@ -168,6 +168,15 @@ const routes: Routes = [
         title: 'Home',
         loadComponent: () => import('./modules/home/home.component'),
       },
+
+      {
+        path: 'new/buy',
+        title: 'Buy',
+        loadComponent: () =>
+          import(
+            './modules/sales-orders/add-sale-order/add-sale-order.component'
+          ).then((m) => m.AddSaleOrderComponent),
+      },
     ],
   },
   {
