@@ -1,0 +1,54 @@
+$primary-color: #007bff;
+$secondary-color: #f9f9f9;
+$hover-bg-color: #e9ecef;
+$table-border-color: #dee2e6;
+$table-font-size: 16px;
+
+/* Personalización de la tabla */
+.custom-table {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: $secondary-color;
+
+  thead {
+    th {
+      background-color: $primary-color;
+      color: white;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+
+  tbody {
+    tr {
+      &:hover {
+        background-color: $hover-bg-color;
+        cursor: pointer;
+      }
+
+      td {
+        text-align: left;
+        padding: 16px;
+        vertical-align: middle;
+        font-size: $table-font-size;
+        border-color: $table-border-color;
+      }
+    }
+  }
+
+  /* Efecto visual para filas alternas */
+  tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 123, 255, 0.05);
+  }
+}
+
+/* Personalización del contenedor de la tabla */
+.table-responsive {
+  margin-top: 20px;
+}
+
+/* Personalización del título */
+h3 {
+  color: $primary-color;
+  font-weight: 600;
+}

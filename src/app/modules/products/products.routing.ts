@@ -3,6 +3,7 @@ import { ListProductsComponent } from './list-products/list-products.component';
 import { ProductCategoriesComponent } from './list-products/list-products-admin/product-categories/product-categories.component';
 import { TblAdminComponent } from './list-products/list-products-admin/tbl-admin/tbl-admin.component';
 import { ProductTypesComponent } from './list-products/list-products-admin/product-types/product-types.component';
+import { DetailProductComponent } from './detail-product/detail-product.component';
 
 export const ProductRoutes: Routes = [
   {
@@ -38,6 +39,13 @@ export const ProductRoutes: Routes = [
             },
           },
         ],
+      },
+      {
+        path: 'detail/:id',
+        component: DetailProductComponent,
+        data: {
+          title: 'Productos',
+        },
       },
     ],
   },
