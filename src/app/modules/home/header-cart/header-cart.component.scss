@@ -1,10 +1,16 @@
 .navbar {
+    height: 67px;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid lightgrey;
     background-color: #030301;
     color:white;
+
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+
     
     &-cart{
         position: relative;
@@ -49,3 +55,26 @@
         
     }
 }
+
+.fa-cart-shopping{
+    cursor: pointer;
+    &:hover{
+        color: #fffb00;
+
+    }
+}
+.btnCerrar{
+    padding: 10px;
+    color: #fff;
+    background-color: #2d62f5;
+    // position: fixed;
+    width: 20px;
+    text-align: center;
+}
+
+// .toltip{
+//     position: fixed;
+//     top: 10px;
+//     right: 10px;
+//     z-index: 100;
+// }
