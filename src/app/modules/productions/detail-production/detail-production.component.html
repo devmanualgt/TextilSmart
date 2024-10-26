@@ -7,15 +7,7 @@
         <span>User</span>
     </div>
 
-    <!-- Navigation Tabs -->
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" id="general-tab" href="javascript:void(0);">General</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="monitoreo-tab" href="javascript:void(0);">Monitoreo</a>
-        </li>
-    </ul>
+    
     <!-- Contenido General -->
     <div id="generalContent" class="form-container">
         <div class="row">
@@ -28,47 +20,59 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <select class="form-select" aria-label="Select Estado">
-                    <option selected>Seleccionar Estado</option>
-                    <option value="1">En Proceso</option>
-                    <option value="2">Completado</option>
-                    <option value="3">Pendiente</option>
-                </select>
+                <!-- Campo para Estado -->
+                <label for="estado" class="form-label">Estado</label>
+                <input type="text" class="form-control" placeholder="Estado" [(ngModel)]="productions.estado">
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <select class="form-select" aria-label="Select Producto">
-                    <option selected>Seleccionar Producto</option>
-                    <option value="1">Producto A</option>
-                    <option value="2">Producto B</option>
-                    <option value="3">Producto C</option>
-                </select>
+                <!-- Campo para Etapa -->
+                <label for="etapa" class="form-label">Etapa</label>
+                <input type="text" class="form-control" placeholder="Etapa" [(ngModel)]="productions.etapa">
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <select class="form-select" aria-label="Select Encargado">
-                    <option selected>Seleccionar Encargado</option>
-                    <option value="1">Encargado 1</option>
-                    <option value="2">Encargado 2</option>
-                    <option value="3">Encargado 3</option>
-                </select>
+                <!-- Campo para Producto -->
+                <label for="Producto" class="form-label">Producto</label>
+                <input type="text" class="form-control" placeholder="Producto" [(ngModel)]="productions.producto.nombre">
+            </div>
+        </div>
+        <div class="row">
+            <h4>Encargado</h4>
+            <div class="col-6">
+                <label for="EncargadoName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="productions.responsable.nombre">
+            </div>
+            <div class="col-6">
+                <label for="EncargadoApellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" placeholder="Apellido" [(ngModel)]="productions.responsable.apellido">
+            </div>
+            <div class="col-6">
+                <label for="EncargadoE-mail" class="form-label">E-mail</label>
+                <input type="text" class="form-control" placeholder="E-mail" [(ngModel)]="productions.responsable.correoElectronico">
+            </div>
+            <div class="col-6">
+                <label for="EncargadoTelefon" class="form-label">Telefono</label>
+                <input type="text" class="form-control" placeholder="Telefono" [(ngModel)]="productions.responsable.telefono">
             </div>
         </div>
         <div class="row">
             <div class="col-6">
                 <label for="fecha-inicio" class="form-label">Fecha Inicio</label>
-                <input type="date" id="fecha-inicio" class="form-control" placeholder="Fecha Inicio">
+                <input type="date" id="fecha-inicio" class="form-control" [(ngModel)]="productions.fechaInicio">
             </div>
             <div class="col-6">
                 <label for="fecha-fin" class="form-label">Fecha Fin</label>
-                <input type="date" id="fecha-fin" class="form-control" placeholder="Fecha Fin">
+                <input type="date" id="fecha-fin" class="form-control" [(ngModel)]="productions.fechaFinEstimada">
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <input type="number" class="form-control" placeholder="Cantidad a Producir">
+                <!-- Campo para Cantidad a Producir -->
+                <label for="CantidadProducir" class="form-label">Cantidad a producir</label>
+                <input type="number" class="form-control" placeholder="Cantidad a Producir" [(ngModel)]="productions.cantidad">
             </div>
         </div>
     </div>
