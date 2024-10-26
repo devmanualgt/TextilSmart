@@ -61,7 +61,7 @@ export class ListProductionsComponent implements OnInit {
     }
   }
 
-  async nextPass(info?: FnData) {
+  async nextPass(info: FnData) {
     const alertDeleted = await this.alertService.alertSimple(
       'Confirmación de Paso Siguiente',
       '¿Desea pasar la producción a la siguiente etapa?',
@@ -73,9 +73,13 @@ export class ListProductionsComponent implements OnInit {
     if (!alertDeleted) {
       return;
     }
+    const data = {
+      procesoId: info.data.next.id,
+      produccionId: info.data.id,
+    };
+    const next = await this.productionService.postNext(data);
+    console.log(next);
   }
-
-  
 
   async deleteItem(id: string) {
     const alertDeleted = await this.alertService.alertSimple(
@@ -108,7 +112,7 @@ export class ListProductionsComponent implements OnInit {
     }
   }
 
-  openNew(){
+  openNew() {
     this.router.navigate([`productions/new`]);
   }
 
