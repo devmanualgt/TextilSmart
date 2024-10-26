@@ -1,11 +1,10 @@
-
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AlertService } from 'src/app/services/alert.service';
 import { ComponentsModule } from 'src/app/components/components.module';
-import {ProductService}from 'src/app/modules/products/services/product.service'
+import { ProductService } from 'src/app/modules/products/services/product.service';
 import { CrudService } from 'src/app/services/crud.service';
 import {
   CRUD,
@@ -17,7 +16,7 @@ import { AddProductComponent } from '../../../add-product/add-product.component'
 import { NavigationExtras, Router } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
-import {tbl_type_productos} from 'src/app/modules/products/models/tbl-products';
+import { tbl_productos } from 'src/app/modules/products/models/tbl-products';
 
 @Component({
   selector: 'app-tbl-products-admin',
@@ -25,13 +24,12 @@ import {tbl_type_productos} from 'src/app/modules/products/models/tbl-products';
   styleUrls: ['tbl-admin.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule, ComponentsModule, MaterialModule],
-
 })
 export class TblAdminComponent {
   tblData: any;
   originalTblData: any;
   tlbInfo: TblInformation;
-  
+
   @ViewChild('productModal', { static: false }) productModal!: ElementRef; // Modal de producto
   @ViewChild('newProductModal', { static: false }) newProductModal!: ElementRef; // Modal de nuevo producto
 
@@ -92,7 +90,6 @@ export class TblAdminComponent {
     }
   }
 
-
   ngOnInit(): void {
     this.getFeedStock();
   }
@@ -102,9 +99,9 @@ export class TblAdminComponent {
       tbl_name: 'Productos Admin',
       export_xls: false,
       scroll_tbl: false,
-      headers: tbl_type_productos.headers,
-      rows:tbl_type_productos.rows,
-      btns: tbl_type_productos.btn,
+      headers: tbl_productos.headers,
+      rows: tbl_productos.rows,
+      btns: tbl_productos.btn,
     };
     const getList = await this.productService.find();
     if (getList.status) {
@@ -129,7 +126,6 @@ export class TblAdminComponent {
       this.router.navigate([`purchase/orders/new`], navigationExtras);
     }
   }
-
 
   async deleteItem(id: string) {
     const alertDeleted = await this.alertService.alertSimple(
@@ -181,16 +177,16 @@ export class TblAdminComponent {
       });
   }
 
-
   search(searchText: string): void {
     if (searchText === '') {
       // Si el texto de búsqueda está vacío, restaurar los datos originales
       this.tblData = [...this.originalTblData];
     } else {
       // Filtrar la tabla si hay texto en el campo de búsqueda
-      this.tblData = this.crudService.filterDataTable(this.originalTblData, searchText);
+      this.tblData = this.crudService.filterDataTable(
+        this.originalTblData,
+        searchText
+      );
     }
   }
-
-  
 }

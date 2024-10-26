@@ -1,4 +1,8 @@
-<app-dashboard-customer></app-dashboard-customer>
+@if(currentUser.rol.rol === 'Administrador'){
 
 <app-dashboard-admin></app-dashboard-admin>
-<p>add-production works!</p>
+
+} @else {
+
+<app-dashboard-customer></app-dashboard-customer>
+}

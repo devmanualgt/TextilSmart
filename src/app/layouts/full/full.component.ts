@@ -6,7 +6,11 @@ import { CoreService } from 'src/app/services/core.service';
 import { AppSettings } from 'src/app/app.config';
 import { filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
-import { navItems } from './vertical/sidebar/sidebar-data';
+import {
+  navItems,
+  navItemsAdmin,
+  navItemsCustomer,
+} from './vertical/sidebar/sidebar-data';
 import { NavService } from '../../services/nav.service';
 import { AppNavItemComponent } from './vertical/sidebar/nav-item/nav-item.component';
 import { RouterModule } from '@angular/router';
@@ -20,6 +24,7 @@ import { AppHorizontalHeaderComponent } from './horizontal/header/header.compone
 import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.component';
 import { AppBreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -56,15 +61,15 @@ interface quicklinks {
     AppHorizontalHeaderComponent,
     AppHorizontalSidebarComponent,
     AppBreadcrumbComponent,
-    CustomizerComponent
+    CustomizerComponent,
   ],
   templateUrl: './full.component.html',
   styleUrls: [],
   encapsulation: ViewEncapsulation.None,
 })
 export class FullComponent implements OnInit {
-
-  navItems = navItems;
+  navItems = navItemsAdmin;
+  currentUser: any;
 
   @ViewChild('leftsidenav')
   public sidenav: MatSidenav;
@@ -195,6 +200,7 @@ export class FullComponent implements OnInit {
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     private navService: NavService,
+    private authService: AuthService
   ) {
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
@@ -221,7 +227,17 @@ export class FullComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user;
+    });
+
+    if (this.currentUser.rol.rol === 'Administrador') {
+      this.navItems = navItemsAdmin;
+    } else {
+      this.navItems = navItemsCustomer;
+    }
+  }
 
   ngOnDestroy() {
     this.layoutChangesSubscription.unsubscribe();
@@ -260,5 +276,9 @@ export class FullComponent implements OnInit {
       this.htmlElement.classList.remove('dark-theme');
       this.htmlElement.classList.add('light-theme');
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

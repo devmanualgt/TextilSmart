@@ -1147,3 +1147,76 @@ export const navItems: any[] = [
     external: true,
   },
 ];
+
+export const navItemsAdmin: any[] = [
+  {
+    navCap: 'Inicio',
+  },
+  {
+    displayName: 'Tablero',
+    iconName: 'layout-dashboard',
+    route: '/dashboard',
+  },
+
+  {
+    navCap: 'Admin',
+  },
+
+  {
+    displayName: 'Materia Prima',
+    iconName: 'shirt',
+    route: 'feedstocks/list',
+  },
+  {
+    displayName: 'Ordenes de Compra',
+    iconName: 'file-invoice',
+    route: 'purchase/orders',
+  },
+  {
+    displayName: 'Productos',
+    iconName: 'building-store',
+    route: 'products/list',
+  },
+  {
+    displayName: 'Producciones',
+    iconName: 'package-export',
+    route: 'productions/list',
+  },
+  {
+    displayName: 'Pedidos',
+    iconName: 'shopping-cart',
+    route: 'sales/orders/list',
+  },
+  {
+    displayName: 'Usuarios',
+    iconName: 'user',
+    route: 'users/list',
+  },
+];
+
+export const navItemsCustomer: any[] = [
+  {
+    navCap: 'Inicio',
+  },
+  {
+    displayName: 'Tablero',
+    iconName: 'layout-dashboard',
+    route: '/dashboard',
+  },
+  {
+    displayName: 'Productos',
+    iconName: 'building-store',
+    route: 'products/list',
+  },
+
+  {
+    displayName: 'Pedidos',
+    iconName: 'shopping-cart',
+    route: 'sales/orders/list',
+  },
+  {
+    displayName: 'Rastreo',
+    iconName: 'current-location',
+    route: 'sales/orders/tracking',
+  },
+];

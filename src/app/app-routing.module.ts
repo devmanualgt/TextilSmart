@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {
+  mapToCanActivate,
+  PreloadAllModules,
+  RouterModule,
+  Routes,
+} from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
-import { AuthGuard } from './auth.guard';
-
+import { AuthGuard } from './guards/auth.guard';
+/* import { AuthGuard } from './auth.guard';
+ */
 const routes: Routes = [
   {
     path: '',
@@ -160,9 +166,8 @@ const routes: Routes = [
       {
         path: 'home',
         title: 'Home',
-        loadComponent: () => import ('./modules/home/home.component'),
+        loadComponent: () => import('./modules/home/home.component'),
       },
-      
     ],
   },
   {
