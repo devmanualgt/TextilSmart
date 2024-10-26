@@ -41,4 +41,23 @@ export class OrdersService extends CrudService<any> {
       return { status: false };
     }
   }
+
+  async getDeliveries() {
+    try {
+      const response = await firstValueFrom(
+        this.http.get<any>(`${this.API_URL}/deliveries`, {
+          observe: 'response',
+        })
+      );
+
+      if (response?.ok) {
+        return { status: true, data: response.body['records'] };
+      } else {
+        return { status: false };
+      }
+    } catch (error) {
+      this.alertService.errorAlertNorm(error, error);
+      return { status: false };
+    }
+  }
 }

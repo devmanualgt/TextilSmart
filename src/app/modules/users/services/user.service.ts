@@ -1,18 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { AlertService } from 'src/app/services/alert.service';
 import { CrudService } from 'src/app/services/crud.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class UserService extends CrudService<any>  {
+export class UserService extends CrudService<any> {
   override API_URL = `${environment.API_URL}/v1/users`;
+  API_URL_R = `${environment.API_URL}/v1`;
   constructor(
-      @Inject(HttpClient) http: HttpClient,
-      public override alertService: AlertService
-    ) {
-      super(http, alertService);
+    @Inject(HttpClient) http: HttpClient,
+    public override alertService: AlertService
+  ) {
+    super(http, alertService);
+  }
+
+  async getRoles() {
+    try {
+      const response = await firstValueFrom(
+        this.http.get<any>(`${this.API_URL_R}/auth/roles/guest`, {
+          observe: 'response',
+        })
+      );
+
+      if (response?.ok) {
+        return { status: true, data: response.body['records'] };
+      } else {
+        return { status: false };
+      }
+    } catch (error) {
+      this.alertService.errorAlertNorm(error, error);
+      return { status: false };
     }
+  }
 }
