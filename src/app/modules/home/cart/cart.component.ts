@@ -42,21 +42,6 @@ export class CartComponent {
     return result;
   }
 
-  // isCartOpen = false;
-
-  // toggleCart() {
-  //   this.isCartOpen = !this.isCartOpen;
-  //   this.updateBodyScroll();
-  // }
-
-  // updateBodyScroll() {
-  //   if (this.isCartOpen) {
-  //     document.body.classList.add('no-scroll');
-  //   } else {
-  //     document.body.classList.remove('no-scroll');
-  //   }
-  // }
-
   pagar() {
     // this.router.navigate(['purchase/orders/new']);
     this.router.navigate(['sales/orders/new']);

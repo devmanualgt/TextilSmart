@@ -62,7 +62,7 @@
                 />
               </mat-form-field>
 
-              <mat-form-field class="col-12 col-md-6 col-xxl-3 campo">
+              <mat-form-field class="col-12 campo">
                 <mat-label>Direccion exacta</mat-label>
                 <input
                   matInput
@@ -71,26 +71,27 @@
                   required
                 />
               </mat-form-field>
-              <mat-form-field class="col-12 col-md-6 col-xxl-3 campo">
+              
+              <mat-form-field class="col-12 campo">
                 <mat-label>Departamento</mat-label>
-                <input
-                  matInput
-                  placeholder="Guatemala"
-                  formControlName="departamento"
-                  required
-                />
+                <mat-select (selectionChange)="getMunicipios($event)" name="departamento">
+                  <mat-option *ngFor="let address of addresses; trackBy: trackByIndex" [value]="address.id">
+                    {{ address.nombre }}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
-              <mat-form-field class="col-12 col-md-6 col-xxl-3 campo">
+              
+              <mat-form-field class="col-12 campo">
                 <mat-label>Municipio</mat-label>
-                <input
-                  matInput
-                  placeholder="Guatemala"
-                  formControlName="municipio"
-                  required
-                />
+                <mat-select name="municipio" [disabled]="!municipios.length">
+                  <mat-option *ngFor="let municipio of municipios; trackBy: trackByIndex" [value]="municipio.id">
+                    {{ municipio.nombre }}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
+
               @if (isRegistering) {
-              <mat-form-field class="col-12 col-md-6 col-xxl-3 campo">
+              <mat-form-field class="col-12 campo">
                 <mat-label>Clave</mat-label>
                 <input
                   matInput
@@ -190,15 +191,11 @@
                   aria-labelledby="example-radio-group-label"
                   class="example-radio-group"
                 >
-                  <mat-radio-button class="example-radio-button" value="1"
-                    >Cargo expreso</mat-radio-button
-                  >
-                  <mat-radio-button class="example-radio-button" value="2"
-                    >Guatex</mat-radio-button
-                  >
-                  <mat-radio-button class="example-radio-button" value="2"
-                    >Forza</mat-radio-button
-                  >
+                  @for (delivery of deliveries; track $index) {
+                  <mat-radio-button class="example-radio-button" [value]="delivery.id"
+                    >{{delivery.nombre}}</mat-radio-button>
+                  }
+                  
                 </mat-radio-group>
               </div>
               <div class="col-md-6">
@@ -207,15 +204,10 @@
                   aria-labelledby="example-radio-group-label"
                   class="example-radio-group"
                 >
-                  <mat-radio-button class="example-radio-button" value="1"
-                    >Pago contra entrega</mat-radio-button
-                  >
-                  <mat-radio-button class="example-radio-button" value="2"
-                    >Transferencia o deposito bancario</mat-radio-button
-                  >
-                  <mat-radio-button class="example-radio-button" value="3"
-                    >Tarjeta de credito o debito</mat-radio-button
-                  >
+                  @for (payment of payments; track $index) {
+                    <mat-radio-button class="example-radio-button" [value]="payment.id"
+                      >{{payment.nombre}}</mat-radio-button>
+                    }
                 </mat-radio-group>
               </div>
             </div>
@@ -328,7 +320,7 @@
               <button mat-raised-button (click)="picker.open()">Abrir</button>
             </div>
 
-            <div class="col-md-3 campo">
+            <div class="col-12 campo">
               <mat-form-field class="campo">
                 <mat-label>CVV</mat-label>
                 <input
@@ -340,15 +332,90 @@
               </mat-form-field>
             </div>
 
-            <div class="col-md-3">
-              <div>
+            <div class="col-12">
+              <div class="d-flex justify-content-between">
                 <button mat-button matStepperPrevious>Regresar</button>
                 <button mat-button matStepperNext>Finalizar</button>
               </div>
             </div>
           </div>
+          <!-- tabla -->
+          <div class="col-md-9">
 
-          <div class="col-md-9"></div>
+            <div class="campo">
+              <!-- <p class="p-1 bg-primary text-white campo">Productos</p> -->
+              <p class="text-success text-end fs-4">
+                Total a pagar Q{{ this.totalCart() }}
+              </p>
+              <div class="contenido-tabla">
+                <table class="table table-bordered text-center">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Cantidad</th>
+                      <th>Precio</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-center">
+                    @if (dataSource.length>0) { @for (producto of dataSource;
+                    track $index) {
+
+                    <tr>
+                      <td>
+                        {{ producto.nombre }}
+                      </td>
+                      <td>
+                        <i
+                          class="fa-solid fa-plus"
+                          (click)="updateUnits('add', producto.id)"
+                        ></i>
+
+                        {{ producto.cantidad }}
+
+                        <i
+                          class="fa-solid fa-minus"
+                          (click)="updateUnits('minus', producto.id)"
+                        ></i>
+                      </td>
+                      <td>
+                        {{ producto.precio }}
+                      </td>
+                      <td>
+                        {{ producto.precio * producto.cantidad }}
+                        <i
+                          class="fa-solid fa-trash"
+                          (click)="deleteProduct(producto.id)"
+                        ></i>
+                      </td>
+                    </tr>
+
+                    } } @else {
+                    <tr class="text-center">
+                      <td colspan="4">
+                        Ups! No has hecho compras...
+                        <!-- <button type="button" class="btn btn-outline-primary rounded-0"
+                              (click)="comprar()"
+                            >Ir a comprar</button> -->
+                      </td>
+                    </tr>
+
+                    }
+                  </tbody>
+                </table>
+                <!-- <div class="text-end">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary rounded-0"
+                    (click)="comprar()"
+                  >
+                    Agrear producto
+                  </button>
+                </div> -->
+              </div>
+            </div>
+
+          </div>
         </div>
       </form>
     </mat-step>
@@ -358,7 +425,7 @@
       <div class="container text-center">
         <p class="fs-1">¡Felicitades!</p>
         <p class="fs-1">Tu compra ha sido realizada con éxito.</p>
-        <button mat-button matStepperPrevious>
+        <button mat-button (click)="regresar()">
           Regresar a la página principal
         </button>
       </div>

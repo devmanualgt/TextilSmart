@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
   styleUrl: './add-sale-order.component.scss',
 })
 export class AddSaleOrderComponent {
-  user = { role: 'admin' };
+  user = { role: 'client' };
+  // user = { role: 'admin' };
 
   constructor(private router: Router) {
     console.log('hrers');
