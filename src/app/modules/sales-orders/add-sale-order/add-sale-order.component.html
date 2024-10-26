@@ -1,1 +1,8 @@
+@if (user.role === 'admin') {
+
+<app-new-sale-order-admin></app-new-sale-order-admin>
+} @else if (user.role !== 'admin') {
+
 <app-new-sale-order-customer></app-new-sale-order-customer>
+
+}

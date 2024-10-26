@@ -125,7 +125,7 @@ export class TblAdminSalesOrdersComponent implements OnInit {
   }
 
   openNew() {
-    this.router.navigate([`productions/new`]);
+    this.router.navigate([`sales/orders/new`]);
   }
 
   search(searchText: string): void {
