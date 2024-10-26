@@ -44,6 +44,7 @@ export class CartComponent {
 
   pagar() {
     // this.router.navigate(['purchase/orders/new']);
-    this.router.navigate(['sales/orders/new']);
+    //this.router.navigate(['sales/orders/new']);
+    this.router.navigate(['new/buy']);
   }
 }
