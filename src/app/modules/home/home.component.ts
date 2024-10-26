@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { StoreService } from './services/store.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 
@@ -37,10 +38,13 @@ export default class HomeComponent {
     products: Product[]= [];
     busqueda: string = '';
 
-    constructor(private productService: ProductService, private storeService: StoreService){}
+    constructor(private ruoter: Router, private productService: ProductService, private storeService: StoreService){}
 
 
-    
+    login(){
+      this.ruoter.navigate(['auth/login'])
+
+    }
     async ngOnInit(){
 
       // const a = await this.productService.find();

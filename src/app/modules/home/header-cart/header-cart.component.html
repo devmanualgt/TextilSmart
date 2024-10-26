@@ -6,7 +6,10 @@
        <p>TextilSmart</p>
     </div>
 
-    <p class="navbar-title">Mi cuenta | Registrar</p>
+    <div class="navbar-title " >
+      <i class="fa-regular fa-user"></i>
+       <a class="enlace p-1"  href="#/auth/login"> Iniciar Sesión</a> 
+      </div>
     <div class="navbar-cart" (click)="onToggleCart()">
       <div class="navbar-cart-items" *ngIf="(myCart$ | async)?.length">
         <p class="toltip">{{ (myCart$ | async)?.length }}</p>
